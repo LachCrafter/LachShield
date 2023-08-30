@@ -12,7 +12,7 @@ LachShield is a Minecraft Paper plugin designed to limit the number of player ac
 
 ## Installation
 
-1. Download the latest release of the plugin from the [Releases](https://github.com/yourusername/lachshield-plugin/releases) section.
+1. Download the latest release of the plugin from the [Releases](https://github.com/LachCrafter/LachShield/releases) section.
 2. Place the downloaded JAR file into the `plugins` folder of your Minecraft server.
 3. Restart or reload your server to enable the plugin.
 
@@ -22,7 +22,7 @@ Once the plugin is installed, it will automatically monitor player logins and ke
 
 ## Contributing
 
-Contributions are welcome! If you find a bug or want to suggest an enhancement, please create an issue in the [Issue Tracker](https://github.com/yourusername/lachshield-plugin/issues). If you'd like to contribute code, fork the repository, create a new branch, make your changes, and then create a pull request.
+Contributions are welcome! If you find a bug or want to suggest an enhancement, please create an issue in the [Issue Tracker](https://github.com/LachCrafter/LachShield/issues). If you'd like to contribute code, fork the repository, create a new branch, make your changes, and then create a pull request.
 
 ## License
 
