@@ -30,4 +30,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For questions or inquiries, you can reach out to me at [your@email.com](mailto:your@email.com).
+For questions or inquiries, you can reach out to me at Discord: [lachcrafter](mailto:your@email.com).
