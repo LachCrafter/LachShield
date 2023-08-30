@@ -14,9 +14,11 @@ import java.util.Map;
 public class LachShield extends JavaPlugin implements Listener {
 
     private Map<String, Integer> ipAccountCount = new HashMap<>();
+    private ConfigManager configManager;
 
     @Override
     public void onEnable() {
+        configManager = new ConfigManager(this);
         Bukkit.getPluginManager().registerEvents(this, this);
     }
 
@@ -25,8 +27,10 @@ public class LachShield extends JavaPlugin implements Listener {
         String ip = event.getPlayer().getAddress().getAddress().getHostAddress();
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
 
-        if (accountCount >= 3) {
-            event.getPlayer().kickPlayer(ChatColor.RED + "Sie haben zu viele Accounts auf dem Server!");
+        int maxAccountsPerIP = configManager.getMaxAccountsPerIP();
+        if (accountCount >= maxAccountsPerIP) {
+            String kickMessage = configManager.getKickMessage();
+            event.getPlayer().kickPlayer(ChatColor.RED + kickMessage);
             return;
         }
 

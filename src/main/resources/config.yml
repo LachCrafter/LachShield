@@ -1,0 +1,2 @@
+max_accounts_per_ip: 3
+kick_message: "You are logged in with more than three accounts!"
