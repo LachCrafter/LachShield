@@ -1,29 +1,40 @@
 package de.lachcrafter.lachshield;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-
-import java.io.File;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class ConfigManager {
 
-    private final LachShield plugin;
-    private final FileConfiguration config;
+    private final JavaPlugin plugin;
+    private FileConfiguration config;
 
-    public ConfigManager(LachShield plugin) {
+    public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
-        File dataFolder = plugin.getDataFolder();
-        if (!dataFolder.exists()) {
-            dataFolder.mkdirs();
-        }
-        this.config = plugin.getConfig();
+        loadConfig();
+    }
+
+    public void loadConfig() {
         plugin.saveDefaultConfig();
+        config = plugin.getConfig();
     }
 
     public int getMaxAccountsPerIP() {
-        return config.getInt("max_accounts_per_ip", 3);
+        return config.getInt("max_accounts_per_ip", 3); // Default value is 3
     }
 
+    public void setMaxAccountsPerIP(int max) {
+        config.set("max_accounts_per_ip", max);
+        plugin.saveConfig();
+    }
+
+
     public String getKickMessage() {
-        return config.getString("kick_message", "You are logged in with more than three accounts!");
+        return ChatColor.translateAlternateColorCodes('&', config.getString("kick_message", "&4You have too many accounts on the server!"));
+    }
+
+    public void setKickMessage(String message) {
+        config.set("kick_message", message);
+        plugin.saveConfig();
     }
 }
