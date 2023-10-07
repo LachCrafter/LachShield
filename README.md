@@ -1,7 +1,7 @@
 # LachShield Plugin
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.20.1-brightgreen.svg)
-![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.0-blue.svg)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.20.2-brightgreen.svg)
+![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.1-blue.svg)
 
 LachShield is a Minecraft Paper plugin designed to limit the number of player accounts that can join the server from the same IP address.
 
