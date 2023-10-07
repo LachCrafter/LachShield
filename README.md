@@ -1,7 +1,7 @@
 # LachShield Plugin
 
 ![Minecraft Version](https://img.shields.io/badge/Minecraft-1.20.2-brightgreen.svg)
-![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.1-blue.svg)
+![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.2-blue.svg)
 
 LachShield is a Minecraft Paper plugin designed to limit the number of player accounts that can join the server from the same IP address.
 
@@ -16,9 +16,15 @@ LachShield is a Minecraft Paper plugin designed to limit the number of player ac
 2. Place the downloaded JAR file into the `plugins` folder of your Minecraft server.
 3. Restart or reload your server to enable the plugin.
 
+## Commands
+
+Commands to manage IP restrictions:
+
+- `/lachshield iplimit <number>`: Set the IP limit to restrict the number of players who can join from the same IP address.
+
 ## Usage
 
-Once the plugin is installed, it will automatically monitor player logins and keep track of the number of accounts from each IP address. If a player attempts to join with a fourth account from the same IP address, they will be kicked from the server with a message indicating the account limit has been exceeded.
+Once the plugin is installed, you can use the new `/lachshield iplimit` command to set the IP limit. Players attempting to join with a fourth account from the same IP address will be kicked from the server with a message indicating the account limit has been exceeded.
 
 ## Contributing
 
@@ -30,4 +36,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For questions or inquiries, you can reach out to me at Discord: [lachcrafter](mailto:your@email.com).
+For questions or inquiries, you can reach out to me at Discord: [lachcrafter].
