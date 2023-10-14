@@ -23,7 +23,7 @@ public class IPLimitCommand implements CommandExecutor {
                     Player player = (Player) sender;
                     if (player.hasPermission("lachshield.admin")) {
                         try {
-                            int newLimit = Integer.parseInt(args[1]); // Nutze args[1], da dort die IP-Grenze steht
+                            int newLimit = Integer.parseInt(args[1]); 
                             plugin.getConfigManager().setMaxAccountsPerIP(newLimit);
                             player.sendMessage(ChatColor.GREEN + "IP limit set to " + newLimit);
                         } catch (NumberFormatException e) {
