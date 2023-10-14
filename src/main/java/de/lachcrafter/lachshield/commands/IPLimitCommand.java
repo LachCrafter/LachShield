@@ -23,16 +23,16 @@ public class IPLimitCommand implements CommandExecutor {
                     Player player = (Player) sender;
                     if (player.hasPermission("lachshield.admin")) {
                         try {
-                            int newLimit = Integer.parseInt(args[1]);
+                            int newLimit = Integer.parseInt(args[1]); // Nutze args[1], da dort die IP-Grenze steht
                             plugin.getConfigManager().setMaxAccountsPerIP(newLimit);
                             player.sendMessage(ChatColor.GREEN + "IP limit set to " + newLimit);
                         } catch (NumberFormatException e) {
                             player.sendMessage(ChatColor.RED + "Invalid number format. Usage: /lachshield iplimit <number>");
                         }
+                        return true;
                     } else {
                         player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
                     }
-                    return true;
                 } else {
                     sender.sendMessage(ChatColor.RED + "Only players can use this command.");
                 }
