@@ -19,9 +19,6 @@ public class IPCheckListener implements Listener {
         // Überprüfen, ob der Spieler die lachshield.admin-Berechtigung hat
         if (!player.hasPermission("lachshield.admin")) {
             int ipLimit = plugin.getConfigManager().getMaxAccountsPerIP();
-            // Hier kannst du die IP-Überprüfung mit ipLimit durchführen
-            // Wenn der Spieler zu viele Accounts mit derselben IP hat, kannst du ihn kicken.
-            // Andernfalls kannst du ihn normal auf den Server lassen.
         }
     }
 }
