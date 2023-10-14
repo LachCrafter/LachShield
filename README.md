@@ -1,14 +1,15 @@
 # LachShield Plugin
 
 ![Minecraft Version](https://img.shields.io/badge/Minecraft-1.20.2-brightgreen.svg)
-![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.2-blue.svg)
+![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.2.1-blue.svg)
 
-LachShield is a Minecraft Paper plugin designed to limit the number of player accounts that can join the server from the same IP address.
+LachShield is a Minecraft Paper plugin designed to manage player connections based on their IP addresses, now with new features and improvements.
 
 ## Features
 
-- Limits the number of player accounts per IP address to three.
-- Players attempting to join with a fourth account from the same IP address will be kicked with a message.
+- **IP Limit Control**: Limit the number of player accounts that can join from the same IP address. Set the IP limit using the `/lachshield iplimit <number>` command.
+- **Custom Kick Message**: Customize the message that players receive when they exceed the IP limit by editing the `config.yml` file.
+- **Admin Privileges**: Players with the `lachshield.admin` permission can bypass the IP limit, ensuring server administrators have control.
 
 ## Installation
 
@@ -16,15 +17,23 @@ LachShield is a Minecraft Paper plugin designed to limit the number of player ac
 2. Place the downloaded JAR file into the `plugins` folder of your Minecraft server.
 3. Restart or reload your server to enable the plugin.
 
-## Commands
-
-Commands to manage IP restrictions:
-
-- `/lachshield iplimit <number>`: Set the IP limit to restrict the number of players who can join from the same IP address.
-
 ## Usage
 
-Once the plugin is installed, you can use the new `/lachshield iplimit` command to set the IP limit. Players attempting to join with a fourth account from the same IP address will be kicked from the server with a message indicating the account limit has been exceeded.
+### Setting the IP Limit
+
+Use the following command to set the IP limit:
+
+/lachshield iplimit <number>
+
+Replace `<number>` with the desired IP limit. Players who exceed this limit will be kicked from the server with a customizable message.
+
+### Custom Kick Message
+
+You can customize the kick message by editing the `config.yml` file. Look for the `kickMessage` option and set your desired message there.
+
+## Permissions
+
+- `lachshield.admin`: Allows users to bypass the IP limit and access admin privileges.
 
 ## Contributing
 
@@ -32,8 +41,8 @@ Contributions are welcome! If you find a bug or want to suggest an enhancement, 
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://github.com/LachCrafter/LachShield/blob/master/LICENSE).
 
 ## Contact
 
-For questions or inquiries, you can reach out to me at Discord: [lachcrafter].
+For questions or inquiries, you can reach out to me on Discord: lachcrafter.
