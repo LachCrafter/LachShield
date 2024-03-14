@@ -33,7 +33,7 @@ You can customize the kick message by editing the `config.yml` file. Look for th
 
 ## Permissions
 
-- `lachshield.admin`: Allows users to bypass the IP limit and access admin privileges.
+- `lachshield.admin`: Allows users to bypass and edit the IP limit and access admin privileges.
 
 ## Contributing
 
