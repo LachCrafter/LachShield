@@ -28,13 +28,22 @@ public class ConfigManager {
         plugin.saveConfig();
     }
 
-
     public String getKickMessage() {
         return ChatColor.translateAlternateColorCodes('&', config.getString("kick_message", "&4You have too many accounts on the server!"));
     }
 
     public void setKickMessage(String message) {
         config.set("kick_message", message);
+        plugin.saveConfig();
+    }
+
+    // New settings for enabling/disabling crystal break delay
+    public boolean isCrystalDelayEnabled() {
+        return config.getBoolean("crystal-delay", false); // Default value is false
+    }
+
+    public void setCrystalDelayEnabled(boolean enabled) {
+        config.set("crystal-delay", enabled);
         plugin.saveConfig();
     }
 }

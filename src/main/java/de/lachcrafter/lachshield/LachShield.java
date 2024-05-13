@@ -1,6 +1,9 @@
 package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
+import de.lachcrafter.lachshield.functions.CrystalDelay;
+import de.lachcrafter.lachshield.listeners.IPCheckListener;
+import de.lachcrafter.lachshield.listeners.CrystalListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,17 +17,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LachShield extends JavaPlugin implements Listener {
-
     private Map<String, Integer> ipAccountCount = new HashMap<>();
     private ConfigManager configManager;
+    private CrystalDelay crystalDelay;
 
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
-        Bukkit.getPluginManager().registerEvents(this, this);
+        crystalDelay = new CrystalDelay();
+
+        // Register existing listeners and commands
         getServer().getPluginManager().registerEvents(this, this);
-        getCommand("lachshield").setExecutor(new IPLimitCommand(this));
         getServer().getPluginManager().registerEvents(new IPCheckListener(this), this);
+        getServer().getPluginManager().registerEvents(new CrystalListener(crystalDelay), this);
+        getCommand("lachshield").setExecutor(new IPLimitCommand(this));
+
         getLogger().info("LachShield loaded");
     }
 
@@ -36,8 +43,8 @@ public class LachShield extends JavaPlugin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         String ip = event.getPlayer().getAddress().getAddress().getHostAddress();
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
-
         int maxAccountsPerIP = configManager.getMaxAccountsPerIP();
+
         if (accountCount >= maxAccountsPerIP) {
             String kickMessage = configManager.getKickMessage();
             event.getPlayer().kickPlayer(ChatColor.RED + kickMessage);
@@ -45,21 +52,6 @@ public class LachShield extends JavaPlugin implements Listener {
         }
 
         ipAccountCount.put(ip, accountCount + 1);
-    }
-
-    public void kickPlayerAndRemoveEntity(Player player, String kickMessage) {
-        player.kickPlayer(kickMessage);
-        player.remove();
-    }
-
-    public int getPlayerAccountsCount(String ipAddress) {
-        int count = 0;
-        for (Player player : getServer().getOnlinePlayers()) {
-            if (player.getAddress().getHostString().equals(ipAddress)) {
-                count++;
-            }
-        }
-        return  count;
     }
 
     @EventHandler

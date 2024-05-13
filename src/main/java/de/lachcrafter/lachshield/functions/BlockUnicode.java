@@ -1,4 +1,4 @@
-package de.lachcrafter.lachshield;
+package de.lachcrafter.lachshield.functions;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

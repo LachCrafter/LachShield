@@ -1,2 +1,3 @@
 max_accounts_per_ip: 3
 kick_message: "The account limit has been exceeded!"
+crystal-delay: false

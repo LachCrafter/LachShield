@@ -1,5 +1,6 @@
-package de.lachcrafter.lachshield;
+package de.lachcrafter.lachshield.listeners;
 
+import de.lachcrafter.lachshield.LachShield;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
