@@ -1,5 +1,6 @@
 package de.lachcrafter.lachshield.functions;
 
+import de.lachcrafter.lachshield.ConfigManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
