@@ -24,7 +24,7 @@ public class LachShield extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
-        crystalDelay = new CrystalDelay();
+        crystalDelay = new CrystalDelay(configManager);  // Pass the configManager to CrystalDelay
 
         // Register existing listeners and commands
         getServer().getPluginManager().registerEvents(this, this);
