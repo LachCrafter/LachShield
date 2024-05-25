@@ -1,4 +1,4 @@
-# LachShield Plugin
+# LachShield Plugin (Discontinued)
 
 ![Minecraft Version](https://img.shields.io/badge/Minecraft-1.20.2-brightgreen.svg)
 ![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.2.1-blue.svg)
