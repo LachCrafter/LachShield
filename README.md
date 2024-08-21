@@ -1,9 +1,9 @@
-# LachShield Plugin (Discontinued)
+# LachShield Plugin
 
 ![Minecraft Version](https://img.shields.io/badge/Minecraft-1.20.2-brightgreen.svg)
 ![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.2.1-blue.svg)
 
-LachShield was a Minecraft Paper plugin designed to manage player connections based on their IP addresses, now with new features and improvements.
+LachShield is a Minecraft Paper plugin designed to manage player connections based on their IP addresses, now with new features and improvements.
 
 ## Features
 
