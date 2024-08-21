@@ -2,7 +2,6 @@ package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
-import de.lachcrafter.lachshield.listeners.CrystalListener;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +23,6 @@ public class LachShield extends JavaPlugin implements Listener {
         // Register existing listeners and commands
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new IPCheckListener(this), this);
-        getServer().getPluginManager().registerEvents(new CrystalListener(crystalDelay), this);
         getCommand("lachshield").setExecutor(new IPLimitCommand(this));
 
         getLogger().info("LachShield loaded");
