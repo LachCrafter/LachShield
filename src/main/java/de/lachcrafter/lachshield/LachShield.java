@@ -1,12 +1,9 @@
 package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
-import de.lachcrafter.lachshield.functions.CrystalDelay;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
 import de.lachcrafter.lachshield.listeners.CrystalListener;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -19,12 +16,10 @@ import java.util.Map;
 public class LachShield extends JavaPlugin implements Listener {
     private Map<String, Integer> ipAccountCount = new HashMap<>();
     private ConfigManager configManager;
-    private CrystalDelay crystalDelay;
 
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
-        crystalDelay = new CrystalDelay(configManager);  // Pass the configManager to CrystalDelay
 
         // Register existing listeners and commands
         getServer().getPluginManager().registerEvents(this, this);

@@ -36,14 +36,4 @@ public class ConfigManager {
         config.set("kick_message", message);
         plugin.saveConfig();
     }
-
-    // New settings for enabling/disabling crystal break delay
-    public boolean isCrystalDelayEnabled() {
-        return config.getBoolean("crystal-delay", false); // Default value is false
-    }
-
-    public void setCrystalDelayEnabled(boolean enabled) {
-        config.set("crystal-delay", enabled);
-        plugin.saveConfig();
-    }
 }

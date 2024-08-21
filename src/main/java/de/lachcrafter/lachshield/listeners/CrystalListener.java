@@ -1,6 +1,5 @@
 package de.lachcrafter.lachshield.listeners;
 
-import de.lachcrafter.lachshield.functions.CrystalDelay;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;

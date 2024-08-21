@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LachShield.main.iml" filepath="$PROJECT_DIR$/.idea/modules/LachShield.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/de.lachcrafter.LachShield.main.iml" filepath="$PROJECT_DIR$/.idea/modules/de.lachcrafter.LachShield.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lachshield.LachShield.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lachshield.LachShield.main.iml" />
     </modules>
   </component>
 </project>
