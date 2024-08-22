@@ -1,11 +1,13 @@
 package de.lachcrafter.lachshield.commands;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import de.lachcrafter.lachshield.LachShield;
+import org.jetbrains.annotations.NotNull;
 
 public class IPLimitCommand implements CommandExecutor {
 
@@ -16,25 +18,22 @@ public class IPLimitCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command cmd, @NotNull String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("lachshield")) {
             if (args.length == 2 && args[0].equalsIgnoreCase("iplimit")) {
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
+                if (sender instanceof Player player) {
                     if (player.hasPermission("lachshield.admin")) {
                         try {
                             int newLimit = Integer.parseInt(args[1]); 
                             plugin.getConfigManager().setMaxAccountsPerIP(newLimit);
-                            player.sendMessage(ChatColor.GREEN + "IP limit set to " + newLimit);
+                            player.sendMessage(Component.text("IP limit has been set to " + newLimit, NamedTextColor.GREEN));
                         } catch (NumberFormatException e) {
-                            player.sendMessage(ChatColor.RED + "Invalid number format. Usage: /lachshield iplimit <number>");
+                            player.sendMessage(Component.text("Invalid number format. Usage: /lachshield iplimit <number>", NamedTextColor.RED));
                         }
                         return true;
                     } else {
-                        player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+                        player.sendMessage(Component.text("You don't have permission to use this command", NamedTextColor.RED));
                     }
-                } else {
-                    sender.sendMessage(ChatColor.RED + "Only players can use this command.");
                 }
             }
         }

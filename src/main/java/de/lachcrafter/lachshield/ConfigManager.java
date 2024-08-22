@@ -34,9 +34,4 @@ public class ConfigManager {
         String rawMessage = config.getString("kick_message", "<red>You have too many accounts on the server!");
         return miniMessage.deserialize(rawMessage);
     }
-
-    public void setKickMessage(String message) {
-        config.set("kick_message", message);
-        plugin.saveConfig();
-    }
 }
