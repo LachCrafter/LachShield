@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'de.lachcrafter'
-version = '1.0-SNAPSHOT'
+version = '1.3'
 
 repositories {
     mavenCentral()
@@ -48,4 +48,11 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+
+jar {
+    archiveBaseName.set("LachShield")
+    archiveVersion.set(provider { version })
+    archiveClassifier.set("")
+    archiveExtension.set("jar")
 }
