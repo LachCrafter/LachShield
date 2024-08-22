@@ -2,7 +2,7 @@ package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LachShield extends JavaPlugin implements Listener {
-    private Map<String, Integer> ipAccountCount = new HashMap<>();
+    private final Map<String, Integer> ipAccountCount = new HashMap<>();
     private ConfigManager configManager;
 
     @Override
@@ -39,13 +39,14 @@ public class LachShield extends JavaPlugin implements Listener {
         int maxAccountsPerIP = configManager.getMaxAccountsPerIP();
 
         if (accountCount >= maxAccountsPerIP) {
-            String kickMessage = configManager.getKickMessage();
-            event.getPlayer().kickPlayer(ChatColor.RED + kickMessage);
+            Component kickComponent = configManager.getKickMessage();
+            event.getPlayer().kick(kickComponent);
             return;
         }
 
         ipAccountCount.put(ip, accountCount + 1);
     }
+
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
