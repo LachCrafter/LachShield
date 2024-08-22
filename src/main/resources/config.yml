@@ -1,2 +1,6 @@
+# LachShield config
+# We use minimessages and the colourformat.
+# Learn more here: https://docs.advntr.dev/minimessage/format.html
+
 max_accounts_per_ip: 3
-kick_message: "The account limit has been exceeded!"
+kick_message: "<red>You have too many accounts on the server!"
