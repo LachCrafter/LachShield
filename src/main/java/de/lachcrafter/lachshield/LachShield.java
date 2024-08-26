@@ -2,6 +2,7 @@ package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
 import de.lachcrafter.lachshield.functions.IPAccountManager;
+import de.lachcrafter.lachshield.functions.PreventNetherRoof;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +22,7 @@ public class LachShield extends JavaPlugin implements Listener {
         // Register existing listeners and commands
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new IPCheckListener(this), this);
+        getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
         getCommand("lachshield").setExecutor(new IPLimitCommand(this));
 
         getLogger().info("LachShield loaded");

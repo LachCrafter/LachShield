@@ -3,4 +3,9 @@
 # Learn more here: https://docs.advntr.dev/minimessage/format.html
 
 max_accounts_per_ip: 3
-kick_message: "<red>You have too many accounts on the server!"
+ip_limit_kick_message: "<red>You have too many accounts on the server!"
+
+# PreventNetherRoof
+prevent_nether_roof:
+  enabled: false
+  warning_message: "<red>You cannot enter the Nether roof!"

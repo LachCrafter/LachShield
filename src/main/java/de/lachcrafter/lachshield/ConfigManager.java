@@ -31,7 +31,7 @@ public class ConfigManager {
     }
 
     public Component getKickMessage() {
-        String rawMessage = config.getString("kick_message", "<red>You have too many accounts on the server!");
+        String rawMessage = config.getString("ip_limit_kick_message", "<red>You have too many accounts on the server!");
         return miniMessage.deserialize(rawMessage);
     }
 }
