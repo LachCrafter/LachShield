@@ -22,16 +22,16 @@ public class ConfigManager {
     }
 
     public int getMaxAccountsPerIP() {
-        return config.getInt("max_accounts_per_ip", 3);
+        return config.getInt("ip_limit.max_accounts_per_ip", 3);
     }
 
     public void setMaxAccountsPerIP(int max) {
-        config.set("max_accounts_per_ip", max);
+        config.set("ip_limit:max_accounts_per_ip", max);
         plugin.saveConfig();
     }
 
     public Component getKickMessage() {
-        String rawMessage = config.getString("ip_limit_kick_message", "<red>You have too many accounts on the server!");
+        String rawMessage = config.getString("ip_limit.kick_message", "<red>You have too many accounts on the server!");
         return miniMessage.deserialize(rawMessage);
     }
 }
