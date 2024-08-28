@@ -16,16 +16,19 @@ public class LachShield extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        System.out.println("initlialising LachShield...");
         configManager = new ConfigManager(this);
         ipAccountManager = new IPAccountManager(configManager);
 
+        System.out.println("loading events...");
         // Register existing listeners and commands
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new IPCheckListener(this), this);
         getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
+        System.out.println("loading commands...");
         getCommand("lachshield").setExecutor(new IPLimitCommand(this));
 
-        getLogger().info("LachShield loaded");
+        getLogger().info("LachShield successfully initialised");
     }
 
     public ConfigManager getConfigManager() {
