@@ -2,6 +2,7 @@ package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
 import de.lachcrafter.lachshield.functions.IPAccountManager;
+import de.lachcrafter.lachshield.functions.JoinMessages;
 import de.lachcrafter.lachshield.functions.PreventNetherRoof;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
 import org.bukkit.event.EventHandler;
@@ -25,6 +26,7 @@ public class LachShield extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new IPCheckListener(this), this);
         getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
+        getServer().getPluginManager().registerEvents(new JoinMessages(getConfig()), this);
         System.out.println("loading commands...");
         getCommand("lachshield").setExecutor(new IPLimitCommand(this));
 
@@ -53,6 +55,6 @@ public class LachShield extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        getLogger().info("LachShield deactivated");
+        getLogger().info("LachShield successfully unloaded");
     }
 }

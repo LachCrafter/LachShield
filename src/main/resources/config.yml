@@ -10,3 +10,9 @@ ip_limit:
 prevent_nether_roof:
   enabled: false
   warning_message: "<red>You cannot enter the Nether roof!"
+
+# Join messages
+join_messages:
+  enabled: false
+  join_message: "<yellow>joined the game!"
+  leave_message: "<gray>left the game."
