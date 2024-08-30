@@ -34,7 +34,7 @@ public class LachShield extends JavaPlugin implements Listener {
         ipAccountManager = new IPAccountManager(configManager, config);
 
         LOGGER.info("Loading events...");
-        // Register existing listeners and commands
+        // register events
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new IPCheckListener(this), this);
         getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
@@ -57,16 +57,13 @@ public class LachShield extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (!ipAccountManager.handlePlayerJoin(event.getPlayer())) {
-            LOGGER.debug("Player join event not handled for player: {}", event.getPlayer().getName());
             return;
         }
-        LOGGER.info("Player joined: {}", event.getPlayer().getName());
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         ipAccountManager.handlePlayerQuit(event.getPlayer());
-        LOGGER.info("Player quit: {}", event.getPlayer().getName());
     }
 
     @Override
