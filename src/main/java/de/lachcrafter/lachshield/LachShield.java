@@ -5,6 +5,7 @@ import de.lachcrafter.lachshield.functions.IPAccountManager;
 import de.lachcrafter.lachshield.functions.JoinMessages;
 import de.lachcrafter.lachshield.functions.PreventNetherRoof;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -14,12 +15,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class LachShield extends JavaPlugin implements Listener {
     private ConfigManager configManager;
     private IPAccountManager ipAccountManager;
+    private FileConfiguration config;
 
     @Override
     public void onEnable() {
         System.out.println("initlialising LachShield...");
         configManager = new ConfigManager(this);
-        ipAccountManager = new IPAccountManager(configManager);
+        ipAccountManager = new IPAccountManager(configManager, config);
 
         System.out.println("loading events...");
         // Register existing listeners and commands

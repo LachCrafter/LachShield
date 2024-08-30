@@ -1,6 +1,8 @@
 # LachShield config
 # We use minimessages and the colourformat.
 # Learn more here: https://docs.advntr.dev/minimessage/format.html
+
+# Ip limit
 ip_limit:
   enabled: true
   max_accounts_per_ip: 3
