@@ -8,6 +8,13 @@
 name: Gradle Package
 
 on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
   release:
     types: [created]
 
