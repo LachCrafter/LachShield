@@ -1,5 +1,6 @@
 package de.lachcrafter.lachshield;
 
+import de.lachcrafter.lachshield.commands.BroadcastCommand;
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
 import de.lachcrafter.lachshield.functions.IPAccountManager;
 import de.lachcrafter.lachshield.functions.JoinMessages;
@@ -41,7 +42,9 @@ public class LachShield extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new JoinMessages(getConfig()), this);
 
         LOGGER.info("Loading commands...");
+        // register commands
         getCommand("lachshield").setExecutor(new IPLimitCommand(this));
+        getCommand("broadcast").setExecutor(new BroadcastCommand(config));
 
         LOGGER.info("LachShield successfully initialized");
     }

@@ -18,3 +18,8 @@ join_messages:
   enabled: false
   join_message: "<yellow>joined the game!"
   leave_message: "<gray>left the game."
+
+# Broadcast messages
+broadcast:
+  prefix: "<dark_aqua>[<red>Broadcast<dark_aqua>]" # remove the text for no prefix
+  messagecolour: "<gold>"
