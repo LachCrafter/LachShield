@@ -23,3 +23,9 @@ join_messages:
 broadcast:
   prefix: "<dark_aqua>[<red>Broadcast<dark_aqua>]" # remove the text for no prefix
   messagecolour: "<gold>"
+
+# Kick AFK players after some minutes
+afK:
+  enabled: false
+  afk_timeout_minutes: 15
+  kick_message: "<red>You have been disconnected for AFK."
