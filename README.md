@@ -8,6 +8,9 @@ LachShield is a Minecraft plugin for paper, it mainly focuses on securing your M
 ## Features
 
 - **IP Limit Control**: Limit the number of player accounts that can join from the same IP address.
+- **Kick AFK players**: Kick players that are AFK in a specified time.
+- **Join and Leave Messages**: Customise the join and leave messages.
+- **Prevent Nether-Roof**: Prevent players to access the Nether Roof.
 
 ## Installation
 
