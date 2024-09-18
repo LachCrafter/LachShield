@@ -24,7 +24,7 @@ You can config the plugins features in the config file.
 
 ## Permissions
 
-- `lachshield.admin`: Allows users to bypass and edit the IP limit and access admin privileges.
+- `lachshield.admin`: Allows admins to bypass the plugins patches.
 
 ## Contributing
 
