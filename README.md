@@ -36,4 +36,4 @@ This project is licensed under the [MIT License](https://github.com/LachCrafter/
 
 ## Contact
 
-For questions or inquiries, you can reach out to me on with EMail: [contact@felicianware.eu](mailto:contact@felicianware.eu)
+For questions or inquiries, you can reach out to me on via email: [contact@felicianware.eu](mailto:contact@felicianware.eu)
