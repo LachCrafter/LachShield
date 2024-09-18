@@ -39,6 +39,9 @@ public class Afk implements Listener {
         if (!enabled) return;
         Player player = event.getPlayer();
         playerActivity.put(player.getUniqueId(), System.currentTimeMillis());
+        if (player.hasPermission("lachshield.admin")) {
+            return;
+        }
     }
 
     private void startAfkCheck() {
