@@ -20,7 +20,6 @@ public class LachShield extends JavaPlugin implements Listener {
     private IPAccountManager ipAccountManager;
     private final FileConfiguration config;
 
-    // Initialize the logger
     private static final Logger LOGGER = LogManager.getLogger(LachShield.class);
 
     public LachShield(FileConfiguration config) {
