@@ -1,11 +1,10 @@
 package de.lachcrafter.lachshield;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import de.lachcrafter.lachshield.commands.BroadcastCommand;
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
-import de.lachcrafter.lachshield.features.Afk;
-import de.lachcrafter.lachshield.features.IPAccountManager;
-import de.lachcrafter.lachshield.features.JoinMessages;
-import de.lachcrafter.lachshield.features.PreventNetherRoof;
+import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +32,8 @@ public class LachShield extends JavaPlugin implements Listener {
 
         configManager = new ConfigManager(this);
         ipAccountManager = new IPAccountManager(configManager, config);
+        PlayerObfuscator playerObfuscator = new PlayerObfuscator();
+
 
         LOGGER.info("Loading events...");
         // register events
@@ -41,6 +42,8 @@ public class LachShield extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
         getServer().getPluginManager().registerEvents(new JoinMessages(getConfig()), this);
         getServer().getPluginManager().registerEvents(new Afk(this), this);
+
+        PacketEvents.getAPI().getEventManager().registerListener(playerObfuscator);
 
         LOGGER.info("Loading commands...");
         // register commands

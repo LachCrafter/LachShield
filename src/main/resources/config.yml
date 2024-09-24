@@ -29,3 +29,14 @@ afk:
   enabled: false
   afk_timeout_minutes: 15
   kick_message: "<red>You have been disconnected for AFK."
+
+# Avoids other players to see some player data through hacks.
+obfuscate-player-data:
+  enabled: false
+  to-obfuscate:
+    health: true
+    ping: true
+    stackSize: true
+    durability: true
+    difficulty: true
+    onGround: true
