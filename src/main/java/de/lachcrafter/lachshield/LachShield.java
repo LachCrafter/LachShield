@@ -2,10 +2,10 @@ package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.commands.BroadcastCommand;
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
-import de.lachcrafter.lachshield.functions.Afk;
-import de.lachcrafter.lachshield.functions.IPAccountManager;
-import de.lachcrafter.lachshield.functions.JoinMessages;
-import de.lachcrafter.lachshield.functions.PreventNetherRoof;
+import de.lachcrafter.lachshield.features.Afk;
+import de.lachcrafter.lachshield.features.IPAccountManager;
+import de.lachcrafter.lachshield.features.JoinMessages;
+import de.lachcrafter.lachshield.features.PreventNetherRoof;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.units.qual.A;
 
 public class LachShield extends JavaPlugin implements Listener {
     private ConfigManager configManager;

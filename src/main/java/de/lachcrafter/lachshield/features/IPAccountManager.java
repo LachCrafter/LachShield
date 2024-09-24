@@ -1,4 +1,4 @@
-package de.lachcrafter.lachshield.functions;
+package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.ConfigManager;
 import net.kyori.adventure.text.Component;

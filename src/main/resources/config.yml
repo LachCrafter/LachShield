@@ -25,7 +25,7 @@ broadcast:
   messagecolour: "<gold>"
 
 # Kick AFK players after some minutes
-afK:
+afk:
   enabled: false
   afk_timeout_minutes: 15
   kick_message: "<red>You have been disconnected for AFK."

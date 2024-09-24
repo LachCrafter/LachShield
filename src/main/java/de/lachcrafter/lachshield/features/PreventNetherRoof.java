@@ -1,4 +1,4 @@
-package de.lachcrafter.lachshield.functions;
+package de.lachcrafter.lachshield.features;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.World;
