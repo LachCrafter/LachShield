@@ -14,6 +14,7 @@ public class LachShield extends JavaPlugin {
     private final IPAccountManager ipAccountManager;
     private final PlayerObfuscator playerObfuscator;
     private final FileConfiguration config;
+    private final ConfigManager configManager;
 
     private static final Logger LOGGER = LogManager.getLogger(LachShield.class);
 
@@ -21,14 +22,19 @@ public class LachShield extends JavaPlugin {
             (
                 PlayerObfuscator playerObfuscator,
                 FileConfiguration config,
-                IPAccountManager ipAccountManager
+                IPAccountManager ipAccountManager,
+                ConfigManager configManager
             )
     {
         this.playerObfuscator = playerObfuscator;
         this.config = config;
         this.ipAccountManager = ipAccountManager;
+        this.configManager = configManager;
     }
 
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }
 
     @Override
     public void onEnable() {
