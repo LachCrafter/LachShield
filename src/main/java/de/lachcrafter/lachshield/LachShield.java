@@ -1,7 +1,6 @@
 package de.lachcrafter.lachshield;
 
 import com.github.retrooper.packetevents.PacketEvents;
-import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import de.lachcrafter.lachshield.commands.BroadcastCommand;
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
 import de.lachcrafter.lachshield.features.*;
@@ -9,68 +8,56 @@ import de.lachcrafter.lachshield.listeners.IPCheckListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class LachShield extends JavaPlugin implements Listener {
-    private ConfigManager configManager;
-    private IPAccountManager ipAccountManager;
+public class LachShield extends JavaPlugin {
+    private final IPAccountManager ipAccountManager;
+    private final PlayerObfuscator playerObfuscator;
     private final FileConfiguration config;
 
     private static final Logger LOGGER = LogManager.getLogger(LachShield.class);
 
-    public LachShield(FileConfiguration config) {
+    public LachShield
+            (
+                PlayerObfuscator playerObfuscator,
+                FileConfiguration config,
+                IPAccountManager ipAccountManager
+            )
+    {
+        this.playerObfuscator = playerObfuscator;
         this.config = config;
+        this.ipAccountManager = ipAccountManager;
     }
+
 
     @Override
     public void onEnable() {
-        LOGGER.info("Initializing LachShield...");
+        LOGGER.info("Initialising LachShield...");
 
-        configManager = new ConfigManager(this);
-        ipAccountManager = new IPAccountManager(configManager, config);
-        PlayerObfuscator playerObfuscator = new PlayerObfuscator();
+        LOGGER.info("Registering Events...");
+        regEvents();
+
+        LOGGER.info("Registering Commands...");
+        regCommands();
+
+        LOGGER.info("LachShield successfully initialized");
+    }
 
 
-        LOGGER.info("Loading events...");
-        // register events
-        getServer().getPluginManager().registerEvents(this, this);
-        getServer().getPluginManager().registerEvents(new IPCheckListener(this), this);
+    // register events
+    public void regEvents() {
+        getServer().getPluginManager().registerEvents(new IPCheckListener(this, ipAccountManager), this);
         getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
         getServer().getPluginManager().registerEvents(new JoinMessages(getConfig()), this);
         getServer().getPluginManager().registerEvents(new Afk(this), this);
 
         PacketEvents.getAPI().getEventManager().registerListener(playerObfuscator);
+    }
 
-        LOGGER.info("Loading commands...");
-        // register commands
+    // register commands
+    public void regCommands() {
         getCommand("lachshield").setExecutor(new IPLimitCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand(config));
-
-        LOGGER.info("LachShield successfully initialized");
-    }
-
-    public ConfigManager getConfigManager() {
-        return configManager;
-    }
-
-    public IPAccountManager getIPAccountManager() {
-        return ipAccountManager;
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        if (!ipAccountManager.handlePlayerJoin(event.getPlayer())) {
-            return;
-        }
-    }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        ipAccountManager.handlePlayerQuit(event.getPlayer());
     }
 
     @Override
