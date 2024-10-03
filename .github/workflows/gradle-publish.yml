@@ -10,11 +10,11 @@ name: Gradle Package
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     types: [closed]
     branches:
-      - master
+      - main
   release:
     types: [created]
 
