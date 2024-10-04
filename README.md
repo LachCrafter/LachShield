@@ -1,7 +1,7 @@
 # LachShield Plugin
 
 ![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1-brightgreen.svg)
-![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.4-blue.svg)
+![Plugin Version](https://img.shields.io/badge/Plugin%20Version-1.4.1-blue.svg)
 
 LachShield is a Minecraft plugin for paper, it mainly focuses on securing your Minecraft server more and adds security features and patches.
 

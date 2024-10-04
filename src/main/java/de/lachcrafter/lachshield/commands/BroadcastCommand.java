@@ -28,6 +28,6 @@ public class BroadcastCommand implements CommandExecutor {
             return true;
         } else {
             sender.sendMessage(Component.text("You do not have permission to use this command!"));
-        } return false;
+        } return true;
     }
 }
