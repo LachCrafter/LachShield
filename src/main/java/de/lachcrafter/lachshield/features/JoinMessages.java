@@ -31,7 +31,7 @@ public class JoinMessages implements Listener {
         if (joinMessage != null) {
             String formattedMessage = joinMessage.replace("%player%", player.getName());
             Component messageComponent = miniMessage.deserialize(formattedMessage);
-            Bukkit.getServer().broadcast(messageComponent);
+            evt.joinMessage(messageComponent);
         }
     }
 
@@ -46,7 +46,7 @@ public class JoinMessages implements Listener {
         if (leaveMessage != null) {
             String formattedMessage = leaveMessage.replace("%player%", player.getName());
             Component messageComponent = miniMessage.deserialize(formattedMessage);
-            Bukkit.getServer().broadcast(messageComponent);
+            evt.quitMessage(messageComponent);
         }
     }
 }
