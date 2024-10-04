@@ -16,8 +16,8 @@ prevent_nether_roof:
 # Join and leave messages
 join_messages:
   enabled: false
-  join_message: "<yellow>joined the game!"
-  leave_message: "<gray>left the game."
+  join_message: "<yellow>%player% joined the game!"
+  leave_message: "<gray>%player% left the game."
 
 # Broadcast messages
 broadcast:
