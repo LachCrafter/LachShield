@@ -18,23 +18,22 @@ public class IPAccountManager {
         this.config = config;
     }
 
-    public boolean handlePlayerJoin(Player player) {
+    public void handlePlayerJoin(Player player) {
         String ip = player.getAddress().getAddress().getHostAddress();
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
         int maxAccountsPerIP = configManager.getMaxAccountsPerIP();
 
         if (!config.getBoolean("join_messages.enabled", false)) {
-            return true;
+            return;
         }
 
         if (accountCount >= maxAccountsPerIP) {
             Component kickComponent = configManager.getKickMessage();
             player.kick(kickComponent);
-            return false;
+            return;
         }
 
         ipAccountCount.put(ip, accountCount + 1);
-        return true;
     }
 
     public void handlePlayerQuit(Player player) {

@@ -1,6 +1,7 @@
 package de.lachcrafter.lachshield.features;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class JoinMessages implements Listener {
 
     private final FileConfiguration cfg;
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public JoinMessages(FileConfiguration cfg) {
         this.cfg = cfg;
@@ -25,15 +27,26 @@ public class JoinMessages implements Listener {
             return;
         }
 
-        Bukkit.getServer().broadcast(Component.text(player.getName() + " " + cfg.getString("join_messages.join_message")));
+        String joinMessage = cfg.getString("join_messages.join_message");
+        if (joinMessage != null) {
+            String formattedMessage = joinMessage.replace("%player%", player.getName());
+            Component messageComponent = miniMessage.deserialize(formattedMessage);
+            Bukkit.getServer().broadcast(messageComponent);
+        }
     }
 
+    @EventHandler
     public void onPlayerLeaveEvent(PlayerQuitEvent evt) {
         if (!cfg.getBoolean("join_messages.enabled", false)) {
             return;
         }
         Player player = evt.getPlayer();
 
-        Bukkit.getServer().broadcast(Component.text(player.getName() + " "+ cfg.getString("join_message.leave_message")));
+        String leaveMessage = cfg.getString("join_messages.leave_message");
+        if (leaveMessage != null) {
+            String formattedMessage = leaveMessage.replace("%player%", player.getName());
+            Component messageComponent = miniMessage.deserialize(formattedMessage);
+            Bukkit.getServer().broadcast(messageComponent);
+        }
     }
 }
