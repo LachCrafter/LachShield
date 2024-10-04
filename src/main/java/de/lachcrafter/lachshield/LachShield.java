@@ -11,25 +11,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LachShield extends JavaPlugin {
-    private final IPAccountManager ipAccountManager;
-    private final PlayerObfuscator playerObfuscator;
-    private final FileConfiguration config;
-    private final ConfigManager configManager;
+    private IPAccountManager ipAccountManager;
+    private PlayerObfuscator playerObfuscator;
+    private FileConfiguration config;
+    private ConfigManager configManager;
 
     private static final Logger LOGGER = LogManager.getLogger(LachShield.class);
 
-    public LachShield
-            (
-                PlayerObfuscator playerObfuscator,
-                FileConfiguration config,
-                IPAccountManager ipAccountManager,
-                ConfigManager configManager
-            )
-    {
-        this.playerObfuscator = playerObfuscator;
-        this.config = config;
-        this.ipAccountManager = ipAccountManager;
-        this.configManager = configManager;
+    public LachShield() {
     }
 
     public ConfigManager getConfigManager() {
@@ -40,6 +29,11 @@ public class LachShield extends JavaPlugin {
     public void onEnable() {
         LOGGER.info("Initialising LachShield...");
 
+        this.config = getConfig();
+        this.configManager = new ConfigManager(this);
+        this.ipAccountManager = new IPAccountManager(configManager, config);
+        this.playerObfuscator = new PlayerObfuscator();
+
         LOGGER.info("Registering Events...");
         regEvents();
 
@@ -49,8 +43,7 @@ public class LachShield extends JavaPlugin {
         LOGGER.info("LachShield successfully initialized");
     }
 
-
-    // register events
+    // Register events
     public void regEvents() {
         getServer().getPluginManager().registerEvents(new IPCheckListener(this, ipAccountManager), this);
         getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
@@ -60,7 +53,7 @@ public class LachShield extends JavaPlugin {
         PacketEvents.getAPI().getEventManager().registerListener(playerObfuscator);
     }
 
-    // register commands
+    // Register commands
     public void regCommands() {
         getCommand("lachshield").setExecutor(new IPLimitCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand(config));
