@@ -24,7 +24,11 @@ public class IPLimitCommand implements CommandExecutor {
                 if (sender instanceof Player player) {
                     if (player.hasPermission("lachshield.admin")) {
                         try {
-                            int newLimit = Integer.parseInt(args[1]); 
+                            int newLimit = Integer.parseInt(args[1]);
+                            if (newLimit < 1) {
+                                player.sendMessage(Component.text("The ip limit should be 1 or more", NamedTextColor.RED));
+                                return true;
+                            }
                             plugin.getConfigManager().setMaxAccountsPerIP(newLimit);
                             player.sendMessage(Component.text("IP limit has been set to " + newLimit, NamedTextColor.GREEN));
                         } catch (NumberFormatException e) {
