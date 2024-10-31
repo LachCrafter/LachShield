@@ -1,33 +1,33 @@
 # LachShield config
-# We use minimessages and the colourformat.
-# Learn more here: https://docs.advntr.dev/minimessage/format.html
+# We use MiniMessages and the color format.
+# Learn more about the syntax here: https://docs.advntr.dev/minimessage/format.html
 
 # Ip limit
 ip_limit:
   enabled: true
-  max_accounts_per_ip: 3
-  kick_message: "<red>>You have reached the account limit on the server!"
+  maxAccountsPerIp: 3
+  kickMessage: "<red>>You have reached the account limit on the server!"
 
 # PreventNetherRoof
 prevent_nether_roof:
   enabled: false
-  warning_message: "<red>You cannot enter the Nether roof!"
+  warningMessage: "<red>You cannot enter the Nether roof!"
 
 # Broadcast messages
 broadcast:
   prefix: "<dark_aqua>[<red>Broadcast<dark_aqua>]" # remove the text for no prefix
-  messagecolour: "<gold>"
+  messageColor: "<gold>"
 
 # Kick AFK players after some minutes
 afk:
   enabled: false
-  afk_timeout_minutes: 15
-  kick_message: "<red>You have been disconnected for AFK."
+  afkTimeoutMinutes: 15
+  kickMessage: "<red>You have been disconnected for AFK."
 
 # Avoids other players to see some player data through hacks.
 obfuscate-player-data:
   enabled: false
-  to-obfuscate:
+  toObfuscate:
     health: true
     ping: true
     stackSize: true
