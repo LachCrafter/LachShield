@@ -2,11 +2,12 @@
 # We use MiniMessages and the color format.
 # Learn more about the syntax here: https://docs.advntr.dev/minimessage/format.html
 
+
 # Ip limit
 ip_limit:
   enabled: true
   maxAccountsPerIp: 3
-  kickMessage: "<red>>You have reached the account limit on the server!"
+  kickMessage: "<red>You have reached the account limit on the server!"
 
 # PreventNetherRoof
 prevent_nether_roof:
