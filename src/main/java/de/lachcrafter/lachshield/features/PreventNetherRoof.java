@@ -9,10 +9,14 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
 
 public class PreventNetherRoof implements Listener {
 
     private final FileConfiguration config;
+    private final HashMap<UUID, Long> cooldowns = new HashMap<>();
 
     public PreventNetherRoof(FileConfiguration config) {
         this.config = config;
@@ -32,20 +36,57 @@ public class PreventNetherRoof implements Listener {
         }
 
         if (world.getEnvironment() == World.Environment.NETHER && player.getLocation().getY() >= 128) {
-            event.setCancelled(true);
+            if (isInCooldown(player)) {
+                return;
+            }
+            setCooldown(player);
 
             String warningMessage = config.getString("prevent_nether_roof.warning_message", "<red>You cannot enter the Nether roof!");
             player.sendMessage(MiniMessage.miniMessage().deserialize(warningMessage));
 
-            Location safeLocation = player.getLocation();
-            safeLocation.setY(127);
+            Location safeLocation = findSafeLocation(player.getLocation());
 
-            if (world.getBlockAt(safeLocation).getType() == Material.AIR && world.getBlockAt(safeLocation.add(0, 1, 0)).getType() == Material.AIR) {
-                player.teleport(safeLocation);
-            } else {
-                safeLocation.setY(126);
-                player.teleport(safeLocation);
+            player.teleport(Objects.requireNonNullElseGet(safeLocation, () -> new Location(world, player.getLocation().getX(), 124, player.getLocation().getZ())));
+        }
+    }
+
+    private boolean isInCooldown(Player player) {
+        UUID playerId = player.getUniqueId();
+        if (cooldowns.containsKey(playerId)) {
+            long lastTime = cooldowns.get(playerId);
+            return (System.currentTimeMillis() - lastTime) < 2000;
+        }
+        return false;
+    }
+
+    private void setCooldown(Player player) {
+        cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+    }
+
+    private Location findSafeLocation(Location originalLocation) {
+        World world = originalLocation.getWorld();
+        if (world == null) return null;
+
+        for (int y = 127; y >= 124; y--) {
+            Location checkLocation = new Location(world, originalLocation.getX(), y, originalLocation.getZ());
+            if (isSafeLocation(checkLocation)) {
+                return checkLocation;
             }
         }
+
+        return null;
+    }
+
+    private boolean isSafeLocation(Location location) {
+        World world = location.getWorld();
+        if (world == null) return false;
+
+        Location feetLocation = location.clone();
+        Location headLocation = location.clone().add(0, 1, 0);
+
+        Material blockAtFeet = world.getBlockAt(feetLocation).getType();
+        Material blockAtHead = world.getBlockAt(headLocation).getType();
+
+        return blockAtFeet == Material.AIR && blockAtHead == Material.AIR;
     }
 }
