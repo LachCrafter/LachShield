@@ -4,6 +4,7 @@
 
 # messsages
 no-permission: "<red>You don't have permission to execute this command!"
+reload-success: "<green>The LachShield configuration has been successfully reloaded."
 
 # Ip limit
 ip_limit:

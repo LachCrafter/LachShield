@@ -3,6 +3,7 @@ package de.lachcrafter.lachshield;
 import com.github.retrooper.packetevents.PacketEvents;
 import de.lachcrafter.lachshield.commands.BroadcastCommand;
 import de.lachcrafter.lachshield.commands.IPLimitCommand;
+import de.lachcrafter.lachshield.commands.ReloadCommand;
 import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.listeners.IPCheckListener;
 import org.apache.logging.log4j.LogManager;
@@ -56,6 +57,7 @@ public class LachShield extends JavaPlugin {
     public void regCommands() {
         getCommand("lachshield").setExecutor(new IPLimitCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand(config));
+        getCommand("lachshield-reload").setExecutor(new ReloadCommand(config, this));
     }
 
     @Override
