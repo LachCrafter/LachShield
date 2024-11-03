@@ -12,3 +12,6 @@ commands:
       description: Sets the limit of the ips that can join at the same time.
   broadcast:
     usage: /broadcast <message>
+  lachshield-reload:
+    usage: /lachshield-reload
+    description: Reload the LachShield plugin configuration
