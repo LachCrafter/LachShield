@@ -27,7 +27,7 @@ public class BroadcastCommand implements CommandExecutor {
                 String message = String.join(" ", args);
 
                 String rawPrefix = config.getString("broadcast.prefix");
-                String rawMessageColor = config.getString("broadcast.messagecolour");
+                String rawMessageColor = config.getString("broadcast.messageColor");
 
                 String fullMessage = rawPrefix + " " + rawMessageColor + message;
 

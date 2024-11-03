@@ -22,7 +22,7 @@ public class ConfigManager {
     }
 
     public int getMaxAccountsPerIP() {
-        return config.getInt("ip_limit.max_accounts_per_ip", 3);
+        return config.getInt("ip_limit.maxAccountsPerIp", 3);
     }
 
     public void setMaxAccountsPerIP(int max) {
@@ -31,7 +31,7 @@ public class ConfigManager {
     }
 
     public Component getKickMessage() {
-        String rawMessage = config.getString("ip_limit.kick_message", "<red>You have too many accounts on the server!");
+        String rawMessage = config.getString("ip_limit.kickMessage", "<red>You have too many accounts on the server!");
         return miniMessage.deserialize(rawMessage);
     }
 }

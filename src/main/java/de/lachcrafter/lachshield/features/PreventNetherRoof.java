@@ -41,7 +41,7 @@ public class PreventNetherRoof implements Listener {
             }
             setCooldown(player);
 
-            String warningMessage = config.getString("prevent_nether_roof.warning_message", "<red>You cannot enter the Nether roof!");
+            String warningMessage = config.getString("prevent_nether_roof.warningMessage", "<red>You cannot enter the Nether roof!");
             player.sendMessage(MiniMessage.miniMessage().deserialize(warningMessage));
 
             Location safeLocation = findSafeLocation(player.getLocation());

@@ -82,11 +82,11 @@ public class PlayerObfuscator extends PacketListenerAbstract {
 
     public void reload(FileConfiguration config) {
         this.enabled = config.getBoolean("obfuscate-player-data.enabled", false);
-        this.stackSize = config.getBoolean("obfuscate-player-data.to-obfuscate.stackSize", true);
-        this.durability = config.getBoolean("obfuscate-player-data.to-obfuscate.durability", true);
-        this.enchantments = config.getBoolean("obfuscate-player-data.to-obfuscate.enchantments", true);
-        this.health = config.getBoolean("obfuscate-player-data.to-obfuscate.health", true);
-        this.onGround = config.getBoolean("obfuscate-player-data.to-obfuscate.onGround", true);
-        this.difficulty = config.getBoolean("obfuscate-player-data.to-obfuscate.difficulty", true);
+        this.stackSize = config.getBoolean("obfuscate-player-data.toObfuscate.stackSize", true);
+        this.durability = config.getBoolean("obfuscate-player-data.toObfuscate.durability", true);
+        this.enchantments = config.getBoolean("obfuscate-player-data.toObfuscate.enchantments", true);
+        this.health = config.getBoolean("obfuscate-player-data.toObfuscate.health", true);
+        this.onGround = config.getBoolean("obfuscate-player-data.toObfuscate.onGround", true);
+        this.difficulty = config.getBoolean("obfuscate-player-data.toObfuscate.difficulty", true);
     }
 }
