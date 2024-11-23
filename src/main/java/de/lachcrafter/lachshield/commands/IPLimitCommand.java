@@ -2,19 +2,24 @@ package de.lachcrafter.lachshield.commands;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import de.lachcrafter.lachshield.LachShield;
 import org.jetbrains.annotations.NotNull;
 
 public class IPLimitCommand implements CommandExecutor {
 
+    private final FileConfiguration config;
     private final LachShield plugin;
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
-    public IPLimitCommand(LachShield plugin) {
+    public IPLimitCommand(LachShield plugin, FileConfiguration config) {
         this.plugin = plugin;
+        this.config = config;
     }
 
     @Override
@@ -36,7 +41,8 @@ public class IPLimitCommand implements CommandExecutor {
                         }
                         return true;
                     } else {
-                        player.sendMessage(Component.text("You don't have permission to use this command", NamedTextColor.RED));
+                        Component noPermission = miniMessage.deserialize(config.getString("messages.noPermission"));
+                        player.sendMessage(noPermission);
                     }
                 }
             }

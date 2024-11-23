@@ -55,7 +55,7 @@ public class LachShield extends JavaPlugin {
 
     // Register commands
     public void regCommands() {
-        getCommand("lachshield").setExecutor(new IPLimitCommand(this));
+        getCommand("lachshield").setExecutor(new IPLimitCommand(this, config));
         getCommand("broadcast").setExecutor(new BroadcastCommand(config));
         getCommand("lachshield-reload").setExecutor(new ReloadCommand(config, this));
     }

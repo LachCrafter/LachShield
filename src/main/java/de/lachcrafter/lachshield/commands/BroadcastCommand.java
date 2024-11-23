@@ -37,7 +37,7 @@ public class BroadcastCommand implements CommandExecutor {
             }
             return true;
         } else {
-            sender.sendMessage(miniMessage.deserialize("<red>You do not have permission to use this command!"));
+            sender.sendMessage(miniMessage.deserialize(config.getString("messages.no-permission")));
         }
         return true;
     }
