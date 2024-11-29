@@ -2,7 +2,7 @@
 # We use MiniMessages and the color format.
 # Learn more about the syntax here: https://docs.advntr.dev/minimessage/format.html
 
-# messsages
+# messages
 messages:
   noPermission: "<red>You don't have permission to execute this command!"
   reloadSuccess: "<green>The LachShield configuration has been successfully reloaded."
