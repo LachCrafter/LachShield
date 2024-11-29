@@ -35,12 +35,12 @@ public class Afk implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (!enabled) return;
         Player player = event.getPlayer();
-        playerActivity.put(player.getUniqueId(), System.currentTimeMillis());
+        if (!enabled) return;
         if (player.hasPermission("lachshield.admin")) {
             return;
         }
+        playerActivity.put(player.getUniqueId(), System.currentTimeMillis());
     }
 
     private void startAfkCheck() {
