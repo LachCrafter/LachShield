@@ -1,21 +1,21 @@
 package de.lachcrafter.lachshield.commands;
 
+import de.lachcrafter.lachshield.ConfigManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 public class BroadcastCommand implements CommandExecutor {
 
-    private final FileConfiguration config;
+    private final ConfigManager configManager;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
-    public BroadcastCommand(FileConfiguration config) {
-        this.config = config;
+    public BroadcastCommand(ConfigManager configManager) {
+        this.configManager = configManager;
     }
 
     @Override
@@ -26,10 +26,7 @@ public class BroadcastCommand implements CommandExecutor {
             } else {
                 String message = String.join(" ", args);
 
-                String rawPrefix = config.getString("broadcast.prefix");
-                String rawMessageColor = config.getString("broadcast.messageColor");
-
-                String fullMessage = rawPrefix + " " + rawMessageColor + message;
+                String fullMessage = configManager.getBroadcastPrefix() + " " + configManager.getBroadcastMessageColor() + message;
 
                 Component broadcastMessage = miniMessage.deserialize(fullMessage);
 
@@ -37,7 +34,7 @@ public class BroadcastCommand implements CommandExecutor {
             }
             return true;
         } else {
-            sender.sendMessage(miniMessage.deserialize(config.getString("messages.no-permission")));
+            sender.sendMessage(configManager.getNoPermission());
         }
         return true;
     }

@@ -4,19 +4,19 @@
 
 # messsages
 messages:
-  no-permission: "<red>You don't have permission to execute this command!"
-  reload-success: "<green>The LachShield configuration has been successfully reloaded."
+  noPermission: "<red>You don't have permission to execute this command!"
+  reloadSuccess: "<green>The LachShield configuration has been successfully reloaded."
 
 # Ip limit
-ip_limit:
+ipLimit:
   enabled: true
   maxAccountsPerIp: 3
   kickMessage: "<red>You have reached the account limit on the server!"
 
 # PreventNetherRoof
-prevent_nether_roof:
+preventNetherRoof:
   enabled: false
-  warningMessage: "<red>You cannot enter the Nether roof!"
+  warnMessage: "<red>You cannot enter the Nether roof!"
 
 # Broadcast messages
 broadcast:
@@ -26,11 +26,11 @@ broadcast:
 # Kick AFK players after some minutes
 afk:
   enabled: false
-  afkTimeoutMinutes: 15
+  timeoutMinutes: 15
   kickMessage: "<red>You have been disconnected for AFK."
 
 # Avoids other players to see some player data through hacks.
-obfuscate-player-data:
+obfuscatePlayerData:
   enabled: false
   toObfuscate:
     health: true

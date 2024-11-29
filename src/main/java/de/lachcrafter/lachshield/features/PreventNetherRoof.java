@@ -1,5 +1,6 @@
 package de.lachcrafter.lachshield.features;
 
+import de.lachcrafter.lachshield.ConfigManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class PreventNetherRoof implements Listener {
 
     private final FileConfiguration config;
+    private ConfigManager configManager;
     private final HashMap<UUID, Long> cooldowns = new HashMap<>();
 
     public PreventNetherRoof(FileConfiguration config) {
@@ -41,8 +43,7 @@ public class PreventNetherRoof implements Listener {
             }
             setCooldown(player);
 
-            String warningMessage = config.getString("prevent_nether_roof.warningMessage", "<red>You cannot enter the Nether roof!");
-            player.sendMessage(MiniMessage.miniMessage().deserialize(warningMessage));
+            player.sendMessage(configManager.getPreventNetherRoofWarningMessage());
 
             Location safeLocation = findSafeLocation(player.getLocation());
 

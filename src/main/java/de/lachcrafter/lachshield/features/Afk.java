@@ -1,7 +1,7 @@
 package de.lachcrafter.lachshield.features;
 
+import de.lachcrafter.lachshield.ConfigManager;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,13 +21,12 @@ public class Afk implements Listener {
     private final Component kickMessage;
     private final boolean enabled;
 
-    public Afk(JavaPlugin plugin) {
+    public Afk(JavaPlugin plugin, ConfigManager configManager) {
         this.plugin = plugin;
         this.enabled = plugin.getConfig().getBoolean("afk.enabled");
-        this.afkTimeoutMinutes = plugin.getConfig().getLong("afk.afk_timeout_minutes") * 60 * 1000;
+        this.afkTimeoutMinutes = configManager.getAfkTimeoutMinutes() * 60 * 1000;
 
-        String rawMessage = plugin.getConfig().getString("afk.kick_message", "<red>You have been disconnected for AFK.");
-        this.kickMessage = MiniMessage.miniMessage().deserialize(rawMessage);
+        this.kickMessage = configManager.getAfkKickMessage();
 
         if (enabled) {
             startAfkCheck();

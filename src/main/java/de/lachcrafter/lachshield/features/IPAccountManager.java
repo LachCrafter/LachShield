@@ -28,7 +28,7 @@ public class IPAccountManager {
         }
 
         if (accountCount >= maxAccountsPerIP) {
-            Component kickComponent = configManager.getKickMessage();
+            Component kickComponent = configManager.getAfkKickMessage();
             player.kick(kickComponent);
             return;
         }

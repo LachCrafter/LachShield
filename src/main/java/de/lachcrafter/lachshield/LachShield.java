@@ -48,7 +48,7 @@ public class LachShield extends JavaPlugin {
     public void regEvents() {
         getServer().getPluginManager().registerEvents(new IPCheckListener(this, ipAccountManager), this);
         getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
-        getServer().getPluginManager().registerEvents(new Afk(this), this);
+        getServer().getPluginManager().registerEvents(new Afk(this, configManager), this);
 
         PacketEvents.getAPI().getEventManager().registerListener(playerObfuscator);
     }
@@ -56,8 +56,8 @@ public class LachShield extends JavaPlugin {
     // Register commands
     public void regCommands() {
         getCommand("lachshield").setExecutor(new IPLimitCommand(this, config));
-        getCommand("broadcast").setExecutor(new BroadcastCommand(config));
-        getCommand("lachshield-reload").setExecutor(new ReloadCommand(config, this));
+        getCommand("broadcast").setExecutor(new BroadcastCommand(configManager));
+        getCommand("lachshield-reload").setExecutor(new ReloadCommand(this));
     }
 
     @Override
