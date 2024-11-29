@@ -1,7 +1,6 @@
 package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.ConfigManager;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
