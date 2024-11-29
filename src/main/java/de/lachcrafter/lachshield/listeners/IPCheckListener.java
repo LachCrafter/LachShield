@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class IPCheckListener implements Listener {
     private final LachShield plugin;
-    private IPAccountManager ipAccountManager;
+    private final IPAccountManager ipAccountManager;
 
     public IPCheckListener(LachShield plugin, IPAccountManager ipAccountManager) {
         this.plugin = plugin;
