@@ -19,9 +19,6 @@ public class LachShield extends JavaPlugin {
 
     private static final Logger LOGGER = LogManager.getLogger(LachShield.class);
 
-    public LachShield() {
-    }
-
     public ConfigManager getConfigManager() {
         return configManager;
     }
