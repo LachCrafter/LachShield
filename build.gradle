@@ -33,9 +33,9 @@ java {
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
+tasks.named('compileJava') {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava11Compatible()) {
-        options.release = targetJavaVersion
+        options.release.set(targetJavaVersion)
     }
 }
 
