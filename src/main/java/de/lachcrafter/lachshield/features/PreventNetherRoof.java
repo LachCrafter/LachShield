@@ -28,7 +28,7 @@ public class PreventNetherRoof implements Listener {
         Player player = event.getPlayer();
         World world = player.getWorld();
 
-        if (!config.getBoolean("prevent_nether_roof.enabled", false)) {
+        if (!config.getBoolean("preventNetherRoof.enabled", false)) {
             return;
         }
 

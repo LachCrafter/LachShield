@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'de.lachcrafter'
-version = '1.5+1'
+version = '1.6'
 
 repositories {
     mavenCentral()

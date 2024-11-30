@@ -23,7 +23,7 @@ public class IPAccountManager {
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
         int maxAccountsPerIP = configManager.getMaxAccountsPerIP();
 
-        if (!config.getBoolean("join_messages.enabled", false)) {
+        if (!config.getBoolean("ipLimit.enabled", false)) {
             return;
         }
 
