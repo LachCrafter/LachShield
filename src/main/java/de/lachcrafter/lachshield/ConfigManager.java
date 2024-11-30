@@ -34,6 +34,7 @@ public class ConfigManager {
      */
     public void reloadConfig() {
         plugin.reloadConfig();
+        config = plugin.getConfig();
     }
 
     public int getMaxAccountsPerIP() {
