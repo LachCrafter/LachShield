@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Afk implements Listener {
+public class AntiAfk implements Listener {
 
     private final JavaPlugin plugin;
     private final HashMap<UUID, Long> playerActivity = new HashMap<>();
@@ -21,7 +21,7 @@ public class Afk implements Listener {
     private final Component kickMessage;
     private final boolean enabled;
 
-    public Afk(JavaPlugin plugin, ConfigManager configManager) {
+    public AntiAfk(JavaPlugin plugin, ConfigManager configManager) {
         this.plugin = plugin;
         this.enabled = plugin.getConfig().getBoolean("afk.enabled");
         this.afkTimeoutMinutes = configManager.getAfkTimeoutMinutes() * 60 * 1000;

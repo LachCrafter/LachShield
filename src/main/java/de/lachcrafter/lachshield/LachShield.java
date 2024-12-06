@@ -45,7 +45,7 @@ public class LachShield extends JavaPlugin {
     public void regEvents() {
         getServer().getPluginManager().registerEvents(new IPCheckListener(this, ipAccountManager), this);
         getServer().getPluginManager().registerEvents(new PreventNetherRoof(getConfig()), this);
-        getServer().getPluginManager().registerEvents(new Afk(this, configManager), this);
+        getServer().getPluginManager().registerEvents(new AntiAfk(this, configManager), this);
 
         PacketEvents.getAPI().getEventManager().registerListener(playerObfuscator);
     }
