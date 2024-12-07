@@ -1,46 +1,39 @@
 package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.ConfigManager;
+import de.lachcrafter.lachshield.LachShield;
+import de.lachcrafter.lachshield.lib.Feature;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-public class AntiAfk implements Listener {
-
-    private final JavaPlugin plugin;
+public class AntiAfk implements Feature {
+    private final LachShield plugin;
+    private final ConfigManager configManager;
     private final HashMap<UUID, Long> playerActivity = new HashMap<>();
-    private final long afkTimeoutMinutes;
-    private final Component kickMessage;
-    private final boolean enabled;
+    private long afkTimeoutMinutes;
+    private Component kickMessage;
 
-    public AntiAfk(JavaPlugin plugin, ConfigManager configManager) {
+    private int taskId = -1;
+
+    public AntiAfk(LachShield plugin, ConfigManager configManager) {
         this.plugin = plugin;
-        this.enabled = plugin.getConfig().getBoolean("afk.enabled");
-        this.afkTimeoutMinutes = configManager.getAfkTimeoutMinutes() * 60 * 1000;
-
-        this.kickMessage = configManager.getAfkKickMessage();
-
-        if (enabled) {
-            startAfkCheck();
-        }
+        this.configManager = configManager;
     }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        if (!enabled) return;
-        if (player.hasPermission("lachshield.admin")) {
-            return;
-        }
+        if (player.hasPermission("lachshield.admin")) return;
         playerActivity.put(player.getUniqueId(), System.currentTimeMillis());
     }
 
@@ -50,10 +43,9 @@ public class AntiAfk implements Listener {
     }
 
     private void startAfkCheck() {
-        new BukkitRunnable() {
+        BukkitTask runnable = new BukkitRunnable() {
             @Override
             public void run() {
-                if (!enabled) return;
                 long currentTime = System.currentTimeMillis();
 
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -72,5 +64,30 @@ public class AntiAfk implements Listener {
                 }
             }
         }.runTaskTimer(plugin, 20L, 20L * 60);
+        taskId = runnable.getTaskId();
+    }
+
+    @Override
+    public String getFeatureName() {
+        return "afk";
+    }
+
+    @Override
+    public void enable() {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        startAfkCheck();
+    }
+
+    @Override
+    public void disable() {
+        HandlerList.unregisterAll(this);
+        Bukkit.getScheduler().cancelTask(taskId);
+        playerActivity.clear();
+    }
+
+    @Override
+    public void reload() {
+        afkTimeoutMinutes = configManager.getAfkTimeoutMinutes() * 60 * 1000;
+        kickMessage = configManager.getAfkKickMessage();
     }
 }

@@ -1,31 +1,42 @@
 package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.ConfigManager;
+import de.lachcrafter.lachshield.LachShield;
+import de.lachcrafter.lachshield.lib.Feature;
 import net.kyori.adventure.text.Component;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class IPAccountManager {
-    private final Map<String, Integer> ipAccountCount = new HashMap<>();
+public class IPAccountManager implements Feature {
+    private final LachShield plugin;
     private final ConfigManager configManager;
-    private final FileConfiguration config;
+    private final Map<String, Integer> ipAccountCount = new HashMap<>();
+    private int maxAccountsPerIP;
 
-    public IPAccountManager(ConfigManager configManager, FileConfiguration config) {
+    public IPAccountManager(LachShield plugin, ConfigManager configManager) {
+        this.plugin = plugin;
         this.configManager = configManager;
-        this.config = config;
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        handlePlayerJoin(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        handlePlayerQuit(event.getPlayer());
     }
 
     public void handlePlayerJoin(Player player) {
         String ip = player.getAddress().getAddress().getHostAddress();
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
-        int maxAccountsPerIP = configManager.getMaxAccountsPerIP();
-
-        if (!config.getBoolean("ipLimit.enabled", false)) {
-            return;
-        }
 
         if (accountCount >= maxAccountsPerIP) {
             Component kickComponent = configManager.getAfkKickMessage();
@@ -43,5 +54,26 @@ public class IPAccountManager {
         if (accountCount > 0) {
             ipAccountCount.put(ip, accountCount - 1);
         }
+    }
+
+    @Override
+    public String getFeatureName() {
+        return "ipLimit";
+    }
+
+    @Override
+    public void enable() {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    @Override
+    public void disable() {
+        HandlerList.unregisterAll(this);
+
+    }
+
+    @Override
+    public void reload() {
+        maxAccountsPerIP = configManager.getMaxAccountsPerIP();
     }
 }

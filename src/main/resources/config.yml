@@ -22,6 +22,7 @@ preventNetherRoof:
 broadcast:
   prefix: "<dark_aqua>[<red>Broadcast<dark_aqua>]" # remove the text for no prefix
   messageColor: "<gold>"
+  format: "<prefix> <message_color><message>"
 
 # Kick AFK players after some minutes
 afk:

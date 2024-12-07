@@ -1,17 +1,23 @@
 name: LachShield
 version: '${version}'
 main: de.lachcrafter.lachshield.LachShield
-api-version: '1.21'
+api-version: '1.13'
 folia-supported: true
-depend:
+softdepend:
   - packetevents
 commands:
   lachshield:
+    reload:
+      usage: /LachShield reload <config|all|feature>
+      description: Reloads the plugin.
+    enable:
+      usage: /LachShield enable <feature>
+      description: Enables a feature.
+    disable:
+      usage: /LachShield disable <feature>
+      description: Disables a feature.
     iplimit:
       usage: /LachShield iplimit <max ips>
       description: Sets the limit of the ips that can join at the same time.
   broadcast:
     usage: /broadcast <message>
-  lachshield-reload:
-    usage: /lachshield-reload
-    description: Reload the LachShield plugin configuration
