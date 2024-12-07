@@ -34,7 +34,7 @@ public class LachShieldCommand implements TabExecutor {
         }
 
         if (args.length == 0) {
-            sender.sendMessage(Component.text("LachShield v" + plugin.getDescription().getVersion(), NamedTextColor.GREEN));
+            sender.sendMessage(Component.text("LachShield v" + plugin.getPluginMeta().getVersion(), NamedTextColor.GREEN));
             sender.sendMessage(Component.text("Usage: /lachshield reload <config|all|feature>", NamedTextColor.GREEN));
             sender.sendMessage(Component.text("Usage: /lachshield enable <feature>", NamedTextColor.GREEN));
             sender.sendMessage(Component.text("Usage: /lachshield disable <feature>", NamedTextColor.GREEN));
