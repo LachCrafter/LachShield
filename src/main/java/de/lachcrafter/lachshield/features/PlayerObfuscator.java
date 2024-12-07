@@ -1,6 +1,6 @@
 package de.lachcrafter.lachshield.features;
 
-import com.github.retrooper.packetevents.event.PacketListenerAbstract;
+import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import com.github.retrooper.packetevents.event.PacketSendEvent;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityData;
@@ -10,24 +10,25 @@ import com.github.retrooper.packetevents.protocol.item.enchantment.type.Enchantm
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.world.Difficulty;
 import com.github.retrooper.packetevents.wrapper.play.server.*;
+import de.lachcrafter.lachshield.ConfigManager;
+import de.lachcrafter.lachshield.lib.PacketEventsFeature;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PlayerObfuscator extends PacketListenerAbstract {
+public class PlayerObfuscator extends PacketEventsFeature {
+    private final ConfigManager configManager;
+    private boolean stackSize, durability, enchantments, health, onGround, difficulty;
 
-    private boolean enabled, stackSize, durability, enchantments, health, onGround, difficulty;
-
-    public PlayerObfuscator() {
+    public PlayerObfuscator(ConfigManager configManager) {
         super(PacketListenerPriority.HIGHEST);
+        this.configManager = configManager;
     }
 
     @Override
     public void onPacketSend(PacketSendEvent event) {
-        if (!enabled) return;
-
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_EQUIPMENT) {
             WrapperPlayServerEntityEquipment ee = new WrapperPlayServerEntityEquipment(event);
 
@@ -79,8 +80,24 @@ public class PlayerObfuscator extends PacketListenerAbstract {
         }
     }
 
-    public void reload(FileConfiguration config) {
-        this.enabled = config.getBoolean("obfuscate-player-data.enabled", false);
+    @Override
+    public String getFeatureName() {
+        return "obfuscatePlayerData";
+    }
+
+    @Override
+    public void enable() {
+        PacketEvents.getAPI().getEventManager().registerListener(this);
+    }
+
+    @Override
+    public void disable() {
+        PacketEvents.getAPI().getEventManager().unregisterListener(this);
+    }
+
+    @Override
+    public void reload() {
+        FileConfiguration config = configManager.getConfig();
         this.stackSize = config.getBoolean("obfuscate-player-data.toObfuscate.stackSize", true);
         this.durability = config.getBoolean("obfuscate-player-data.toObfuscate.durability", true);
         this.enchantments = config.getBoolean("obfuscate-player-data.toObfuscate.enchantments", true);

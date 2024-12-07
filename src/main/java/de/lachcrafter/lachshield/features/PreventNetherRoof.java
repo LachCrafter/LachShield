@@ -1,10 +1,12 @@
 package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.ConfigManager;
+import de.lachcrafter.lachshield.LachShield;
+import de.lachcrafter.lachshield.lib.Feature;
+import net.kyori.adventure.text.Component;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.Location;
@@ -13,14 +15,15 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
-public class PreventNetherRoof implements Listener {
-
-    private final FileConfiguration config;
-    private ConfigManager configManager;
+public class PreventNetherRoof implements Feature {
+    private final LachShield plugin;
+    private final ConfigManager configManager;
     private final HashMap<UUID, Long> cooldowns = new HashMap<>();
+    private Component preventNetherRoofWarningMessage;
 
-    public PreventNetherRoof(FileConfiguration config) {
-        this.config = config;
+    public PreventNetherRoof(LachShield plugin, ConfigManager configManager) {
+        this.plugin = plugin;
+        this.configManager = configManager;
     }
 
     @EventHandler
@@ -28,13 +31,7 @@ public class PreventNetherRoof implements Listener {
         Player player = event.getPlayer();
         World world = player.getWorld();
 
-        if (!config.getBoolean("preventNetherRoof.enabled", false)) {
-            return;
-        }
-
-        if (player.hasPermission("lachshield.admin")) {
-            return;
-        }
+        if (player.hasPermission("lachshield.admin")) return;
 
         if (world.getEnvironment() == World.Environment.NETHER && player.getLocation().getY() >= 128) {
             if (isInCooldown(player)) {
@@ -42,10 +39,9 @@ public class PreventNetherRoof implements Listener {
             }
             setCooldown(player);
 
-            player.sendMessage(configManager.getPreventNetherRoofWarningMessage());
+            player.sendMessage(preventNetherRoofWarningMessage);
 
             Location safeLocation = findSafeLocation(player.getLocation());
-
             player.teleport(Objects.requireNonNullElseGet(safeLocation, () -> new Location(world, player.getLocation().getX(), 124, player.getLocation().getZ())));
         }
     }
@@ -88,5 +84,26 @@ public class PreventNetherRoof implements Listener {
         Material blockAtHead = world.getBlockAt(headLocation).getType();
 
         return blockAtFeet == Material.AIR && blockAtHead == Material.AIR;
+    }
+
+    @Override
+    public String getFeatureName() {
+        return "preventNetherRoof";
+    }
+
+    @Override
+    public void enable() {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    @Override
+    public void disable() {
+        HandlerList.unregisterAll(this);
+        cooldowns.clear();
+    }
+
+    @Override
+    public void reload() {
+        preventNetherRoofWarningMessage = configManager.getPreventNetherRoofWarningMessage();
     }
 }

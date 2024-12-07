@@ -9,7 +9,7 @@ LachShield is a Minecraft plugin, for security and more basic server features.
 
 ### Installation
 1. Download the latest release of the plugin from the [Releases](https://github.com/LachCrafter/LachShield/releases) section.
-2. LachShield depends on the PacketEvents plugin, download it [here](https://modrinth.com/plugin/packetevents/versions).
+2. LachShield has an optional dependency of PacketEvents for the Player Obfuscator Feature, download it [here](https://modrinth.com/plugin/packetevents/versions).
 3. Place the downloaded JAR file into the `plugins` folder of your Minecraft server.
 4. Restart or reload your server to enable the plugin.
 

@@ -1,5 +1,6 @@
 package de.lachcrafter.lachshield;
 
+import de.lachcrafter.lachshield.lib.Feature;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -37,6 +38,13 @@ public class ConfigManager {
         config = plugin.getConfig();
     }
 
+    /**
+     * Get the configuration file
+     */
+    public FileConfiguration getConfig() {
+        return config;
+    }
+
     public int getMaxAccountsPerIP() {
         return config.getInt("ipLimit.maxAccountsPerIp", 3);
     }
@@ -56,6 +64,19 @@ public class ConfigManager {
         return miniMessage.deserialize(rawMessage);
     }
 
+    public boolean isFeatureEnabled(String feature) {
+        return config.getBoolean(feature + ".enabled", true);
+    }
+
+    public void setFeatureEnabled(String feature, boolean enabled) {
+        config.set(feature + ".enabled", enabled);
+        plugin.saveConfig();
+    }
+
+    public void setFeatureEnabled(Feature feature, boolean enabled) {
+        setFeatureEnabled(feature.getFeatureName(), enabled);
+    }
+
     public Component getIpLimitKickMessage() {
         String rawMessage = config.getString("ipLimit.kickMessage", "<red>You have reached the account limit on the server!");
         return miniMessage.deserialize(rawMessage);
@@ -64,6 +85,10 @@ public class ConfigManager {
     public Component getPreventNetherRoofWarningMessage() {
         String rawMessage = config.getString("preventNetherRoof.warnMessage", "<red>You cannot enter the Nether roof!");
         return miniMessage.deserialize(rawMessage);
+    }
+
+    public String getBroadcastFormat() {
+        return config.getString("broadcast.format", "<prefix> <message_color><message>");
     }
 
     public Component getBroadcastPrefix() {
@@ -81,7 +106,7 @@ public class ConfigManager {
     }
 
     public Component getAfkKickMessage() {
-        String rawMessage = config.getString("afk.kickMessage");
+        String rawMessage = config.getString("afk.kickMessage", "<red>You have been disconnected for AFK.");
         return miniMessage.deserialize(rawMessage);
     }
 }
