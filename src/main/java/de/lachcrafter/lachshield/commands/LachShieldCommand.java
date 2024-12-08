@@ -52,6 +52,7 @@ public class LachShieldCommand implements TabExecutor {
             if (args[1].equalsIgnoreCase("all")) {
                 plugin.getConfigManager().reloadConfig();
                 featureManager.getFeatureList().forEach(Feature::reload);
+                sender.sendMessage(Component.text("All features reloaded", NamedTextColor.GREEN));
                 return true;
             }
 
@@ -65,6 +66,7 @@ public class LachShieldCommand implements TabExecutor {
             }
 
             feature.reload();
+            sender.sendMessage(Component.text("Feature " + feature.getFeatureName() + " reloaded", NamedTextColor.GREEN));
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("enable")) {
