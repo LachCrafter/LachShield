@@ -4,7 +4,7 @@ import org.bukkit.event.Listener;
 
 public interface Feature extends Listener {
     /**
-     * Returns the name of the feature used in the config
+     * @return the name of the feature used in the config
      */
     String getFeatureName();
 
