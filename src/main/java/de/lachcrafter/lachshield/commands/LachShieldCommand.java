@@ -1,6 +1,6 @@
 package de.lachcrafter.lachshield.commands;
 
-import de.lachcrafter.lachshield.ConfigManager;
+import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.lib.Feature;
 import de.lachcrafter.lachshield.lib.FeatureManager;
 import net.kyori.adventure.text.Component;

@@ -1,6 +1,6 @@
 package de.lachcrafter.lachshield.lib;
 
-import de.lachcrafter.lachshield.ConfigManager;
+import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package de.lachcrafter.lachshield.commands;
 
-import de.lachcrafter.lachshield.ConfigManager;
+import de.lachcrafter.lachshield.managers.ConfigManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;

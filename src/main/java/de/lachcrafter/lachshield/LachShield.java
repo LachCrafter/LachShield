@@ -5,6 +5,7 @@ import de.lachcrafter.lachshield.commands.LachShieldCommand;
 import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.lib.Feature;
 import de.lachcrafter.lachshield.lib.FeatureManager;
+import de.lachcrafter.lachshield.managers.ConfigManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.plugin.java.JavaPlugin;

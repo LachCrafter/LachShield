@@ -10,7 +10,7 @@ import com.github.retrooper.packetevents.protocol.item.enchantment.type.Enchantm
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.world.Difficulty;
 import com.github.retrooper.packetevents.wrapper.play.server.*;
-import de.lachcrafter.lachshield.ConfigManager;
+import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.lib.PacketEventsFeature;
 import org.bukkit.configuration.file.FileConfiguration;
 
