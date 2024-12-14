@@ -1,7 +1,7 @@
 name: LachShield
 version: '${version}'
 main: de.lachcrafter.lachshield.LachShield
-api-version: '1.13'
+api-version: '1.20'
 folia-supported: true
 softdepend:
   - packetevents
