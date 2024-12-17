@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'xyz.jpenilla.run-paper' version '2.3.1'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'de.lachcrafter'
@@ -22,6 +23,8 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
     compileOnly 'com.github.retrooper:packetevents-spigot:2.5.0'
+
+    implementation 'org.bstats:bstats-bukkit:3.0.2'
 }
 
 def targetJavaVersion = 21
@@ -63,4 +66,10 @@ jar {
 runServer {
     minecraftVersion("1.20.6")
     jvmArgs("-DPaper.IgnoreJavaVersion=true", "-Dcom.mojang.eula.agree=true")
+}
+
+// Shadow Jar Configuration
+tasks.shadowJar {
+    archiveClassifier.set("") // Ensure the output JAR replaces the default jar task
+    relocate("org.bstats", "de.lachcrafter.util") // Replace with your package
 }

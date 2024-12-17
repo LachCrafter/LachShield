@@ -8,6 +8,7 @@ import de.lachcrafter.lachshield.lib.FeatureManager;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class LachShield extends JavaPlugin {
 
         LOGGER.info("Registering Commands...");
         regCommands();
+
+        int pluginId = 24143;
+        Metrics metrics = new Metrics(this, pluginId);
 
         LOGGER.info("LachShield successfully initialized in {}ms", System.currentTimeMillis() - startTime);
     }
