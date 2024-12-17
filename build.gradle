@@ -68,8 +68,7 @@ runServer {
     jvmArgs("-DPaper.IgnoreJavaVersion=true", "-Dcom.mojang.eula.agree=true")
 }
 
-// Shadow Jar Configuration
 tasks.shadowJar {
-    archiveClassifier.set("") // Ensure the output JAR replaces the default jar task
-    relocate("org.bstats", "de.lachcrafter.util") // Replace with your package
+    archiveClassifier.set("")
+    relocate("org.bstats", "de.lachcrafter.util")
 }
