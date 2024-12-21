@@ -1,0 +1,145 @@
+package de.lachcrafter.lachshield.commands;
+
+import de.lachcrafter.lachshield.LachShield;
+import de.lachcrafter.lachshield.lib.Feature;
+import de.lachcrafter.lachshield.lib.FeatureManager;
+import de.lachcrafter.lachshield.managers.ConfigManager;
+import io.papermc.paper.command.brigadier.BasicCommand;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class LachShieldCommand implements BasicCommand {
+
+    private final LachShield plugin;
+    private final ConfigManager configManager;
+    private final FeatureManager featureManager;
+
+    public LachShieldCommand(LachShield plugin) {
+        this.plugin = plugin;
+        this.configManager = plugin.getConfigManager();
+        this.featureManager = plugin.getFeatureManager();
+    }
+
+    @Override
+    public void execute(@NotNull CommandSourceStack stack, @NotNull String @NotNull [] args) {
+        if (!stack.getExecutor().hasPermission("lachshield.admin")) {
+            stack.getExecutor().sendMessage(configManager.getNoPermission());
+            return;
+        }
+
+        if (args.length == 0) {
+            stack.getExecutor().sendMessage(Component.text("LachShield v" + plugin.getPluginMeta().getVersion(), NamedTextColor.GREEN));
+            stack.getExecutor().sendMessage(Component.text("Usage: /lachshield reload <config|all|feature>", NamedTextColor.GREEN));
+            stack.getExecutor().sendMessage(Component.text("Usage: /lachshield enable <feature>", NamedTextColor.GREEN));
+            stack.getExecutor().sendMessage(Component.text("Usage: /lachshield disable <feature>", NamedTextColor.GREEN));
+            stack.getExecutor().sendMessage(Component.text("Usage: /lachshield iplimit <number>", NamedTextColor.GREEN));
+            return;
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
+            if (args[1].equalsIgnoreCase("config")) {
+                plugin.getConfigManager().reloadConfig();
+                stack.getExecutor().sendMessage(Component.text("Config reloaded", NamedTextColor.GREEN));
+                return;
+            }
+
+            if (args[1].equalsIgnoreCase("all")) {
+                plugin.getConfigManager().reloadConfig();
+                featureManager.getFeatureList().forEach(Feature::reload);
+                stack.getExecutor().sendMessage(Component.text("All features reloaded", NamedTextColor.GREEN));
+                return;
+            }
+
+            Feature feature = featureManager.getFeatureList().stream()
+                    .filter(f -> f.getFeatureName().equalsIgnoreCase(args[1]))
+                    .findFirst()
+                    .orElse(null);
+            if (feature == null) {
+                stack.getExecutor().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
+                return;
+            }
+
+            feature.reload();
+            stack.getExecutor().sendMessage(Component.text("Feature " + feature.getFeatureName() + " reloaded", NamedTextColor.GREEN));
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("enable")) {
+            Feature feature = featureManager.getDisabledFeatures().stream()
+                    .filter(f -> f.getFeatureName().equalsIgnoreCase(args[1]))
+                    .findFirst()
+                    .orElse(null);
+            if (feature == null) {
+                stack.getExecutor().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
+                return;
+            }
+
+            featureManager.enable(feature);
+            stack.getExecutor().sendMessage(Component.text("Feature enabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            return;
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("disable")) {
+            Feature feature = featureManager.getEnabledFeatures().stream()
+                    .filter(f -> f.getFeatureName().equalsIgnoreCase(args[1]))
+                    .findFirst()
+                    .orElse(null);
+            if (feature == null) {
+                stack.getExecutor().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
+                return;
+            }
+
+            featureManager.disable(feature);
+            stack.getExecutor().sendMessage(Component.text("Feature disabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            return;
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("iplimit")) {
+            try {
+                int newLimit = Integer.parseInt(args[1]);
+                if (newLimit < 1) {
+                    stack.getExecutor().sendMessage(Component.text("The ip limit should be 1 or more", NamedTextColor.RED));
+                    return;
+                }
+                plugin.getConfigManager().setMaxAccountsPerIP(newLimit);
+                stack.getExecutor().sendMessage(Component.text("IP limit has been set to " + newLimit, NamedTextColor.GREEN));
+            } catch (NumberFormatException e) {
+                stack.getExecutor().sendMessage(Component.text("Invalid number format. Usage: /lachshield iplimit <number>", NamedTextColor.RED));
+            }
+        }
+    }
+
+    @Override
+    public @NotNull Collection<String> suggest(@NotNull CommandSourceStack stack, String @NotNull [] args) {
+        if (args.length == 1) {
+            return List.of("reload", "enable", "disable", "iplimit");
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
+            return Stream.concat(Stream.of("config", "all"), featureManager.getEnabledFeatures().stream().map(Feature::getFeatureName))
+                    .filter(feature -> feature.startsWith(args[1]))
+                    .toList();
+        }
+
+        if (args.length == 2 && (args[0].equalsIgnoreCase("enable"))) {
+            return featureManager.getDisabledFeatures().stream()
+                    .map(Feature::getFeatureName)
+                    .filter(feature -> feature.startsWith(args[1]))
+                    .toList();
+        }
+
+        if (args.length == 2 && (args[0].equalsIgnoreCase("disable"))) {
+            return featureManager.getEnabledFeatures().stream()
+                    .map(Feature::getFeatureName)
+                    .filter(feature -> feature.startsWith(args[1]))
+                    .toList();
+        }
+
+        return List.of();
+    }
+}
