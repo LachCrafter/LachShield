@@ -11,7 +11,6 @@ import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -36,9 +35,6 @@ public class LachShield extends JavaPlugin {
 
         LOGGER.info("Registering Commands...");
         regCommands();
-
-        int pluginId = 24143;
-        Metrics metrics = new Metrics(this, pluginId);
 
         LOGGER.info("LachShield successfully initialized in {}ms", System.currentTimeMillis() - startTime);
     }
