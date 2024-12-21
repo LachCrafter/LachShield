@@ -116,7 +116,7 @@ public class LachShieldCommand implements BasicCommand {
 
     @Override
     public @NotNull Collection<String> suggest(@NotNull CommandSourceStack stack, String @NotNull [] args) {
-        if (args.length == 1) {
+        if (args.length <= 1) {
             return List.of("reload", "enable", "disable", "iplimit");
         }
 
