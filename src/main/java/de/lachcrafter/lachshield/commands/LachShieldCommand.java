@@ -28,31 +28,31 @@ public class LachShieldCommand implements BasicCommand {
 
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String @NotNull [] args) {
-        if (!stack.getExecutor().hasPermission("lachshield.admin")) {
-            stack.getExecutor().sendMessage(configManager.getNoPermission());
+        if (!stack.getSender().hasPermission("lachshield.admin")) {
+            stack.getSender().sendMessage(configManager.getNoPermission());
             return;
         }
 
         if (args.length == 0) {
-            stack.getExecutor().sendMessage(Component.text("LachShield v" + plugin.getPluginMeta().getVersion(), NamedTextColor.GREEN));
-            stack.getExecutor().sendMessage(Component.text("Usage: /lachshield reload <config|all|feature>", NamedTextColor.GREEN));
-            stack.getExecutor().sendMessage(Component.text("Usage: /lachshield enable <feature>", NamedTextColor.GREEN));
-            stack.getExecutor().sendMessage(Component.text("Usage: /lachshield disable <feature>", NamedTextColor.GREEN));
-            stack.getExecutor().sendMessage(Component.text("Usage: /lachshield iplimit <number>", NamedTextColor.GREEN));
+            stack.getSender().sendMessage(Component.text("LachShield v" + plugin.getPluginMeta().getVersion(), NamedTextColor.GREEN));
+            stack.getSender().sendMessage(Component.text("Usage: /lachshield reload <config|all|feature>", NamedTextColor.GREEN));
+            stack.getSender().sendMessage(Component.text("Usage: /lachshield enable <feature>", NamedTextColor.GREEN));
+            stack.getSender().sendMessage(Component.text("Usage: /lachshield disable <feature>", NamedTextColor.GREEN));
+            stack.getSender().sendMessage(Component.text("Usage: /lachshield iplimit <number>", NamedTextColor.GREEN));
             return;
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
             if (args[1].equalsIgnoreCase("config")) {
                 plugin.getConfigManager().reloadConfig();
-                stack.getExecutor().sendMessage(Component.text("Config reloaded", NamedTextColor.GREEN));
+                stack.getSender().sendMessage(Component.text("Config reloaded", NamedTextColor.GREEN));
                 return;
             }
 
             if (args[1].equalsIgnoreCase("all")) {
                 plugin.getConfigManager().reloadConfig();
                 featureManager.getFeatureList().forEach(Feature::reload);
-                stack.getExecutor().sendMessage(Component.text("All features reloaded", NamedTextColor.GREEN));
+                stack.getSender().sendMessage(Component.text("All features reloaded", NamedTextColor.GREEN));
                 return;
             }
 
@@ -61,12 +61,12 @@ public class LachShieldCommand implements BasicCommand {
                     .findFirst()
                     .orElse(null);
             if (feature == null) {
-                stack.getExecutor().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
+                stack.getSender().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
                 return;
             }
 
             feature.reload();
-            stack.getExecutor().sendMessage(Component.text("Feature " + feature.getFeatureName() + " reloaded", NamedTextColor.GREEN));
+            stack.getSender().sendMessage(Component.text("Feature " + feature.getFeatureName() + " reloaded", NamedTextColor.GREEN));
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("enable")) {
@@ -75,12 +75,12 @@ public class LachShieldCommand implements BasicCommand {
                     .findFirst()
                     .orElse(null);
             if (feature == null) {
-                stack.getExecutor().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
+                stack.getSender().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
                 return;
             }
 
             featureManager.enable(feature);
-            stack.getExecutor().sendMessage(Component.text("Feature enabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            stack.getSender().sendMessage(Component.text("Feature enabled " + feature.getFeatureName(), NamedTextColor.GREEN));
             return;
         }
 
@@ -90,12 +90,12 @@ public class LachShieldCommand implements BasicCommand {
                     .findFirst()
                     .orElse(null);
             if (feature == null) {
-                stack.getExecutor().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
+                stack.getSender().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
                 return;
             }
 
             featureManager.disable(feature);
-            stack.getExecutor().sendMessage(Component.text("Feature disabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            stack.getSender().sendMessage(Component.text("Feature disabled " + feature.getFeatureName(), NamedTextColor.GREEN));
             return;
         }
 
@@ -103,13 +103,13 @@ public class LachShieldCommand implements BasicCommand {
             try {
                 int newLimit = Integer.parseInt(args[1]);
                 if (newLimit < 1) {
-                    stack.getExecutor().sendMessage(Component.text("The ip limit should be 1 or more", NamedTextColor.RED));
+                    stack.getSender().sendMessage(Component.text("The ip limit should be 1 or more", NamedTextColor.RED));
                     return;
                 }
                 plugin.getConfigManager().setMaxAccountsPerIP(newLimit);
-                stack.getExecutor().sendMessage(Component.text("IP limit has been set to " + newLimit, NamedTextColor.GREEN));
+                stack.getSender().sendMessage(Component.text("IP limit has been set to " + newLimit, NamedTextColor.GREEN));
             } catch (NumberFormatException e) {
-                stack.getExecutor().sendMessage(Component.text("Invalid number format. Usage: /lachshield iplimit <number>", NamedTextColor.RED));
+                stack.getSender().sendMessage(Component.text("Invalid number format. Usage: /lachshield iplimit <number>", NamedTextColor.RED));
             }
         }
     }
