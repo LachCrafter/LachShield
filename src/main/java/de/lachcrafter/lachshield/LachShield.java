@@ -1,7 +1,7 @@
 package de.lachcrafter.lachshield;
 
-import de.lachcrafter.lachshield.commands.BroadcastCommand;
-import de.lachcrafter.lachshield.commands.LachShieldCommand;
+import de.lachcrafter.lachshield.commands.BroadcastCommandOld;
+import de.lachcrafter.lachshield.commands.LachShieldCommandOld;
 import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.lib.Feature;
 import de.lachcrafter.lachshield.lib.FeatureManager;
@@ -62,8 +62,8 @@ public class LachShield extends JavaPlugin {
 
     // Register commands
     public void regCommands() {
-        getCommand("lachshield").setExecutor(new LachShieldCommand(this));
-        getCommand("broadcast").setExecutor(new BroadcastCommand(configManager));
+        getCommand("lachshield").setExecutor(new LachShieldCommandOld(this));
+        getCommand("broadcast").setExecutor(new BroadcastCommandOld(configManager));
     }
 
     public ConfigManager getConfigManager() {

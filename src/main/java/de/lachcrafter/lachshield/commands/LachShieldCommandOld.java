@@ -15,12 +15,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class LachShieldCommand implements TabExecutor {
+public class LachShieldCommandOld implements TabExecutor {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final FeatureManager featureManager;
 
-    public LachShieldCommand(LachShield plugin) {
+    public LachShieldCommandOld(LachShield plugin) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
         this.featureManager = plugin.getFeatureManager();
