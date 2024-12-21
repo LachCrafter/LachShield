@@ -1,15 +1,20 @@
 package de.lachcrafter.lachshield;
 
-import de.lachcrafter.lachshield.commands.BroadcastCommandOld;
-import de.lachcrafter.lachshield.commands.LachShieldCommandOld;
+import de.lachcrafter.lachshield.commands.BroadcastCommand;
+import de.lachcrafter.lachshield.commands.LachShieldCommand;
 import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.lib.Feature;
 import de.lachcrafter.lachshield.lib.FeatureManager;
 import de.lachcrafter.lachshield.managers.ConfigManager;
+import io.papermc.paper.command.brigadier.Commands;
+import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +67,12 @@ public class LachShield extends JavaPlugin {
 
     // Register commands
     public void regCommands() {
-        getCommand("lachshield").setExecutor(new LachShieldCommandOld(this));
-        getCommand("broadcast").setExecutor(new BroadcastCommandOld(configManager));
+        LifecycleEventManager<@NotNull Plugin> manager = this.getLifecycleManager();
+        manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            final Commands commands = event.registrar();
+            commands.register("lachshield", new LachShieldCommand(this));
+            commands.register("broadcast", "Broadcast a message to all players on the server.", new BroadcastCommand(configManager));
+        });
     }
 
     public ConfigManager getConfigManager() {
