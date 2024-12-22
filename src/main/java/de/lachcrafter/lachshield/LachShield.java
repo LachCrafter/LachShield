@@ -21,7 +21,7 @@ import java.util.List;
 public class LachShield extends JavaPlugin {
     private ConfigManager configManager;
     private FeatureManager featureManager;
-    public static final Logger LOGGER = LogManager.getLogger("LachSheld");
+    public static final Logger LOGGER = LogManager.getLogger("LachShield");
 
     @Override
     public void onEnable() {
