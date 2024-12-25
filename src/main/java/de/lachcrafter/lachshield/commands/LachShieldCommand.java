@@ -7,7 +7,9 @@ import de.lachcrafter.lachshield.managers.ConfigManager;
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -34,11 +36,20 @@ public class LachShieldCommand implements BasicCommand {
         }
 
         if (args.length == 0) {
-            stack.getSender().sendMessage(Component.text("LachShield v" + plugin.getPluginMeta().getVersion(), NamedTextColor.GREEN));
-            stack.getSender().sendMessage(Component.text("Usage: /lachshield reload <config|all|feature>", NamedTextColor.GREEN));
-            stack.getSender().sendMessage(Component.text("Usage: /lachshield enable <feature>", NamedTextColor.GREEN));
-            stack.getSender().sendMessage(Component.text("Usage: /lachshield disable <feature>", NamedTextColor.GREEN));
-            stack.getSender().sendMessage(Component.text("Usage: /lachshield iplimit <number>", NamedTextColor.GREEN));
+            TextComponent message = Component.text()
+                    .content("LachShield v" + plugin.getPluginMeta().getVersion())
+                    .appendNewline()
+                    .append(Component.text("Usage: /lachshield reload <config|all|feature>"))
+                    .appendNewline()
+                    .append(Component.text("Usage: /lachshield enable <feature>"))
+                    .appendNewline()
+                    .append(Component.text("Usage: /lachshield disable <feature>"))
+                    .appendNewline()
+                    .append(Component.text("Usage: /lachshield iplimit <number>"))
+                    .color(NamedTextColor.GREEN)
+                    .build();
+
+            stack.getSender().sendMessage(message);
             return;
         }
 
