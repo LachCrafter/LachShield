@@ -6,10 +6,14 @@ import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.lib.Feature;
 import de.lachcrafter.lachshield.lib.FeatureManager;
 import de.lachcrafter.lachshield.managers.ConfigManager;
+import io.papermc.paper.command.brigadier.Commands;
+import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bstats.bukkit.Metrics;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +21,7 @@ import java.util.List;
 public class LachShield extends JavaPlugin {
     private ConfigManager configManager;
     private FeatureManager featureManager;
-    public static final Logger LOGGER = LogManager.getLogger("LachSheld");
+    public static final Logger LOGGER = LogManager.getLogger("LachShield");
 
     @Override
     public void onEnable() {
@@ -31,9 +35,6 @@ public class LachShield extends JavaPlugin {
 
         LOGGER.info("Registering Commands...");
         regCommands();
-
-        int pluginId = 24143;
-        Metrics metrics = new Metrics(this, pluginId);
 
         LOGGER.info("LachShield successfully initialized in {}ms", System.currentTimeMillis() - startTime);
     }
@@ -62,8 +63,12 @@ public class LachShield extends JavaPlugin {
 
     // Register commands
     public void regCommands() {
-        getCommand("lachshield").setExecutor(new LachShieldCommand(this));
-        getCommand("broadcast").setExecutor(new BroadcastCommand(configManager));
+        LifecycleEventManager<@NotNull Plugin> manager = this.getLifecycleManager();
+        manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            final Commands commands = event.registrar();
+            commands.register("lachshield", new LachShieldCommand(this));
+            commands.register("broadcast", "Broadcast a message to all players on the server.", new BroadcastCommand(configManager));
+        });
     }
 
     public ConfigManager getConfigManager() {

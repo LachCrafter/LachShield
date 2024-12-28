@@ -1,11 +1,10 @@
 plugins {
     id 'java'
     id 'xyz.jpenilla.run-paper' version '2.3.1'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-group = 'de.lachcrafter'
-version = '1.6'
+group = project.group
+version = project.version
 
 repositories {
     mavenCentral()
@@ -23,8 +22,6 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
     compileOnly 'com.github.retrooper:packetevents-spigot:2.5.0'
-
-    implementation 'org.bstats:bstats-bukkit:3.0.2'
 }
 
 def targetJavaVersion = 21
@@ -51,7 +48,7 @@ processResources {
     def props = [version: version]
     inputs.properties props
     filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
+    filesMatching('paper-plugin.yml') {
         expand props
     }
 }
@@ -64,11 +61,6 @@ jar {
 }
 
 runServer {
-    minecraftVersion("1.20.6")
+    minecraftVersion("1.21.4")
     jvmArgs("-DPaper.IgnoreJavaVersion=true", "-Dcom.mojang.eula.agree=true")
-}
-
-tasks.shadowJar {
-    archiveClassifier.set("")
-    relocate("org.bstats", "de.lachcrafter.util")
 }
