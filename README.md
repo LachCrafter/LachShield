@@ -15,7 +15,16 @@ LachShield is a Minecraft plugin, for security and more basic server features.
 
 ### Config
 You can config the plugins features in the `config.yml` file.
-> you can find a full documentation in the [wiki](https://github.com/LachCrafter/LachShield/wiki/Configuration).
+> you can find a full documentation on the [wiki](https://github.com/LachCrafter/LachShield/wiki/Configuration).
+
+### Commands
+```
+/lachshield - info about the plugin and help
+/lachshield reload <config|all|feature> - reload specific features, the config or the whole plugin
+/lachshield enable <feature> - enable a specific feature
+/lachshield disable <feature> - disable a specific feature
+/lachshield iplimit <number> - set the IP limit
+```
 
 ### Permissions
 - `lachshield.admin`: Allows admins to bypass the plugins patches.
