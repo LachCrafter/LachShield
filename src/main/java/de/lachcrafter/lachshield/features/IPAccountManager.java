@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class IPAccountManager implements Feature {
     private final LachShield plugin;
@@ -35,7 +36,7 @@ public class IPAccountManager implements Feature {
     }
 
     public void handlePlayerJoin(Player player) {
-        String ip = player.getAddress().getAddress().getHostAddress();
+        String ip = Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress();
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
 
         if (accountCount >= maxAccountsPerIP) {
@@ -48,7 +49,7 @@ public class IPAccountManager implements Feature {
     }
 
     public void handlePlayerQuit(Player player) {
-        String ip = player.getAddress().getAddress().getHostAddress();
+        String ip = Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress();
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
 
         if (accountCount > 0) {
