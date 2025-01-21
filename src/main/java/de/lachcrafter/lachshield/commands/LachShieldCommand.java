@@ -57,7 +57,7 @@ public class LachShieldCommand implements BasicCommand {
         if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
             if (args[1].equalsIgnoreCase("config")) {
                 plugin.getConfigManager().reloadConfig();
-                stack.getSender().sendMessage(Component.text("Config reloaded", NamedTextColor.GREEN));
+                stack.getSender().sendMessage(configManager.getReloadSuccessMessage());
                 return;
             }
 
