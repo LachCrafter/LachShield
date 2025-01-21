@@ -40,7 +40,7 @@ public class IPAccountManager implements Feature {
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
 
         if (accountCount >= maxAccountsPerIP) {
-            Component kickComponent = configManager.getAfkKickMessage();
+            Component kickComponent = configManager.getIpLimitKickMessage();
             player.kick(kickComponent);
             return;
         }
