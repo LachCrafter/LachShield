@@ -29,7 +29,7 @@ public class LachShieldCommand implements BasicCommand {
 
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String @NotNull [] args) {
-        if (!stack.getSender().hasPermission("lachshield.admin")) {
+        if (!stack.getSender().hasPermission("lachshield.admin") || !stack.getSender().hasPermission("lachshield.commands")) {
             stack.getSender().sendMessage(configManager.getNoPermission());
             return;
         }
