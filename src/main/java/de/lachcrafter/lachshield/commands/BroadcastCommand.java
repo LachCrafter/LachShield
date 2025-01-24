@@ -20,7 +20,7 @@ public class BroadcastCommand implements BasicCommand {
     @Override
     public void execute(CommandSourceStack stack, String @NotNull [] args) {
 
-        if (!stack.getSender().hasPermission("lachshield.admin")) {
+        if (!stack.getSender().hasPermission("lachshield.admin") || !stack.getSender().hasPermission("lachshield.broadcast") || !stack.getSender().hasPermission("lachshield.commands")) {
             stack.getSender().sendMessage(configManager.getNoPermission());
             return;
         }
