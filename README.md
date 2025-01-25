@@ -6,6 +6,7 @@ A customizable plugin that enhances the server security and features.
 - **Kick AFK players**: Kick players that are AFK in a specified time.
 - **Prevent Nether-Roof**: Prevent players from accessing the Nether Roof.
 - **Player Information Obfuscation**: Prevents players from viewing information from other players through hacks (e.g. health, armor durability).
+- **Anti Pearl Phase**: Prevent players from phasing through blocks using ender pearls.
 
 ### Installation
 1. Download the latest release of the plugin from the [Releases](https://github.com/LachCrafter/LachShield/releases) section.
