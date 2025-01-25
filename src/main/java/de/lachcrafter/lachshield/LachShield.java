@@ -49,7 +49,8 @@ public class LachShield extends JavaPlugin {
         List<Feature> features = new ArrayList<>(List.of(
                 new AntiAfk(this, configManager),
                 new IPAccountManager(this, configManager),
-                new PreventNetherRoof(this, configManager)
+                new PreventNetherRoof(this, configManager),
+                new AntiPearlPhase(this)
         ));
 
         if (getServer().getPluginManager().isPluginEnabled("packetevents")) {

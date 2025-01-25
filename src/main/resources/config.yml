@@ -40,3 +40,7 @@ obfuscatePlayerData:
     durability: true
     difficulty: true
     onGround: true
+
+# Players can't throw enderpearls in blocks to "phase" into them.
+antiPearlPhase:
+  enabled: false
