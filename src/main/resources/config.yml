@@ -13,7 +13,7 @@ ipLimit:
   maxAccountsPerIp: 3
   kickMessage: "<red>You have reached the account limit on the server!"
 
-# PreventNetherRoof
+# Prevent the Nether Roof
 preventNetherRoof:
   enabled: false
   warnMessage: "<red>You cannot enter the Nether roof!"
@@ -41,6 +41,6 @@ obfuscatePlayerData:
     difficulty: true
     onGround: true
 
-# Players can't throw enderpearls in blocks to "phase" into them.
+# Players can't throw ender pearls in blocks to "phase" into them.
 antiPearlPhase:
   enabled: false
