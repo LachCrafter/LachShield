@@ -9,18 +9,19 @@ import de.lachcrafter.lachshield.managers.ConfigManager;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class LachShield extends JavaPlugin {
     private ConfigManager configManager;
     private FeatureManager featureManager;
-    public final Logger LOGGER = this.getLogger();
+    public final Logger LOGGER = LogManager.getLogger("LachShield");
 
     @Override
     public void onEnable() {
