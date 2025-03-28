@@ -128,6 +128,10 @@ public class LachShieldCommand implements BasicCommand {
 
     @Override
     public @NotNull Collection<String> suggest(@NotNull CommandSourceStack stack, String @NotNull [] args) {
+        if (!stack.getSender().hasPermission("lachshield.admin") || !stack.getSender().hasPermission("lachshield.commands")) {
+            return List.of();
+        }
+
         if (args.length <= 1) {
             return List.of("reload", "enable", "disable", "iplimit");
         }
