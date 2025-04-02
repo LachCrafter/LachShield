@@ -45,8 +45,6 @@ public class LachShieldCommand implements BasicCommand {
                     .append(Component.text("Usage: /lachshield disable <feature> - disables a specific feature"))
                     .appendNewline()
                     .append(Component.text("Usage: /lachshield iplimit <number> - set the player ip limit"))
-                    .appendNewline()
-                    .append(Component.text("Usage: /broadcast <message>"))
                     .color(NamedTextColor.GREEN)
                     .build();
 

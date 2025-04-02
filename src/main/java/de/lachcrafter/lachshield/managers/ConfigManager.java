@@ -87,20 +87,6 @@ public class ConfigManager {
         return miniMessage.deserialize(rawMessage);
     }
 
-    public String getBroadcastFormat() {
-        return config.getString("broadcast.format", "<prefix> <message_color><message>");
-    }
-
-    public Component getBroadcastPrefix() {
-        String rawMessage = config.getString("broadcast.prefix", "<dark_aqua>[<red>Broadcast<dark_aqua>]");
-        return miniMessage.deserialize(rawMessage);
-    }
-
-    public Component getBroadcastMessageColor() {
-        String rawMessage = config.getString("broadcast.messageColor", "<gold>");
-        return miniMessage.deserialize(rawMessage);
-    }
-
     public long getAfkTimeoutMinutes() {
         return config.getInt("afk.timeoutMinutes", 15);
     }
