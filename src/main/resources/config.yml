@@ -18,12 +18,6 @@ preventNetherRoof:
   enabled: false
   warnMessage: "<red>You cannot enter the Nether roof!"
 
-# Broadcast messages
-broadcast:
-  prefix: "<dark_aqua>[<red>Broadcast<dark_aqua>]" # remove the text for no prefix
-  messageColor: "<gold>"
-  format: "<prefix> <message_color><message>"
-
 # Kick AFK players after some minutes
 afk:
   enabled: false

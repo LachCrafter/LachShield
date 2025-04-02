@@ -1,6 +1,5 @@
 package de.lachcrafter.lachshield;
 
-import de.lachcrafter.lachshield.commands.BroadcastCommand;
 import de.lachcrafter.lachshield.commands.LachShieldCommand;
 import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.lib.Feature;
@@ -67,7 +66,6 @@ public class LachShield extends JavaPlugin {
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             final Commands commands = event.registrar();
             commands.register("lachshield", new LachShieldCommand(this));
-            commands.register("broadcast", "Broadcast a message to all players on the server.", new BroadcastCommand(configManager));
         });
     }
 
