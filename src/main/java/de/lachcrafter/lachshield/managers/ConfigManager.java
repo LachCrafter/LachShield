@@ -54,14 +54,8 @@ public class ConfigManager {
         plugin.saveConfig();
     }
 
-    public Component getNoPermission() {
-        String rawMessage = config.getString("messages.noPermission", "<red>You don't have permission to execute this command!");
-        return miniMessage.deserialize(rawMessage);
-    }
-
-    public Component getReloadSuccessMessage() {
-        String rawMessage = config.getString("messages.reloadSuccess", "<green>The LachShield configuration has been successfully reloaded.");
-        return miniMessage.deserialize(rawMessage);
+    public Component getMessage(String path) {
+        return miniMessage.deserialize(config.getString(path, "Message " + path + " not found."));
     }
 
     public boolean isFeatureEnabled(String feature) {
@@ -77,22 +71,7 @@ public class ConfigManager {
         setFeatureEnabled(feature.getFeatureName(), enabled);
     }
 
-    public Component getIpLimitKickMessage() {
-        String rawMessage = config.getString("ipLimit.kickMessage", "<red>You have reached the account limit on the server!");
-        return miniMessage.deserialize(rawMessage);
-    }
-
-    public Component getPreventNetherRoofWarningMessage() {
-        String rawMessage = config.getString("preventNetherRoof.warnMessage", "<red>You cannot enter the Nether roof!");
-        return miniMessage.deserialize(rawMessage);
-    }
-
     public long getAfkTimeoutMinutes() {
         return config.getInt("afk.timeoutMinutes", 15);
-    }
-
-    public Component getAfkKickMessage() {
-        String rawMessage = config.getString("afk.kickMessage", "<red>You have been disconnected for AFK.");
-        return miniMessage.deserialize(rawMessage);
     }
 }

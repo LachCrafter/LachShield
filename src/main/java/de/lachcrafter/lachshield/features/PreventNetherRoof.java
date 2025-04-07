@@ -104,6 +104,6 @@ public class PreventNetherRoof implements Feature {
 
     @Override
     public void reload() {
-        preventNetherRoofWarningMessage = configManager.getPreventNetherRoofWarningMessage();
+        preventNetherRoofWarningMessage = configManager.getMessage("preventNetherRoof.warnMessage");
     }
 }

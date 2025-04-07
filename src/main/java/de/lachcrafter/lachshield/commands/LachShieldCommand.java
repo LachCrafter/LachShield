@@ -30,7 +30,7 @@ public class LachShieldCommand implements BasicCommand {
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String @NotNull [] args) {
         if (!stack.getSender().hasPermission("lachshield.admin") || !stack.getSender().hasPermission("lachshield.commands")) {
-            stack.getSender().sendMessage(configManager.getNoPermission());
+            stack.getSender().sendMessage(configManager.getMessage("messages.noPermission"));
             return;
         }
 
@@ -57,7 +57,7 @@ public class LachShieldCommand implements BasicCommand {
         if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
             if (args[1].equalsIgnoreCase("config")) {
                 plugin.getConfigManager().reloadConfig();
-                stack.getSender().sendMessage(configManager.getReloadSuccessMessage());
+                stack.getSender().sendMessage(configManager.getMessage("messages.reloadSuccess"));
                 return;
             }
 

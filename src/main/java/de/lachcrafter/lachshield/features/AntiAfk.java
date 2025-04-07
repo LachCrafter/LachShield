@@ -89,6 +89,6 @@ public class AntiAfk implements Feature {
     @Override
     public void reload() {
         afkTimeoutMinutes = configManager.getAfkTimeoutMinutes() * 60 * 1000;
-        kickMessage = configManager.getAfkKickMessage();
+        kickMessage = configManager.getMessage("afk.kickMessage");
     }
 }
