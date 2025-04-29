@@ -3,7 +3,7 @@ A customizable and lightweight Minecraft security-focused plugin.
 > **Note**: You can find the full documentation of LachShield on the [wiki](https://github.com/LachCrafter/LachShield/wiki).
 
 ## Features
-- **IP Limit Control**: Limit the number of player accounts that can join from the same IP address.
+- **IP Limit Control**: Limit the number of player accounts that can join from the same IP address. **Warning**: not supported on Folia at the moment.
 - **Kick AFK players**: Kick players that are AFK in a specified time.
 - **Prevent Nether-Roof**: Prevent players from accessing the Nether Roof.
 - **Player Metadata Obfuscation**: Prevents players from viewing information from other players through hacks (e.g. health, armor durability).
