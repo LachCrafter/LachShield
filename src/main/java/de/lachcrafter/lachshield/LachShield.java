@@ -45,11 +45,14 @@ public class LachShield extends JavaPlugin {
     // Enable features
     public void enableFeatures() {
         List<Feature> features = new ArrayList<>(List.of(
-                new AntiAfk(this, configManager),
                 new IPAccountManager(this, configManager),
                 new PreventNetherRoof(this, configManager),
                 new AntiPearlPhase(this)
         ));
+
+        if (!isFolia()) {
+            new AntiAfk(this, configManager);
+        }
 
         if (getServer().getPluginManager().isPluginEnabled("packetevents")) {
             features.add(new PlayerObfuscator(configManager));
@@ -75,5 +78,19 @@ public class LachShield extends JavaPlugin {
 
     public FeatureManager getFeatureManager() {
         return featureManager;
+    }
+
+    /**
+     * Check if the server runs Folia
+     *
+     * @return true if Folia and false if else.
+     */
+    private static boolean isFolia() {
+        try {
+            Class.forName("io.papermc.paper.threaded regions.RecognizedServer");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
     }
 }
