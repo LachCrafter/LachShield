@@ -9,6 +9,7 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -20,6 +21,7 @@ public class LachShieldCommand implements BasicCommand {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final FeatureManager featureManager;
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public LachShieldCommand(LachShield plugin) {
         this.plugin = plugin;
@@ -36,16 +38,16 @@ public class LachShieldCommand implements BasicCommand {
 
         if (args.length == 0) {
             TextComponent message = Component.text()
-                    .content("LachShield v" + plugin.getPluginMeta().getVersion())
+                    .append(Component.text("LachShield v" + plugin.getPluginMeta().getVersion() + " - sub-commands", NamedTextColor.GOLD))
                     .appendNewline()
-                    .append(Component.text("Usage: /lachshield reload <config|all|feature> - reloads a specific component or everything"))
+                    .append(Component.text("- /lachshield reload <config|all|feature> - reloads a specific component or everything"))
                     .appendNewline()
-                    .append(Component.text("Usage: /lachshield enable <feature> - reloads a specific feature"))
+                    .append(Component.text("- /lachshield enable <feature> - reloads a specific feature"))
                     .appendNewline()
-                    .append(Component.text("Usage: /lachshield disable <feature> - disables a specific feature"))
+                    .append(Component.text("- /lachshield disable <feature> - disables a specific feature"))
                     .appendNewline()
-                    .append(Component.text("Usage: /lachshield iplimit <number> - set the player ip limit"))
-                    .color(NamedTextColor.GREEN)
+                    .append(Component.text("- /lachshield iplimit <number> - set the player ip limit"))
+                    .color(NamedTextColor.DARK_GREEN)
                     .build();
 
             stack.getSender().sendMessage(message);
