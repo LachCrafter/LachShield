@@ -5,6 +5,9 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Get and set values from the config.yml
@@ -58,6 +61,10 @@ public class ConfigManager {
         return miniMessage.deserialize(config.getString(path, "Message " + path + " not found."));
     }
 
+    public @NotNull List<String> getStringList(String path) {
+        return config.getStringList(path);
+    }
+
     public boolean isFeatureEnabled(String feature) {
         return config.getBoolean(feature + ".enabled", true);
     }
@@ -73,5 +80,9 @@ public class ConfigManager {
 
     public long getAfkTimeoutMinutes() {
         return config.getInt("afk.timeoutMinutes", 15);
+    }
+
+    public List<String> getChatBlacklist() {
+        return config.getStringList("chatCensor.blacklist");
     }
 }

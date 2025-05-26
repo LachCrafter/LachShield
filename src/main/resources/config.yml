@@ -24,7 +24,7 @@ afk:
   timeoutMinutes: 15
   kickMessage: "<red>You have been disconnected for AFK."
 
-# Avoids other players to see some player data through hacks.
+# Avoid other players to see some player data through hacks.
 obfuscatePlayerData:
   enabled: false
   toObfuscate:
@@ -38,3 +38,13 @@ obfuscatePlayerData:
 # Players can't throw ender pearls in blocks to "phase" into them.
 antiPearlPhase:
   enabled: false
+
+# Censor words/elements in chat.
+chatCensor:
+  enabled: false
+  warning:
+    enabled: true
+    message: "<red>Hey watch your words!"
+  blacklist: # Insert blacklisted words here.
+    - "test"
+    - "test1"

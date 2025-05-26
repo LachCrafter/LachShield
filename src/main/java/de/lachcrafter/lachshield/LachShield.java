@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LachShield extends JavaPlugin {
-    private ConfigManager configManager;
+    public static ConfigManager configManager;
     private FeatureManager featureManager;
     public static final Logger LOGGER = LogManager.getLogger("LachShield");
 
@@ -26,7 +26,7 @@ public class LachShield extends JavaPlugin {
     public void onEnable() {
         LOGGER.info("Initialising LachShield...");
 
-        this.configManager = new ConfigManager(this);
+        configManager = new ConfigManager(this);
 
         LOGGER.info("Enabling Features...");
         enableFeatures();
@@ -47,7 +47,8 @@ public class LachShield extends JavaPlugin {
         List<Feature> features = new ArrayList<>(List.of(
                 new IPAccountManager(this, configManager),
                 new PreventNetherRoof(this, configManager),
-                new AntiPearlPhase(this)
+                new AntiPearlPhase(this),
+                new ChatCensor(this)
         ));
 
         if (!isFolia()) {
