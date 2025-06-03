@@ -4,6 +4,7 @@ import de.lachcrafter.lachshield.LachShield;
 import de.lachcrafter.lachshield.lib.Feature;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 
 import java.util.List;
 
@@ -39,7 +40,9 @@ public class ChatCensor implements Feature {
     }
 
     @Override
-    public void disable() {}
+    public void disable() {
+        HandlerList.unregisterAll(this);
+    }
 
     @Override
     public void reload() {}
