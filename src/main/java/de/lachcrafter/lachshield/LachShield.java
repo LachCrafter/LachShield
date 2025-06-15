@@ -55,7 +55,6 @@ public class LachShield extends JavaPlugin {
             new AntiAfk(this, configManager);
         }
 
-        System.out.println(getServer().getPluginManager().isPluginEnabled("packetevents"));
         if (getServer().getPluginManager().isPluginEnabled("packetevents")) {
             features.add(new PlayerObfuscator(configManager));
         }
