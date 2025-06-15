@@ -16,11 +16,16 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PlayerObfuscator extends PacketEventsFeature {
     private final ConfigManager configManager;
-    private boolean stackSize, durability, enchantments, health, onGround, difficulty;
+    private boolean stackSize;
+    private boolean durability;
+    private boolean health;
+    private boolean onGround;
+    private boolean difficulty;
 
     public PlayerObfuscator(ConfigManager configManager) {
         super(PacketListenerPriority.HIGHEST);
@@ -39,13 +44,13 @@ public class PlayerObfuscator extends PacketEventsFeature {
                 if (durability) {
                     eq.getItem().setDamageValue(0);
                 }
-                if (eq.getItem().isEnchanted(event.getUser().getClientVersion()) && enchantments) {
+                if (eq.getItem().isEnchanted()) {
                     eq.getItem().setEnchantments(new ArrayList<>(Collections.singletonList(
                             new Enchantment.Builder()
                                     .type(EnchantmentTypes.ALL_DAMAGE_PROTECTION)
                                     .level(69)
                                     .build()
-                    )), event.getUser().getClientVersion());
+                    )));
                 }
             });
         }
@@ -53,14 +58,14 @@ public class PlayerObfuscator extends PacketEventsFeature {
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_METADATA) {
             WrapperPlayServerEntityMetadata em = new WrapperPlayServerEntityMetadata(event);
 
-            ArrayList<EntityData> datas = new ArrayList<>();
-            for (EntityData ed : em.getEntityMetadata()) {
+            List<EntityData<?>> datas = new ArrayList<>();
+            for (EntityData<?> ed : em.getEntityMetadata()) {
                 if (ed.getIndex() == 9 && health) {
                     float healthValue = ThreadLocalRandom.current().nextFloat() * (20f - 2f) + 2f;
                     if ((float) ed.getValue() == 0f) {
                         healthValue = 0;
                     }
-                    datas.add(new EntityData(9, EntityDataTypes.FLOAT, healthValue));
+                    datas.add(new EntityData<>(9, EntityDataTypes.FLOAT, healthValue));
                 } else {
                     datas.add(ed);
                 }
@@ -100,7 +105,7 @@ public class PlayerObfuscator extends PacketEventsFeature {
         FileConfiguration config = configManager.getConfig();
         this.stackSize = config.getBoolean("obfuscate-player-data.toObfuscate.stackSize", true);
         this.durability = config.getBoolean("obfuscate-player-data.toObfuscate.durability", true);
-        this.enchantments = config.getBoolean("obfuscate-player-data.toObfuscate.enchantments", true);
+        boolean enchantments = config.getBoolean("obfuscate-player-data.toObfuscate.enchantments", true);
         this.health = config.getBoolean("obfuscate-player-data.toObfuscate.health", true);
         this.onGround = config.getBoolean("obfuscate-player-data.toObfuscate.onGround", true);
         this.difficulty = config.getBoolean("obfuscate-player-data.toObfuscate.difficulty", true);
