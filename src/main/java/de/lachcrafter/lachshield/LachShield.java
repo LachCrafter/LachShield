@@ -47,12 +47,12 @@ public class LachShield extends JavaPlugin {
         List<Feature> features = new ArrayList<>(List.of(
                 new IPAccountManager(this, configManager),
                 new PreventNetherRoof(this, configManager),
-                new AntiPearlPhase(this),
                 new ChatCensor(this)
         ));
 
         if (!isFolia()) {
-            new AntiAfk(this, configManager);
+            features.add(new AntiAfk(this, configManager));
+            features.add(new AntiPearlPhase(this));
         }
 
         if (getServer().getPluginManager().isPluginEnabled("packetevents")) {
