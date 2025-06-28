@@ -42,7 +42,7 @@ public class PreventNetherRoof implements Feature {
             player.sendMessage(preventNetherRoofWarningMessage);
 
             Location safeLocation = findSafeLocation(player.getLocation());
-            player.teleport(Objects.requireNonNullElseGet(safeLocation, () -> new Location(world, player.getLocation().getX(), 124, player.getLocation().getZ())));
+            player.teleportAsync(Objects.requireNonNullElseGet(safeLocation, () -> new Location(world, player.getLocation().getX(), 124, player.getLocation().getZ())));
         }
     }
 
