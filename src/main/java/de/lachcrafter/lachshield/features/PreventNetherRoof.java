@@ -42,7 +42,20 @@ public class PreventNetherRoof implements Feature {
             player.sendMessage(preventNetherRoofWarningMessage);
 
             Location safeLocation = findSafeLocation(player.getLocation());
+            if (safeLocation == null) {
+                Location headLocation = player.getLocation().add(0, -7, 0);
+                Location feetLocation = player.getLocation().add(0, -8, 0);
+
+                if (headLocation.getBlock().getBlockData().getMaterial() == Material.NETHERRACK && feetLocation.getBlock().getBlockData().getMaterial() == Material.NETHERRACK) {
+                    headLocation.getBlock().breakNaturally();
+                    feetLocation.getBlock().breakNaturally();
+                }
+                player.teleportAsync(feetLocation);
+                return;
+            }
+
             player.teleportAsync(Objects.requireNonNullElseGet(safeLocation, () -> new Location(world, player.getLocation().getX(), 124, player.getLocation().getZ())));
+            System.out.println(safeLocation.getY());
         }
     }
 
@@ -63,7 +76,7 @@ public class PreventNetherRoof implements Feature {
         World world = originalLocation.getWorld();
         if (world == null) return null;
 
-        for (int y = 127; y >= 124; y--) {
+        for (int y = 121; y >= 115; y--) {
             Location checkLocation = new Location(world, originalLocation.getX(), y, originalLocation.getZ());
             if (isSafeLocation(checkLocation)) {
                 return checkLocation;
