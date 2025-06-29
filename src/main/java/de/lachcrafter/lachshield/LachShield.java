@@ -88,7 +88,7 @@ public class LachShield extends JavaPlugin {
      */
     private static boolean isFolia() {
         try {
-            Class.forName("io.papermc.paper.threaded regions.RecognizedServer");
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
             return true;
         } catch (ClassNotFoundException e) {
             return false;
