@@ -7,7 +7,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class IPAccountManager implements Feature {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerLogin(PlayerLoginEvent event) {
         handlePlayerJoin(event.getPlayer());
     }
 
@@ -70,7 +70,6 @@ public class IPAccountManager implements Feature {
     @Override
     public void disable() {
         HandlerList.unregisterAll(this);
-
     }
 
     @Override
