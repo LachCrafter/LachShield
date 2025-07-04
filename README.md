@@ -3,16 +3,16 @@ A customizable and lightweight Minecraft security-focused plugin.
 > **Note**: You can find the full documentation of LachShield on the [wiki](https://github.com/LachCrafter/LachShield/wiki).
 
 ## Features
-- **IP Limit Control**: Limit the number of player accounts that can join from the same IP address. **Warning**: not supported on Folia at the moment.
-- **Kick AFK players**: Kick players that are AFK in a specified time.
-- **Prevent Nether-Roof**: Prevent players from accessing the Nether Roof.
-- **Player Metadata Obfuscation**: Prevents players from viewing information from other players through hacks (e.g. health, armor durability).
-- **Anti Pearl Phase**: Prevent players from phasing through blocks using ender pearls.
+- **IPLimiter**: Limit the number of player accounts that can join from the same IP address. **Warning**: not supported on Folia at the moment.
+- **AntiAFK**: Kick players that are AFK in a specified time.
+- **AntiNetherRoof**: Prevent players from accessing the Nether Roof.
+- **HidePlayerData**: Prevents players from viewing information from other players through hacks (e.g. health, armor durability).
+- **AntiPearlPhase**: Prevent players from phasing through blocks using ender pearls.
 
 ## Installation
 Downloading and installing LachShield is very easy, just follow this little guide.
 1. Download the latest release of the plugin from the [Releases](https://github.com/LachCrafter/LachShield/releases) section.
-2. *(Optional)* For the `PlayerObfuscator` feature, download the `PacketEvents` dependency [here](https://modrinth.com/plugin/packetevents/versions).
+2. *(Optional)* For the `HidePlayerData` feature, download the `PacketEvents` dependency [here](https://modrinth.com/plugin/packetevents/versions).
 3. Place the downloaded JAR file into the `plugins` folder of your Minecraft server.
 4. Restart your server to load and enable the plugin.
 
@@ -29,7 +29,7 @@ Contributions are welcome! If you find a bug or want to suggest an enhancement o
 
 If you'd like to contribute code, fork the repository, create a new branch, make your changes, and then create a [pull request](https://github.com/LachCrafter/LachShield/pulls).
 
-## Important information
+## Other information
 ### License
 This project is licensed under the [MIT License](https://github.com/LachCrafter/LachShield/blob/main/LICENSE).
 ### Sponsoring
