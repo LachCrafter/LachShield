@@ -31,7 +31,7 @@ public class ChatCensor implements Feature {
 
     @Override
     public String getFeatureName() {
-        return "ChatCensor";
+        return "chatCensor";
     }
 
     @Override
