@@ -16,6 +16,14 @@ Downloading and installing LachShield is very easy, just follow this little guid
 3. Place the downloaded JAR file into the `plugins` folder of your Minecraft server.
 4. Restart your server to load and enable the plugin.
 
+## Folia
+There are some modules that cannot be implemented for Folia servers at the moment. These include:
+
+- AntiAFK
+- AntiPearlPhase
+
+These modules won't be loadedon a Folia server.
+
 ## Configuration
 
 LachShield creates the configuration file right after the first start of your server with the plugin installed.
