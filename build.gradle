@@ -55,7 +55,7 @@ processResources {
 
 jar {
     archiveBaseName.set("LachShield")
-    archiveVersion.set(provider { version })
+    archiveVersion.set(provider { version } as Provider<? extends String>)
     archiveClassifier.set("")
     archiveExtension.set("jar")
 }
