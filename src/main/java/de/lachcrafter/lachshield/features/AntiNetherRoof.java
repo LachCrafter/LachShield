@@ -15,13 +15,13 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
-public class PreventNetherRoof implements Feature {
+public class AntiNetherRoof implements Feature {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final HashMap<UUID, Long> cooldowns = new HashMap<>();
-    private Component preventNetherRoofWarningMessage;
+    private Component antiNetherRoofWarningMessage;
 
-    public PreventNetherRoof(LachShield plugin, ConfigManager configManager) {
+    public AntiNetherRoof(LachShield plugin, ConfigManager configManager) {
         this.plugin = plugin;
         this.configManager = configManager;
     }
@@ -31,7 +31,7 @@ public class PreventNetherRoof implements Feature {
         Player player = event.getPlayer();
         World world = player.getWorld();
 
-        if (player.hasPermission("lachshield.admin") || player.hasPermission("lachshield.preventRoof")) return;
+        if (player.hasPermission("lachshield.admin") || player.hasPermission("lachshield.antiNetherRoof")) return;
 
         if (world.getEnvironment() == World.Environment.NETHER && player.getLocation().getY() >= 128) {
             if (isInCooldown(player)) {
@@ -39,7 +39,7 @@ public class PreventNetherRoof implements Feature {
             }
             setCooldown(player);
 
-            player.sendMessage(preventNetherRoofWarningMessage);
+            player.sendMessage(antiNetherRoofWarningMessage);
 
             Location safeLocation = findSafeLocation(player.getLocation());
             if (safeLocation == null) {
@@ -101,7 +101,7 @@ public class PreventNetherRoof implements Feature {
 
     @Override
     public String getFeatureName() {
-        return "preventNetherRoof";
+        return "AntiNetherRoof";
     }
 
     @Override
@@ -117,6 +117,6 @@ public class PreventNetherRoof implements Feature {
 
     @Override
     public void reload() {
-        preventNetherRoofWarningMessage = configManager.getMessage("preventNetherRoof.warnMessage");
+        antiNetherRoofWarningMessage = configManager.getMessage("AntiNetherRoof.warnMessage");
     }
 }

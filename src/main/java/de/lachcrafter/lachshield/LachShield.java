@@ -46,8 +46,8 @@ public class LachShield extends JavaPlugin {
     public void enableFeatures() {
         List<Feature> features = new ArrayList<>(List.of(
                 new IPAccountManager(this, configManager),
-                new PreventNetherRoof(this, configManager),
-                new ChatCensor(this)
+                new AntiNetherRoof(this, configManager),
+                new ChatFilter(this)
         ));
 
         if (!isFolia()) {
@@ -56,7 +56,7 @@ public class LachShield extends JavaPlugin {
         }
 
         if (getServer().getPluginManager().isPluginEnabled("packetevents")) {
-            features.add(new PlayerObfuscator(configManager));
+            features.add(new HidePlayerData(configManager));
         }
 
         featureManager = new FeatureManager(configManager);

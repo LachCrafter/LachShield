@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PlayerObfuscator extends PacketEventsFeature {
+public class HidePlayerData extends PacketEventsFeature {
     private final ConfigManager configManager;
     private boolean stackSize;
     private boolean durability;
@@ -27,7 +27,7 @@ public class PlayerObfuscator extends PacketEventsFeature {
     private boolean onGround;
     private boolean difficulty;
 
-    public PlayerObfuscator(ConfigManager configManager) {
+    public HidePlayerData(ConfigManager configManager) {
         super(PacketListenerPriority.HIGHEST);
         this.configManager = configManager;
     }
@@ -87,7 +87,7 @@ public class PlayerObfuscator extends PacketEventsFeature {
 
     @Override
     public String getFeatureName() {
-        return "obfuscatePlayerData";
+        return "HidePlayerData";
     }
 
     @Override
@@ -103,11 +103,10 @@ public class PlayerObfuscator extends PacketEventsFeature {
     @Override
     public void reload() {
         FileConfiguration config = configManager.getConfig();
-        this.stackSize = config.getBoolean("obfuscate-player-data.toObfuscate.stackSize", true);
-        this.durability = config.getBoolean("obfuscate-player-data.toObfuscate.durability", true);
-        boolean enchantments = config.getBoolean("obfuscate-player-data.toObfuscate.enchantments", true);
-        this.health = config.getBoolean("obfuscate-player-data.toObfuscate.health", true);
-        this.onGround = config.getBoolean("obfuscate-player-data.toObfuscate.onGround", true);
-        this.difficulty = config.getBoolean("obfuscate-player-data.toObfuscate.difficulty", true);
+        this.stackSize = config.getBoolean("HidePlayerData.toObfuscate.stackSize", true);
+        this.durability = config.getBoolean("HidePlayerData.toObfuscate.durability", true);
+        this.health = config.getBoolean("HidePlayerData.toObfuscate.health", true);
+        this.onGround = config.getBoolean("HidePlayerData.toObfuscate.onGround", true);
+        this.difficulty = config.getBoolean("HidePlayerData.toObfuscate.difficulty", true);
     }
 }

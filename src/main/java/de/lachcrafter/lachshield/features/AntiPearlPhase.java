@@ -53,7 +53,7 @@ public class AntiPearlPhase implements Feature {
 
     @Override
     public String getFeatureName() {
-        return "antiPearlPhase";
+        return "AntiPearlPhase";
     }
 
     @Override

@@ -70,7 +70,7 @@ public class AntiAfk implements Feature {
 
     @Override
     public String getFeatureName() {
-        return "afk";
+        return "AntiAFK";
     }
 
     @Override
@@ -89,6 +89,6 @@ public class AntiAfk implements Feature {
     @Override
     public void reload() {
         afkTimeoutMinutes = configManager.getAfkTimeoutMinutes() * 60 * 1000;
-        kickMessage = configManager.getMessage("afk.kickMessage");
+        kickMessage = configManager.getMessage("AntiAFK.kickMessage");
     }
 }

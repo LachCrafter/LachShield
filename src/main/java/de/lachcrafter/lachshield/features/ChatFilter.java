@@ -8,11 +8,11 @@ import org.bukkit.event.HandlerList;
 
 import java.util.List;
 
-public class ChatCensor implements Feature {
-    private final List<String> blacklist = LachShield.configManager.getStringList("chatCensor.blacklist");
+public class ChatFilter implements Feature {
+    private final List<String> blacklist = LachShield.configManager.getStringList("ChatFilter.blacklist");
     private final LachShield lachShield;
 
-    public ChatCensor(LachShield lachShield) {
+    public ChatFilter(LachShield lachShield) {
         this.lachShield = lachShield;
     }
 
@@ -21,8 +21,8 @@ public class ChatCensor implements Feature {
         for (String s : blacklist) {
             if (event.message().toString().contains(s)) {
                 event.setCancelled(true);
-                if (LachShield.configManager.getConfig().getBoolean("chatCensor.warning.enabled")) {
-                    event.getPlayer().sendMessage(LachShield.configManager.getMessage("chatCensor.warning.message"));
+                if (LachShield.configManager.getConfig().getBoolean("ChatFilter.warning.enabled")) {
+                    event.getPlayer().sendMessage(LachShield.configManager.getMessage("ChatFilter.warning.message"));
                 }
                 break;
             }
@@ -31,7 +31,7 @@ public class ChatCensor implements Feature {
 
     @Override
     public String getFeatureName() {
-        return "chatCensor";
+        return "ChatFilter";
     }
 
     @Override

@@ -31,7 +31,7 @@ public class IPAccountManager implements Feature {
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
 
         if (accountCount >= maxAccountsPerIP) {
-            Component kickComponent = configManager.getMessage("ipLimit.kickMessage");
+            Component kickComponent = configManager.getMessage("IPLimiter.kickMessage");
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, kickComponent);
             return;
         }
@@ -55,7 +55,7 @@ public class IPAccountManager implements Feature {
 
     @Override
     public String getFeatureName() {
-        return "ipLimit";
+        return "IPLimiter";
     }
 
     @Override

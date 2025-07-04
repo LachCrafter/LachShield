@@ -49,11 +49,11 @@ public class ConfigManager {
     }
 
     public int getMaxAccountsPerIP() {
-        return config.getInt("ipLimit.maxAccountsPerIp", 3);
+        return config.getInt("IPLimiter.maxAccountsPerIp", 3);
     }
 
     public void setMaxAccountsPerIP(int max) {
-        config.set("ipLimit.maxAccountsPerIp", max);
+        config.set("IPLimiter.maxAccountsPerIp", max);
         plugin.saveConfig();
     }
 
@@ -79,10 +79,10 @@ public class ConfigManager {
     }
 
     public long getAfkTimeoutMinutes() {
-        return config.getInt("afk.timeoutMinutes", 15);
+        return config.getInt("AntiAFK.timeoutMinutes", 15);
     }
 
     public List<String> getChatBlacklist() {
-        return config.getStringList("chatCensor.blacklist");
+        return config.getStringList("ChatFilter.blacklist");
     }
 }

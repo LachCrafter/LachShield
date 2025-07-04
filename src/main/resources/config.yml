@@ -2,45 +2,44 @@
 # We use MiniMessages and the color format.
 # Learn more about the syntax here: https://docs.advntr.dev/minimessage/format.html
 
-# messages
+# General plugin messages.
 messages:
   noPermission: "<red>You don't have permission to execute this command!"
   reloadSuccess: "<green>The LachShield configuration has been successfully reloaded."
 
-# Ip limit
-ipLimit:
+# Limit connections that come from the same IP address.
+IPLimiter:
   enabled: true
   maxAccountsPerIp: 3
   kickMessage: "<red>You have reached the account limit on the server!"
 
-# Prevent the Nether Roof
-preventNetherRoof:
+# Prevent players to access the nether roof.
+AntiNetherRoof:
   enabled: false
   warnMessage: "<red>You cannot enter the Nether roof!"
 
 # Kick AFK players after some minutes
-afk:
+AntiAFK:
   enabled: false
   timeoutMinutes: 15
   kickMessage: "<red>You have been disconnected for AFK."
 
-# Avoid other players to see some player data through hacks.
-obfuscatePlayerData:
+# Hide player data that can bee seen through hacks or mods.
+HidePlayerData:
   enabled: false
   toObfuscate:
     health: true
-    ping: true
     stackSize: true
     durability: true
     difficulty: true
     onGround: true
 
 # Players can't throw ender pearls in blocks to "phase" into them.
-antiPearlPhase:
+AntiPearlPhase:
   enabled: false
 
-# Censor words/elements in chat.
-chatCensor:
+# Filter certain words/elements out in chat.
+ChatFilter:
   enabled: false
   warning:
     enabled: true
