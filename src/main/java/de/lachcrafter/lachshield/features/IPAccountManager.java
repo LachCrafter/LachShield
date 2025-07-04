@@ -7,7 +7,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
@@ -26,26 +26,22 @@ public class IPAccountManager implements Feature {
     }
 
     @EventHandler
-    public void onPlayerLogin(PlayerLoginEvent event) {
-        handlePlayerJoin(event.getPlayer());
+    public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
+        String ip = event.getAddress().getHostAddress();
+        int accountCount = ipAccountCount.getOrDefault(ip, 0);
+
+        if (accountCount >= maxAccountsPerIP) {
+            Component kickComponent = configManager.getMessage("ipLimit.kickMessage");
+            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, kickComponent);
+            return;
+        }
+
+        ipAccountCount.put(ip, accountCount + 1);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         handlePlayerQuit(event.getPlayer());
-    }
-
-    public void handlePlayerJoin(Player player) {
-        String ip = Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress();
-        int accountCount = ipAccountCount.getOrDefault(ip, 0);
-
-        if (accountCount >= maxAccountsPerIP) {
-            Component kickComponent = configManager.getMessage("ipLimit.kickMessage");
-            player.kick(kickComponent);
-            return;
-        }
-
-        ipAccountCount.put(ip, accountCount + 1);
     }
 
     public void handlePlayerQuit(Player player) {
