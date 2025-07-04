@@ -9,7 +9,6 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -21,7 +20,6 @@ public class LachShieldCommand implements BasicCommand {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final FeatureManager featureManager;
-    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public LachShieldCommand(LachShield plugin) {
         this.plugin = plugin;
