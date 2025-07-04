@@ -124,6 +124,25 @@ public class LachShieldCommand implements BasicCommand {
                 stack.getSender().sendMessage(Component.text("Invalid number format. Usage: /lachshield iplimit <number>", NamedTextColor.RED));
             }
         }
+
+        if (args[0].equalsIgnoreCase("status")) {
+            TextComponent.Builder statusBuilder = Component.text()
+                    .append(Component.text("Enabled modules (" + featureManager.getEnabledFeatures().size() + "):", NamedTextColor.GOLD)).appendNewline();
+
+            featureManager.getEnabledFeatures().forEach(feature -> statusBuilder.append(Component.text(feature.getFeatureName(), NamedTextColor.GREEN)).appendNewline());
+
+            statusBuilder.append(Component.text("Disabled modules (" + featureManager.getDisabledFeatures().size() + "):", NamedTextColor.GOLD)).appendNewline();
+
+            for (int i = 0; i < featureManager.getDisabledFeatures().size(); i++) {
+                Feature currentFeature = featureManager.getDisabledFeatures().get(i);
+                statusBuilder.append(Component.text(currentFeature.getFeatureName(), NamedTextColor.RED));
+                if (i + 1 != featureManager.getDisabledFeatures().size()) {
+                    statusBuilder.appendNewline();
+                }
+            }
+
+            stack.getSender().sendMessage(statusBuilder);
+        }
     }
 
     @Override
@@ -133,7 +152,7 @@ public class LachShieldCommand implements BasicCommand {
         }
 
         if (args.length <= 1) {
-            return List.of("reload", "enable", "disable", "iplimit");
+            return List.of("reload", "enable", "disable", "iplimit", "status");
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
