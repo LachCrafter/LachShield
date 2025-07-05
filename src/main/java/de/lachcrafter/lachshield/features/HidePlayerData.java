@@ -17,6 +17,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class HidePlayerData extends PacketEventsFeature {
@@ -24,8 +25,6 @@ public class HidePlayerData extends PacketEventsFeature {
     private boolean stackSize;
     private boolean durability;
     private boolean health;
-    private boolean onGround;
-    private boolean difficulty;
 
     public HidePlayerData(ConfigManager configManager) {
         super(PacketListenerPriority.HIGHEST);
@@ -48,7 +47,7 @@ public class HidePlayerData extends PacketEventsFeature {
                     eq.getItem().setEnchantments(new ArrayList<>(Collections.singletonList(
                             new Enchantment.Builder()
                                     .type(EnchantmentTypes.ALL_DAMAGE_PROTECTION)
-                                    .level(69)
+                                    .level(new Random().nextInt(1, 60))
                                     .build()
                     )));
                 }
@@ -61,27 +60,12 @@ public class HidePlayerData extends PacketEventsFeature {
             List<EntityData<?>> datas = new ArrayList<>();
             for (EntityData<?> ed : em.getEntityMetadata()) {
                 if (ed.getIndex() == 9 && health) {
-                    float healthValue = ThreadLocalRandom.current().nextFloat() * (20f - 2f) + 2f;
-                    if ((float) ed.getValue() == 0f) {
-                        healthValue = 0;
-                    }
-                    datas.add(new EntityData<>(9, EntityDataTypes.FLOAT, healthValue));
+                    em.getEntityMetadata().removeIf(data -> data.getIndex() == 9);
                 } else {
                     datas.add(ed);
                 }
             }
             em.setEntityMetadata(datas);
-        }
-
-        if (event.getPacketType() == PacketType.Play.Server.ENTITY_RELATIVE_MOVE && onGround) {
-            WrapperPlayServerEntityRelativeMove erm = new WrapperPlayServerEntityRelativeMove(event);
-            erm.setOnGround(false);
-        }
-
-        if (event.getPacketType() == PacketType.Play.Server.SERVER_DIFFICULTY && difficulty) {
-            WrapperPlayServerDifficulty sd = new WrapperPlayServerDifficulty(event);
-            sd.setDifficulty(Difficulty.PEACEFUL);
-            sd.setLocked(true);
         }
     }
 
@@ -103,9 +87,8 @@ public class HidePlayerData extends PacketEventsFeature {
     @Override
     public void reload() {
         FileConfiguration config = configManager.getConfig();
-        this.stackSize = config.getBoolean("HidePlayerData.toObfuscate.stackSize", true);
-        this.durability = config.getBoolean("HidePlayerData.toObfuscate.durability", true);
-        this.health = config.getBoolean("HidePlayerData.toObfuscate.health", true);
-        this.difficulty = config.getBoolean("HidePlayerData.toObfuscate.difficulty", true);
+        this.stackSize = config.getBoolean("HidePlayerData.data.stackSize", true);
+        this.durability = config.getBoolean("HidePlayerData.data.durability", true);
+        this.health = config.getBoolean("HidePlayerData.data.health", true);
     }
 }
