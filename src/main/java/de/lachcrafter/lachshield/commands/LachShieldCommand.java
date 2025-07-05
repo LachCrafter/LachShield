@@ -80,22 +80,27 @@ public class LachShieldCommand implements BasicCommand {
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("enable")) {
-            Feature feature = featureManager.getDisabledFeatures().stream()
+            Feature feature = featureManager.getFeatureList().stream()
                     .filter(f -> f.getFeatureName().equalsIgnoreCase(args[1]))
                     .findFirst()
                     .orElse(null);
+
+
             if (feature == null) {
                 stack.getSender().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
                 return;
             }
 
-            featureManager.enable(feature);
-            stack.getSender().sendMessage(Component.text("Feature enabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            if (featureManager.enable(feature)) {
+                stack.getSender().sendMessage(Component.text("Feature enabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            } else {
+                stack.getSender().sendMessage(Component.text("Feature is already enabled", NamedTextColor.RED));
+            }
             return;
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("disable")) {
-            Feature feature = featureManager.getEnabledFeatures().stream()
+            Feature feature = featureManager.getFeatureList().stream()
                     .filter(f -> f.getFeatureName().equalsIgnoreCase(args[1]))
                     .findFirst()
                     .orElse(null);
@@ -104,8 +109,12 @@ public class LachShieldCommand implements BasicCommand {
                 return;
             }
 
-            featureManager.disable(feature);
-            stack.getSender().sendMessage(Component.text("Feature disabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            if (featureManager.disable(feature)) {
+                stack.getSender().sendMessage(Component.text("Feature disabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            } else {
+                stack.getSender().sendMessage(Component.text("Feature is already disabled", NamedTextColor.RED));
+            }
+
             return;
         }
 

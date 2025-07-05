@@ -47,22 +47,28 @@ public class FeatureManager {
         }
     }
 
-    public void enable(Feature feature) {
+    public boolean enable(Feature feature) {
         if (!enabledFeatures.contains(feature)) {
             enabledFeatures.add(feature);
             feature.reload();
             feature.enable();
             configManager.setFeatureEnabled(feature, true);
             LachShield.LOGGER.info("Enabled feature: {}", feature.getFeatureName());
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public void disable(Feature feature) {
+    public boolean disable(Feature feature) {
         if (enabledFeatures.contains(feature)) {
             enabledFeatures.remove(feature);
             feature.disable();
             configManager.setFeatureEnabled(feature, false);
             LachShield.LOGGER.info("Disabled feature: {}", feature.getFeatureName());
+            return true;
+        } else {
+            return false;
         }
     }
 }
