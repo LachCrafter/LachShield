@@ -58,12 +58,8 @@ public class HidePlayerData extends PacketEventsFeature {
             WrapperPlayServerEntityMetadata em = new WrapperPlayServerEntityMetadata(event);
 
             List<EntityData<?>> datas = new ArrayList<>();
-            for (EntityData<?> ed : em.getEntityMetadata()) {
-                if (ed.getIndex() == 9 && health) {
-                    em.getEntityMetadata().removeIf(data -> data.getIndex() == 9);
-                } else {
-                    datas.add(ed);
-                }
+            if (health) {
+                em.getEntityMetadata().removeIf(data -> data.getIndex() == 9);
             }
             em.setEntityMetadata(datas);
         }
