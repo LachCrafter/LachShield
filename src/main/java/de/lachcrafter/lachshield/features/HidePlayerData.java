@@ -106,7 +106,6 @@ public class HidePlayerData extends PacketEventsFeature {
         this.stackSize = config.getBoolean("HidePlayerData.toObfuscate.stackSize", true);
         this.durability = config.getBoolean("HidePlayerData.toObfuscate.durability", true);
         this.health = config.getBoolean("HidePlayerData.toObfuscate.health", true);
-        this.onGround = config.getBoolean("HidePlayerData.toObfuscate.onGround", true);
         this.difficulty = config.getBoolean("HidePlayerData.toObfuscate.difficulty", true);
     }
 }
