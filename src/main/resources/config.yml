@@ -32,7 +32,6 @@ HidePlayerData:
     stackSize: true
     durability: true
     difficulty: true
-    onGround: true
 
 # Players can't throw ender pearls in blocks to "phase" into them.
 AntiPearlPhase:
