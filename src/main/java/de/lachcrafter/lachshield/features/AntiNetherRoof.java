@@ -55,7 +55,6 @@ public class AntiNetherRoof implements Feature {
             }
 
             player.teleportAsync(Objects.requireNonNullElseGet(safeLocation, () -> new Location(world, player.getLocation().getX(), 124, player.getLocation().getZ())));
-            System.out.println(safeLocation.getY());
         }
     }
 
