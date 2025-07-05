@@ -1,10 +1,18 @@
 package de.lachcrafter.lachshield.lib;
 
-public abstract class NewFeature {
+import com.github.retrooper.packetevents.event.PacketListenerAbstract;
+import com.github.retrooper.packetevents.event.PacketListenerPriority;
+
+public abstract class NewFeature extends PacketListenerAbstract {
 
     private final String name;
 
     public NewFeature(String name) {
+        this.name = name;
+    }
+
+    public NewFeature(String name, PacketListenerPriority priority) {
+        super(priority);
         this.name = name;
     }
 
