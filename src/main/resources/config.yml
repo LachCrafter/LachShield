@@ -35,6 +35,7 @@ HidePlayerData:
 # Players can't throw ender pearls in blocks to "phase" into them.
 AntiPearlPhase:
   enabled: false
+  downPitch: 45.00
 
 # Filter certain words/elements out in chat.
 ChatFilter:

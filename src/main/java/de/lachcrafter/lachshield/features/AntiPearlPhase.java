@@ -33,8 +33,9 @@ public class AntiPearlPhase implements Feature {
 
     private boolean isPlayerLookingDown(Player player) {
         Location location = player.getLocation();
+        double downPitch = plugin.getConfigManager().getConfig().getDouble("AntiPearlPhase.downPitch", 45.00D);
         double pitch = location.getPitch();
-        return (pitch > 45.0D || pitch < -45.0D);
+        return (pitch > downPitch || pitch < -downPitch);
     }
 
     private boolean isDestinationSafe(Location from, Location to) {
