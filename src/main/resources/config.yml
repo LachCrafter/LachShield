@@ -27,11 +27,10 @@ AntiAFK:
 # Hide player data that can bee seen through hacks or mods.
 HidePlayerData:
   enabled: false
-  toObfuscate:
+  data:
     health: true
     stackSize: true
     durability: true
-    difficulty: true
 
 # Players can't throw ender pearls in blocks to "phase" into them.
 AntiPearlPhase:
