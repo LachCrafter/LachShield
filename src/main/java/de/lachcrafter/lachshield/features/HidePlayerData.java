@@ -4,11 +4,9 @@ import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import com.github.retrooper.packetevents.event.PacketSendEvent;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityData;
-import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.item.enchantment.Enchantment;
 import com.github.retrooper.packetevents.protocol.item.enchantment.type.EnchantmentTypes;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
-import com.github.retrooper.packetevents.protocol.world.Difficulty;
 import com.github.retrooper.packetevents.wrapper.play.server.*;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.lib.PacketEventsFeature;
@@ -18,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class HidePlayerData extends PacketEventsFeature {
     private final ConfigManager configManager;
