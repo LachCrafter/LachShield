@@ -1,8 +1,8 @@
 package de.lachcrafter.lachshield.features;
 
+import de.lachcrafter.lachshield.lib.NewFeature;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.lib.Feature;
 import net.kyori.adventure.text.Component;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
@@ -15,13 +15,14 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
-public class AntiNetherRoof implements Feature {
+public class AntiNetherRoof extends NewFeature {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private Component antiNetherRoofWarningMessage;
 
     public AntiNetherRoof(LachShield plugin, ConfigManager configManager) {
+        super("AntiNetherRoof");
         this.plugin = plugin;
         this.configManager = configManager;
     }
@@ -99,23 +100,18 @@ public class AntiNetherRoof implements Feature {
     }
 
     @Override
-    public String getFeatureName() {
-        return "AntiNetherRoof";
-    }
-
-    @Override
-    public void enable() {
+    public void onEnable() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @Override
-    public void disable() {
+    public void onDisable() {
         HandlerList.unregisterAll(this);
         cooldowns.clear();
     }
 
     @Override
-    public void reload() {
+    public void onReload() {
         antiNetherRoofWarningMessage = configManager.getMessage("AntiNetherRoof.warnMessage");
     }
 }

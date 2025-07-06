@@ -8,8 +8,8 @@ import com.github.retrooper.packetevents.protocol.item.enchantment.Enchantment;
 import com.github.retrooper.packetevents.protocol.item.enchantment.type.EnchantmentTypes;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.wrapper.play.server.*;
+import de.lachcrafter.lachshield.lib.NewFeature;
 import de.lachcrafter.lachshield.managers.ConfigManager;
-import de.lachcrafter.lachshield.lib.PacketEventsFeature;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
@@ -17,14 +17,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class HidePlayerData extends PacketEventsFeature {
+public class HidePlayerData extends NewFeature {
     private final ConfigManager configManager;
     private boolean stackSize;
     private boolean durability;
     private boolean health;
 
     public HidePlayerData(ConfigManager configManager) {
-        super(PacketListenerPriority.HIGHEST);
+        super("HidePlayerData", PacketListenerPriority.HIGHEST);
         this.configManager = configManager;
     }
 
@@ -63,22 +63,17 @@ public class HidePlayerData extends PacketEventsFeature {
     }
 
     @Override
-    public String getFeatureName() {
-        return "HidePlayerData";
-    }
-
-    @Override
-    public void enable() {
+    public void onEnable() {
         PacketEvents.getAPI().getEventManager().registerListener(this);
     }
 
     @Override
-    public void disable() {
+    public void onDisable() {
         PacketEvents.getAPI().getEventManager().unregisterListener(this);
     }
 
     @Override
-    public void reload() {
+    public void onReload() {
         FileConfiguration config = configManager.getConfig();
         this.stackSize = config.getBoolean("HidePlayerData.data.stackSize", true);
         this.durability = config.getBoolean("HidePlayerData.data.durability", true);

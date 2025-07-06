@@ -1,8 +1,8 @@
 package de.lachcrafter.lachshield.features;
 
+import de.lachcrafter.lachshield.lib.NewFeature;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.lib.Feature;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class AntiAfk implements Feature {
+public class AntiAfk extends NewFeature {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final HashMap<UUID, Long> playerActivity = new HashMap<>();
@@ -26,6 +26,7 @@ public class AntiAfk implements Feature {
     private int taskId = -1;
 
     public AntiAfk(LachShield plugin, ConfigManager configManager) {
+        super("AntiAFK");
         this.plugin = plugin;
         this.configManager = configManager;
     }
@@ -69,25 +70,20 @@ public class AntiAfk implements Feature {
     }
 
     @Override
-    public String getFeatureName() {
-        return "AntiAFK";
-    }
-
-    @Override
-    public void enable() {
+    public void onEnable() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         startAfkCheck();
     }
 
     @Override
-    public void disable() {
+    public void onDisable() {
         HandlerList.unregisterAll(this);
         Bukkit.getScheduler().cancelTask(taskId);
         playerActivity.clear();
     }
 
     @Override
-    public void reload() {
+    public void onReload() {
         afkTimeoutMinutes = configManager.getAfkTimeoutMinutes() * 60 * 1000;
         kickMessage = configManager.getMessage("AntiAFK.kickMessage");
     }

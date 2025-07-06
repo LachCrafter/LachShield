@@ -1,18 +1,19 @@
 package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.lib.Feature;
+import de.lachcrafter.lachshield.lib.NewFeature;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 
 import java.util.List;
 
-public class ChatFilter implements Feature {
+public class ChatFilter extends NewFeature {
     private final List<String> blacklist = LachShield.configManager.getStringList("ChatFilter.blacklist");
     private final LachShield lachShield;
 
     public ChatFilter(LachShield lachShield) {
+        super("ChatFilter");
         this.lachShield = lachShield;
     }
 
@@ -30,20 +31,15 @@ public class ChatFilter implements Feature {
     }
 
     @Override
-    public String getFeatureName() {
-        return "ChatFilter";
-    }
-
-    @Override
-    public void enable() {
+    public void onEnable() {
         lachShield.getServer().getPluginManager().registerEvents(this, lachShield);
     }
 
     @Override
-    public void disable() {
+    public void onDisable() {
         HandlerList.unregisterAll(this);
     }
 
     @Override
-    public void reload() {}
+    public void onReload() {}
 }

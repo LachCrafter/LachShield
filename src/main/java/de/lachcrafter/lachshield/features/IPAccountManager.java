@@ -1,8 +1,8 @@
 package de.lachcrafter.lachshield.features;
 
+import de.lachcrafter.lachshield.lib.NewFeature;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.lib.Feature;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,13 +14,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class IPAccountManager implements Feature {
+public class IPAccountManager extends NewFeature {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final Map<String, Integer> ipAccountCount = new HashMap<>();
     private int maxAccountsPerIP;
 
     public IPAccountManager(LachShield plugin, ConfigManager configManager) {
+        super("IPLimiter");
         this.plugin = plugin;
         this.configManager = configManager;
     }
@@ -54,22 +55,17 @@ public class IPAccountManager implements Feature {
     }
 
     @Override
-    public String getFeatureName() {
-        return "IPLimiter";
-    }
-
-    @Override
-    public void enable() {
+    public void onEnable() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @Override
-    public void disable() {
+    public void onDisable() {
         HandlerList.unregisterAll(this);
     }
 
     @Override
-    public void reload() {
+    public void onReload() {
         maxAccountsPerIP = configManager.getMaxAccountsPerIP();
     }
 }
