@@ -86,7 +86,7 @@ public class LachShield extends JavaPlugin {
      *
      * @return true if Folia and false if else.
      */
-    private static boolean isFolia() {
+    public static boolean isFolia() {
         try {
             Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
             return true;
