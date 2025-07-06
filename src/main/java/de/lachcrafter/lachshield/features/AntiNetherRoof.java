@@ -22,7 +22,7 @@ public class AntiNetherRoof extends NewFeature {
     private Component antiNetherRoofWarningMessage;
 
     public AntiNetherRoof(LachShield plugin, ConfigManager configManager) {
-        super("AntiNetherRoof");
+        super("AntiNetherRoof", true);
         this.plugin = plugin;
         this.configManager = configManager;
     }

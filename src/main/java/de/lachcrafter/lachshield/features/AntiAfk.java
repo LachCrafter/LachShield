@@ -26,7 +26,7 @@ public class AntiAfk extends NewFeature {
     private int taskId = -1;
 
     public AntiAfk(LachShield plugin, ConfigManager configManager) {
-        super("AntiAFK");
+        super("AntiAFK", false);
         this.plugin = plugin;
         this.configManager = configManager;
     }

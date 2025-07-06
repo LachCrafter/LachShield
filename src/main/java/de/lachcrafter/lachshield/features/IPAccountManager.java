@@ -21,7 +21,7 @@ public class IPAccountManager extends NewFeature {
     private int maxAccountsPerIP;
 
     public IPAccountManager(LachShield plugin, ConfigManager configManager) {
-        super("IPLimiter");
+        super("IPLimiter", true);
         this.plugin = plugin;
         this.configManager = configManager;
     }

@@ -7,14 +7,17 @@ import org.bukkit.event.Listener;
 public abstract class NewFeature extends PacketListenerAbstract implements Listener {
 
     private final String name;
+    private final boolean foliaCompatible;
 
-    public NewFeature(String name) {
+    public NewFeature(String name, boolean foliaCompatible) {
         this.name = name;
+        this.foliaCompatible = foliaCompatible;
     }
 
-    public NewFeature(String name, PacketListenerPriority priority) {
+    public NewFeature(String name, PacketListenerPriority priority, boolean foliaCompatible) {
         super(priority);
         this.name = name;
+        this.foliaCompatible = foliaCompatible;
     }
 
     /**
@@ -22,6 +25,13 @@ public abstract class NewFeature extends PacketListenerAbstract implements Liste
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * @return If the feature works on Folia or not.
+     */
+    public boolean isFoliaCompatible() {
+        return foliaCompatible;
     }
 
     public abstract void onEnable();

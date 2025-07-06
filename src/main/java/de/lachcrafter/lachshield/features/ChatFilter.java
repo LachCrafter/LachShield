@@ -13,7 +13,7 @@ public class ChatFilter extends NewFeature {
     private final LachShield lachShield;
 
     public ChatFilter(LachShield lachShield) {
-        super("ChatFilter");
+        super("ChatFilter", true);
         this.lachShield = lachShield;
     }
 
