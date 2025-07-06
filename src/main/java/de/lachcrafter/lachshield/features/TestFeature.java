@@ -5,7 +5,7 @@ import de.lachcrafter.lachshield.lib.NewFeature;
 public class TestFeature extends NewFeature {
 
     public TestFeature() {
-        super("TestFeatureNew");
+        super("TestFeatureNew", true);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class AntiPearlPhase extends NewFeature {
     private final LachShield plugin;
 
     public AntiPearlPhase(LachShield plugin) {
-        super("AntiPearlPhase");
+        super("AntiPearlPhase", false);
         this.plugin = plugin;
     }
 
