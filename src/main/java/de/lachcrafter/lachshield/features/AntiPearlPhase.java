@@ -1,7 +1,7 @@
 package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.lib.Feature;
+import de.lachcrafter.lachshield.lib.NewFeature;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -11,11 +11,12 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class AntiPearlPhase implements Feature {
+public class AntiPearlPhase extends NewFeature {
 
     private final LachShield plugin;
 
     public AntiPearlPhase(LachShield plugin) {
+        super("AntiPearlPhase");
         this.plugin = plugin;
     }
 
@@ -53,20 +54,15 @@ public class AntiPearlPhase implements Feature {
     }
 
     @Override
-    public String getFeatureName() {
-        return "AntiPearlPhase";
-    }
-
-    @Override
-    public void enable() {
+    public void onEnable() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @Override
-    public void disable() {
+    public void onDisable() {
         HandlerList.unregisterAll(this);
     }
 
     @Override
-    public void reload() {}
+    public void onReload() {}
 }

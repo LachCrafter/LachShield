@@ -2,8 +2,9 @@ package de.lachcrafter.lachshield.lib;
 
 import com.github.retrooper.packetevents.event.PacketListenerAbstract;
 import com.github.retrooper.packetevents.event.PacketListenerPriority;
+import org.bukkit.event.Listener;
 
-public abstract class NewFeature extends PacketListenerAbstract {
+public abstract class NewFeature extends PacketListenerAbstract implements Listener {
 
     private final String name;
 
