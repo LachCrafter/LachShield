@@ -3,9 +3,11 @@ package de.lachcrafter.lachshield.lib;
 import de.lachcrafter.lachshield.LachShield;
 import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.managers.ConfigManager;
+import org.apache.commons.lang3.AnnotationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class NewFeatureManager {
     private final LachShield plugin;
@@ -178,6 +180,17 @@ public class NewFeatureManager {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get a feature by its name.
+     * @param name name of the feature.
+     */
+    public NewFeature getFeatureByName(String name) {
+        return registeredFeatures.stream()
+                .filter(f -> f.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 
 }
