@@ -10,7 +10,7 @@ public abstract class NewFeature extends PacketListenerAbstract implements Liste
     private final boolean foliaCompatible;
     private boolean packetListener = false;
 
-    public NewFeature(String name, boolean foliaCompatible, boolean packetListener) {
+    public NewFeature(String name, boolean foliaCompatible) {
         this.name = name;
         this.foliaCompatible = foliaCompatible;
     }
