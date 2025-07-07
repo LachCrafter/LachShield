@@ -126,6 +126,14 @@ public class NewFeatureManager {
     }
 
     /**
+     * Get all available registered features.
+     * @return all available features.
+     */
+    public List<NewFeature> getRegisteredFeatures() {
+        return registeredFeatures;
+    }
+
+    /**
      * Enables a feature.
      * @param feature the feature to enable.
      * @return Returns true when the feature has been enabled, or false when it is already enabled.
