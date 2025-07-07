@@ -42,7 +42,7 @@ public class LachShield extends JavaPlugin {
         LOGGER.info("LachShield successfully unloaded");
     }
 
-    // Enable features
+    // Enable feature
     public void enableFeatures() {
         List<Feature> features = new ArrayList<>(List.of(
                 new IPAccountManager(this, configManager),
