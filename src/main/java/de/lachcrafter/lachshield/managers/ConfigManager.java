@@ -1,6 +1,6 @@
 package de.lachcrafter.lachshield.managers;
 
-import de.lachcrafter.lachshield.lib.Feature;
+import de.lachcrafter.lachshield.features.Feature;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -75,7 +75,7 @@ public class ConfigManager {
     }
 
     public void setFeatureEnabled(Feature feature, boolean enabled) {
-        setFeatureEnabled(feature.getFeatureName(), enabled);
+        setFeatureEnabled(feature.getName(), enabled);
     }
 
     public long getAfkTimeoutMinutes() {

@@ -1,7 +1,6 @@
 package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.lib.NewFeature;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -11,7 +10,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class AntiPearlPhase extends NewFeature {
+public class AntiPearlPhase extends Feature {
 
     private final LachShield plugin;
 

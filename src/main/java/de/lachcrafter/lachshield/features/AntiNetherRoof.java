@@ -1,6 +1,5 @@
 package de.lachcrafter.lachshield.features;
 
-import de.lachcrafter.lachshield.lib.NewFeature;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
-public class AntiNetherRoof extends NewFeature {
+public class AntiNetherRoof extends Feature {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final HashMap<UUID, Long> cooldowns = new HashMap<>();

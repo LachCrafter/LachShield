@@ -1,6 +1,5 @@
 package de.lachcrafter.lachshield.features;
 
-import de.lachcrafter.lachshield.lib.NewFeature;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
@@ -16,7 +15,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class AntiAfk extends NewFeature {
+public class AntiAfk extends Feature {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final HashMap<UUID, Long> playerActivity = new HashMap<>();

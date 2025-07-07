@@ -1,21 +1,18 @@
-package de.lachcrafter.lachshield.lib;
+package de.lachcrafter.lachshield.managers;
 
 import de.lachcrafter.lachshield.LachShield;
 import de.lachcrafter.lachshield.features.*;
-import de.lachcrafter.lachshield.managers.ConfigManager;
-import org.apache.commons.lang3.AnnotationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class NewFeatureManager {
+public class FeatureManager {
     private final LachShield plugin;
     private final ConfigManager configManager;
 
-    private final List<NewFeature> allFeatures, registeredFeatures, enabledFeatures, incompatibleFeatures;
+    private final List<Feature> allFeatures, registeredFeatures, enabledFeatures, incompatibleFeatures;
 
-    public NewFeatureManager(LachShield plugin) {
+    public FeatureManager(LachShield plugin) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
 
@@ -44,7 +41,7 @@ public class NewFeatureManager {
      * Registers a feature.
      * @param feature the feature to register.
      */
-    public void registerFeature(NewFeature feature) {
+    public void registerFeature(Feature feature) {
         if (!registeredFeatures.contains(feature) && !incompatibleFeatures.contains(feature)) {
             registeredFeatures.add(feature);
         }
@@ -55,7 +52,7 @@ public class NewFeatureManager {
      * Adds a feature to a {@link List} of features that can't be used at the moment due to incompatibility or missing dependencies.
      * @param feature the feature to add.
      */
-    public void addIncompatibleFeature(NewFeature feature) {
+    public void addIncompatibleFeature(Feature feature) {
         if (!incompatibleFeatures.contains(feature)) {
             incompatibleFeatures.add(feature);
         }
@@ -66,7 +63,7 @@ public class NewFeatureManager {
      * It also checks for dependencies and server software for each feature.
      * This should only be called once.
      */
-    public void initFeatures(List<NewFeature> features) {
+    public void initFeatures(List<Feature> features) {
         features.forEach(
                 feature -> {
 
@@ -105,7 +102,7 @@ public class NewFeatureManager {
      * Get all features as a List
      * @return all features in a list.
      */
-    public List<NewFeature> getAllFeatures() {
+    public List<Feature> getAllFeatures() {
         return allFeatures;
     }
 
@@ -113,7 +110,7 @@ public class NewFeatureManager {
      * Get all enabled features as a List
      * @return all enabled features in a list.
      */
-    public List<NewFeature> getEnabledFeatures() {
+    public List<Feature> getEnabledFeatures() {
         return enabledFeatures;
     }
 
@@ -121,7 +118,7 @@ public class NewFeatureManager {
      * Get all disabled features as a List
      * @return all disabled features in a list.
      */
-    public List<NewFeature> getDisabledFeatures() {
+    public List<Feature> getDisabledFeatures() {
         return allFeatures.stream()
                 .filter(newFeature -> !enabledFeatures.contains(newFeature))
                 .toList();
@@ -131,7 +128,7 @@ public class NewFeatureManager {
      * Get all available registered features.
      * @return all available features.
      */
-    public List<NewFeature> getRegisteredFeatures() {
+    public List<Feature> getRegisteredFeatures() {
         return registeredFeatures;
     }
 
@@ -140,7 +137,7 @@ public class NewFeatureManager {
      * @param feature the feature to enable.
      * @return Returns true when the feature has been enabled, or false when it is already enabled.
      */
-    public boolean enableFeature(NewFeature feature) {
+    public boolean enableFeature(Feature feature) {
         if (!enabledFeatures.contains(feature)) {
             enabledFeatures.add(feature);
             configManager.setFeatureEnabled(feature.getName(), true);
@@ -157,7 +154,7 @@ public class NewFeatureManager {
      * @param feature the feature to disable.
      * @return Returns true when the feature has been disabled, or false when it is already disabled.
      */
-    public boolean disableFeature(NewFeature feature) {
+    public boolean disableFeature(Feature feature) {
         if (enabledFeatures.contains(feature)) {
             feature.onDisable();
             enabledFeatures.remove(feature);
@@ -173,7 +170,7 @@ public class NewFeatureManager {
      * @param feature the feature to reload.
      * @return Returns true if the feature has been reloaded, or false when the feature is disabled.
      */
-    public boolean reloadFeature(NewFeature feature) {
+    public boolean reloadFeature(Feature feature) {
         if (!enabledFeatures.contains(feature)) {
             feature.onReload();
             return true;
@@ -186,7 +183,7 @@ public class NewFeatureManager {
      * Get a feature by its name.
      * @param name name of the feature.
      */
-    public NewFeature getFeatureByName(String name) {
+    public Feature getFeatureByName(String name) {
         return registeredFeatures.stream()
                 .filter(f -> f.getName().equalsIgnoreCase(name))
                 .findFirst()

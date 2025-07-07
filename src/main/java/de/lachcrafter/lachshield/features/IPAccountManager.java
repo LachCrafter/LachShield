@@ -1,6 +1,5 @@
 package de.lachcrafter.lachshield.features;
 
-import de.lachcrafter.lachshield.lib.NewFeature;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
@@ -14,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class IPAccountManager extends NewFeature {
+public class IPAccountManager extends Feature {
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final Map<String, Integer> ipAccountCount = new HashMap<>();

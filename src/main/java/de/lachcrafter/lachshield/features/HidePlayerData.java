@@ -8,7 +8,6 @@ import com.github.retrooper.packetevents.protocol.item.enchantment.Enchantment;
 import com.github.retrooper.packetevents.protocol.item.enchantment.type.EnchantmentTypes;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.wrapper.play.server.*;
-import de.lachcrafter.lachshield.lib.NewFeature;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -17,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class HidePlayerData extends NewFeature {
+public class HidePlayerData extends Feature {
     private final ConfigManager configManager;
     private boolean stackSize;
     private boolean durability;
