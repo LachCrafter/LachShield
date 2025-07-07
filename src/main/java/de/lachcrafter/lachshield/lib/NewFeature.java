@@ -8,16 +8,18 @@ public abstract class NewFeature extends PacketListenerAbstract implements Liste
 
     private final String name;
     private final boolean foliaCompatible;
+    private boolean packetListener = false;
 
-    public NewFeature(String name, boolean foliaCompatible) {
+    public NewFeature(String name, boolean foliaCompatible, boolean packetListener) {
         this.name = name;
         this.foliaCompatible = foliaCompatible;
     }
 
-    public NewFeature(String name, PacketListenerPriority priority, boolean foliaCompatible) {
+    public NewFeature(String name, PacketListenerPriority priority, boolean packetListener,  boolean foliaCompatible) {
         super(priority);
         this.name = name;
         this.foliaCompatible = foliaCompatible;
+        this.packetListener = packetListener;
     }
 
     /**
@@ -32,6 +34,13 @@ public abstract class NewFeature extends PacketListenerAbstract implements Liste
      */
     public boolean isFoliaCompatible() {
         return foliaCompatible;
+    }
+
+    /**
+     * @return If the feature listens to packets.
+     */
+    public boolean isPacketListener() {
+        return packetListener;
     }
 
     public abstract void onEnable();
