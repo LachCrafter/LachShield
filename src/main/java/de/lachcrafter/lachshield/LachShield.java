@@ -1,7 +1,7 @@
 package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.commands.LachShieldCommand;
-import de.lachcrafter.lachshield.lib.NewFeatureManager;
+import de.lachcrafter.lachshield.managers.FeatureManager;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LachShield extends JavaPlugin {
     public static ConfigManager configManager;
-    public static NewFeatureManager featureManager;
+    public static FeatureManager featureManager;
     public static final Logger LOGGER = LogManager.getLogger("LachShield");
 
     @Override
@@ -24,7 +24,7 @@ public class LachShield extends JavaPlugin {
         configManager = new ConfigManager(this);
 
         LOGGER.info("Loading Features...");
-        featureManager = new NewFeatureManager(this);
+        featureManager = new FeatureManager(this);
 
         LOGGER.info("Registering Commands...");
         regCommands();
