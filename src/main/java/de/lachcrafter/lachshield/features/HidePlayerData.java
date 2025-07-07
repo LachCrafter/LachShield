@@ -24,7 +24,7 @@ public class HidePlayerData extends NewFeature {
     private boolean health;
 
     public HidePlayerData(ConfigManager configManager) {
-        super("HidePlayerData", PacketListenerPriority.HIGHEST, true);
+        super("HidePlayerData", PacketListenerPriority.HIGHEST, true, true);
         this.configManager = configManager;
     }
 
