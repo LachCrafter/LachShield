@@ -1,8 +1,8 @@
 package de.lachcrafter.lachshield.commands;
 
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.lib.Feature;
-import de.lachcrafter.lachshield.lib.FeatureManager;
+import de.lachcrafter.lachshield.lib.NewFeature;
+import de.lachcrafter.lachshield.lib.NewFeatureManager;
 import de.lachcrafter.lachshield.managers.ConfigManager;
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
@@ -19,12 +19,12 @@ public class LachShieldCommand implements BasicCommand {
 
     private final LachShield plugin;
     private final ConfigManager configManager;
-    private final FeatureManager featureManager;
+    private final NewFeatureManager featureManager;
 
     public LachShieldCommand(LachShield plugin) {
         this.plugin = plugin;
-        this.configManager = plugin.getConfigManager();
-        this.featureManager = plugin.getFeatureManager();
+        this.configManager = LachShield.configManager;
+        this.featureManager = LachShield.featureManager;
     }
 
     @Override
@@ -61,13 +61,13 @@ public class LachShieldCommand implements BasicCommand {
 
             if (args[1].equalsIgnoreCase("all")) {
                 plugin.getConfigManager().reloadConfig();
-                featureManager.getFeatureList().forEach(Feature::reload);
+                featureManager.getEnabledFeatures().forEach(featureManager::reloadFeature);
                 stack.getSender().sendMessage(Component.text("All features reloaded", NamedTextColor.GREEN));
                 return;
             }
 
-            Feature feature = featureManager.getFeatureList().stream()
-                    .filter(f -> f.getFeatureName().equalsIgnoreCase(args[1]))
+            NewFeature feature = featureManager.getRegisteredFeatures().stream()
+                    .filter(f -> f.getName().equalsIgnoreCase(args[1]))
                     .findFirst()
                     .orElse(null);
             if (feature == null) {
@@ -75,24 +75,20 @@ public class LachShieldCommand implements BasicCommand {
                 return;
             }
 
-            feature.reload();
-            stack.getSender().sendMessage(Component.text("Feature " + feature.getFeatureName() + " reloaded", NamedTextColor.GREEN));
+            feature.onReload();
+            stack.getSender().sendMessage(Component.text("Feature " + feature.getName() + " reloaded", NamedTextColor.GREEN));
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("enable")) {
-            Feature feature = featureManager.getFeatureList().stream()
-                    .filter(f -> f.getFeatureName().equalsIgnoreCase(args[1]))
-                    .findFirst()
-                    .orElse(null);
-
+            NewFeature feature = featureManager.getFeatureByName(args[1]);
 
             if (feature == null) {
                 stack.getSender().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
                 return;
             }
 
-            if (featureManager.enable(feature)) {
-                stack.getSender().sendMessage(Component.text("Feature enabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            if (featureManager.disableFeature(feature)) {
+                stack.getSender().sendMessage(Component.text("Feature enabled " + feature.getName(), NamedTextColor.GREEN));
             } else {
                 stack.getSender().sendMessage(Component.text("Feature is already enabled", NamedTextColor.RED));
             }
@@ -100,17 +96,14 @@ public class LachShieldCommand implements BasicCommand {
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("disable")) {
-            Feature feature = featureManager.getFeatureList().stream()
-                    .filter(f -> f.getFeatureName().equalsIgnoreCase(args[1]))
-                    .findFirst()
-                    .orElse(null);
+            NewFeature feature = featureManager.getFeatureByName(args[1]);
             if (feature == null) {
                 stack.getSender().sendMessage(Component.text("Feature not found", NamedTextColor.RED));
                 return;
             }
 
-            if (featureManager.disable(feature)) {
-                stack.getSender().sendMessage(Component.text("Feature disabled " + feature.getFeatureName(), NamedTextColor.GREEN));
+            if (featureManager.disableFeature(feature)) {
+                stack.getSender().sendMessage(Component.text("Feature disabled " + feature.getName(), NamedTextColor.GREEN));
             } else {
                 stack.getSender().sendMessage(Component.text("Feature is already disabled", NamedTextColor.RED));
             }
@@ -136,13 +129,13 @@ public class LachShieldCommand implements BasicCommand {
             TextComponent.Builder statusBuilder = Component.text()
                     .append(Component.text("Enabled modules (" + featureManager.getEnabledFeatures().size() + "):", NamedTextColor.GOLD)).appendNewline();
 
-            featureManager.getEnabledFeatures().forEach(feature -> statusBuilder.append(Component.text(feature.getFeatureName(), NamedTextColor.GREEN)).appendNewline());
+            featureManager.getEnabledFeatures().forEach(feature -> statusBuilder.append(Component.text(feature.getName(), NamedTextColor.GREEN)).appendNewline());
 
             statusBuilder.append(Component.text("Disabled modules (" + featureManager.getDisabledFeatures().size() + "):", NamedTextColor.GOLD)).appendNewline();
 
             for (int i = 0; i < featureManager.getDisabledFeatures().size(); i++) {
-                Feature currentFeature = featureManager.getDisabledFeatures().get(i);
-                statusBuilder.append(Component.text(currentFeature.getFeatureName(), NamedTextColor.RED));
+                NewFeature currentFeature = featureManager.getDisabledFeatures().get(i);
+                statusBuilder.append(Component.text(currentFeature.getName(), NamedTextColor.RED));
                 if (i + 1 != featureManager.getDisabledFeatures().size()) {
                     statusBuilder.appendNewline();
                 }
@@ -163,21 +156,21 @@ public class LachShieldCommand implements BasicCommand {
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
-            return Stream.concat(Stream.of("config", "all"), featureManager.getEnabledFeatures().stream().map(Feature::getFeatureName))
+            return Stream.concat(Stream.of("config", "all"), featureManager.getEnabledFeatures().stream().map(NewFeature::getName))
                     .filter(feature -> feature.startsWith(args[1]))
                     .toList();
         }
 
         if (args.length == 2 && (args[0].equalsIgnoreCase("enable"))) {
             return featureManager.getDisabledFeatures().stream()
-                    .map(Feature::getFeatureName)
+                    .map(NewFeature::getName)
                     .filter(feature -> feature.startsWith(args[1]))
                     .toList();
         }
 
         if (args.length == 2 && (args[0].equalsIgnoreCase("disable"))) {
             return featureManager.getEnabledFeatures().stream()
-                    .map(Feature::getFeatureName)
+                    .map(NewFeature::getName)
                     .filter(feature -> feature.startsWith(args[1]))
                     .toList();
         }
