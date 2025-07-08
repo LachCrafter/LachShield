@@ -20,7 +20,7 @@ public class FeatureManager {
 
     public FeatureManager(LachShield plugin) {
         this.plugin = plugin;
-        this.configManager = plugin.getConfigManager();
+        this.configManager = LachShield.configManager;
 
         this.allFeatures = new ArrayList<>();
         this.registeredFeatures = new ArrayList<>();

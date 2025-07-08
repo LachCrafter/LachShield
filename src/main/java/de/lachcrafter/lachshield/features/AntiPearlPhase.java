@@ -33,7 +33,7 @@ public class AntiPearlPhase extends Feature {
 
     private boolean isPlayerLookingDown(Player player) {
         Location location = player.getLocation();
-        double downPitch = plugin.getConfigManager().getConfig().getDouble("AntiPearlPhase.downPitch", 45.00D);
+        double downPitch = LachShield.configManager.getConfig().getDouble("AntiPearlPhase.downPitch", 45.00D);
         double pitch = location.getPitch();
         return (pitch > downPitch || pitch < -downPitch);
     }
