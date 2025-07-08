@@ -6,17 +6,10 @@ public abstract class Feature implements Listener {
 
     private final String name;
     private final boolean foliaCompatible;
-    private boolean packetListener = false;
 
     public Feature(String name, boolean foliaCompatible) {
         this.name = name;
         this.foliaCompatible = foliaCompatible;
-    }
-
-    public Feature(String name, boolean packetListener, boolean foliaCompatible) {
-        this.name = name;
-        this.foliaCompatible = foliaCompatible;
-        this.packetListener = packetListener;
     }
 
     /**
@@ -31,13 +24,6 @@ public abstract class Feature implements Listener {
      */
     public boolean isFoliaCompatible() {
         return foliaCompatible;
-    }
-
-    /**
-     * @return If the feature listens to packets.
-     */
-    public boolean isPacketListener() {
-        return packetListener;
     }
 
     public abstract void onEnable();

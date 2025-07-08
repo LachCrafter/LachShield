@@ -21,7 +21,7 @@ public class HidePlayerData extends Feature {
     PacketListener packetListener = new PacketListener();
 
     public HidePlayerData() {
-        super("HidePlayerData", true, true);
+        super("HidePlayerData", true);
     }
 
     @Override
