@@ -1,14 +1,13 @@
 package de.lachcrafter.lachshield.features;
 
 import com.github.retrooper.packetevents.PacketEvents;
-import com.github.retrooper.packetevents.event.PacketListenerPriority;
+import com.github.retrooper.packetevents.event.PacketListenerAbstract;
 import com.github.retrooper.packetevents.event.PacketSendEvent;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityData;
 import com.github.retrooper.packetevents.protocol.item.enchantment.Enchantment;
 import com.github.retrooper.packetevents.protocol.item.enchantment.type.EnchantmentTypes;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.wrapper.play.server.*;
-import de.lachcrafter.lachshield.managers.ConfigManager;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
@@ -16,16 +15,36 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class HidePlayerData extends Feature {
-    private final ConfigManager configManager;
-    private boolean stackSize;
-    private boolean durability;
-    private boolean health;
+import static de.lachcrafter.lachshield.LachShield.configManager;
 
-    public HidePlayerData(ConfigManager configManager) {
-        super("HidePlayerData", PacketListenerPriority.HIGHEST, true, true);
-        this.configManager = configManager;
+public class HidePlayerData extends Feature {
+    PacketListener packetListener = new PacketListener();
+
+    public HidePlayerData() {
+        super("HidePlayerData", true, true);
     }
+
+    @Override
+    public void onEnable() {
+        PacketEvents.getAPI().getEventManager().registerListener(packetListener);
+    }
+
+    @Override
+    public void onDisable() {
+        PacketEvents.getAPI().getEventManager().unregisterListener(packetListener);
+    }
+
+    @Override
+    public void onReload() {
+        packetListener.reload();
+    }
+}
+
+class PacketListener extends PacketListenerAbstract {
+
+    public boolean stackSize;
+    public boolean durability;
+    public boolean health;
 
     @Override
     public void onPacketSend(PacketSendEvent event) {
@@ -61,21 +80,11 @@ public class HidePlayerData extends Feature {
         }
     }
 
-    @Override
-    public void onEnable() {
-        PacketEvents.getAPI().getEventManager().registerListener(this);
-    }
-
-    @Override
-    public void onDisable() {
-        PacketEvents.getAPI().getEventManager().unregisterListener(this);
-    }
-
-    @Override
-    public void onReload() {
+    public void reload() {
         FileConfiguration config = configManager.getConfig();
         this.stackSize = config.getBoolean("HidePlayerData.data.stackSize", true);
         this.durability = config.getBoolean("HidePlayerData.data.durability", true);
         this.health = config.getBoolean("HidePlayerData.data.health", true);
     }
+
 }

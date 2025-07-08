@@ -1,7 +1,13 @@
 package de.lachcrafter.lachshield.managers;
 
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.features.*;
+import de.lachcrafter.lachshield.features.AntiAfk;
+import de.lachcrafter.lachshield.features.AntiNetherRoof;
+import de.lachcrafter.lachshield.features.AntiPearlPhase;
+import de.lachcrafter.lachshield.features.Feature;
+import de.lachcrafter.lachshield.features.HidePlayerData;
+import de.lachcrafter.lachshield.features.ChatFilter;
+import de.lachcrafter.lachshield.features.IPAccountManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +28,25 @@ public class FeatureManager {
         this.incompatibleFeatures = new ArrayList<>();
 
         // List all features here.
-        initFeatures(List.of(
+        List<Feature> features = new ArrayList<>(List.of(
 
                 new AntiAfk(plugin, configManager),
                 new AntiNetherRoof(plugin, configManager),
                 new AntiPearlPhase(plugin),
                 new ChatFilter(plugin),
-                new HidePlayerData(configManager),
                 new IPAccountManager(plugin, configManager)
 
         ));
+
+        // List PacketEvents-dependent features here.
+        if (plugin.getServer().getPluginManager().isPluginEnabled("packetevents")) {
+            features.add(new HidePlayerData());
+        } else {
+            LachShield.LOGGER.warn("PacketEvents has not been found and features that depend on PacketEvents will not be loaded.");
+        }
+
+        // Register the features listed.
+        initFeatures(features);
 
         // Load all features.
         loadFeatures();
@@ -44,45 +59,24 @@ public class FeatureManager {
     public void registerFeature(Feature feature) {
         if (!registeredFeatures.contains(feature) && !incompatibleFeatures.contains(feature)) {
             registeredFeatures.add(feature);
-        }
-    }
-
-
-    /**
-     * Adds a feature to a {@link List} of features that can't be used at the moment due to incompatibility or missing dependencies.
-     * @param feature the feature to add.
-     */
-    public void addIncompatibleFeature(Feature feature) {
-        if (!incompatibleFeatures.contains(feature)) {
-            incompatibleFeatures.add(feature);
+            LachShield.LOGGER.info("Feature enabled: {}", feature.getName());
         }
     }
 
     /**
      * Initializes all features defined.
-     * It also checks for dependencies and server software for each feature.
      * This should only be called once.
      */
     public void initFeatures(List<Feature> features) {
-        features.forEach(
-                feature -> {
+        features.forEach(feature -> {
 
-                    // Add all features to the allFeatures list.
-                    allFeatures.add(feature);
+            if (LachShield.isFolia() && !feature.isFoliaCompatible()) {
+                incompatibleFeatures.add(feature);
+                LachShield.LOGGER.warn("Feature {} not enabled due to Folia limitations.", feature.getName());
+            }
 
-                    // Check for Folia compatibility.
-                    if (LachShield.isFolia() && !feature.isFoliaCompatible()) {
-                        addIncompatibleFeature(feature);
-                    }
-
-                    // Check for PacketEvents dependency.
-                    if (!plugin.getServer().getPluginManager().isPluginEnabled("packetevents") && feature.isPacketListener()) {
-                        addIncompatibleFeature(feature);
-                    }
-
-                    registerFeature(feature);
-                }
-        );
+            registerFeature(feature);
+        });
     }
 
     /**
@@ -96,14 +90,6 @@ public class FeatureManager {
             }
 
         });
-    }
-
-    /**
-     * Get all features as a List
-     * @return all features in a list.
-     */
-    public List<Feature> getAllFeatures() {
-        return allFeatures;
     }
 
     /**

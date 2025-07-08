@@ -1,10 +1,8 @@
 package de.lachcrafter.lachshield.features;
 
-import com.github.retrooper.packetevents.event.PacketListenerAbstract;
-import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import org.bukkit.event.Listener;
 
-public abstract class Feature extends PacketListenerAbstract implements Listener {
+public abstract class Feature implements Listener {
 
     private final String name;
     private final boolean foliaCompatible;
@@ -15,8 +13,7 @@ public abstract class Feature extends PacketListenerAbstract implements Listener
         this.foliaCompatible = foliaCompatible;
     }
 
-    public Feature(String name, PacketListenerPriority priority, boolean packetListener, boolean foliaCompatible) {
-        super(priority);
+    public Feature(String name, boolean packetListener, boolean foliaCompatible) {
         this.name = name;
         this.foliaCompatible = foliaCompatible;
         this.packetListener = packetListener;
