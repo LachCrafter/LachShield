@@ -87,7 +87,7 @@ public class LachShieldCommand extends Command {
                 return;
             }
 
-            if (featureManager.disableFeature(feature)) {
+            if (featureManager.enableFeature(feature)) {
                 stack.getSender().sendMessage(Component.text("Feature enabled " + feature.getName(), NamedTextColor.GREEN));
             } else {
                 stack.getSender().sendMessage(Component.text("Feature is already enabled", NamedTextColor.RED));
