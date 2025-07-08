@@ -16,13 +16,13 @@ public class FeatureManager {
     private final LachShield plugin;
     private final ConfigManager configManager;
 
-    private final List<Feature> allFeatures, registeredFeatures, enabledFeatures, incompatibleFeatures;
+    private final List<Feature> disabledFeatures, registeredFeatures, enabledFeatures, incompatibleFeatures;
 
     public FeatureManager(LachShield plugin) {
         this.plugin = plugin;
         this.configManager = LachShield.configManager;
 
-        this.allFeatures = new ArrayList<>();
+        this.disabledFeatures = new ArrayList<>();
         this.registeredFeatures = new ArrayList<>();
         this.enabledFeatures = new ArrayList<>();
         this.incompatibleFeatures = new ArrayList<>();
@@ -59,7 +59,7 @@ public class FeatureManager {
     public void registerFeature(Feature feature) {
         if (!registeredFeatures.contains(feature) && !incompatibleFeatures.contains(feature)) {
             registeredFeatures.add(feature);
-            LachShield.LOGGER.info("Feature enabled: {}", feature.getName());
+            LachShield.LOGGER.info("Feature registered: {}", feature.getName());
         }
     }
 
@@ -69,12 +69,10 @@ public class FeatureManager {
      */
     public void initFeatures(List<Feature> features) {
         features.forEach(feature -> {
-
             if (LachShield.isFolia() && !feature.isFoliaCompatible()) {
                 incompatibleFeatures.add(feature);
                 LachShield.LOGGER.warn("Feature {} not enabled due to Folia limitations.", feature.getName());
             }
-
             registerFeature(feature);
         });
     }
@@ -84,9 +82,10 @@ public class FeatureManager {
      */
     public void loadFeatures() {
         registeredFeatures.forEach(feature -> {
-
             if (configManager.isFeatureEnabled(feature.getName())) {
                 enableFeature(feature);
+            } else {
+                disabledFeatures.add(feature);
             }
 
         });
@@ -105,9 +104,7 @@ public class FeatureManager {
      * @return all disabled features in a list.
      */
     public List<Feature> getDisabledFeatures() {
-        return allFeatures.stream()
-                .filter(newFeature -> !enabledFeatures.contains(newFeature))
-                .toList();
+        return disabledFeatures;
     }
 
     /**
@@ -144,6 +141,7 @@ public class FeatureManager {
         if (enabledFeatures.contains(feature)) {
             feature.onDisable();
             enabledFeatures.remove(feature);
+            disabledFeatures.add(feature);
             configManager.setFeatureEnabled(feature.getName(), false);
             return true;
         } else {
