@@ -4,7 +4,6 @@ import de.lachcrafter.lachshield.LachShield;
 import de.lachcrafter.lachshield.features.Feature;
 import de.lachcrafter.lachshield.managers.FeatureManager;
 import de.lachcrafter.lachshield.managers.ConfigManager;
-import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -15,13 +14,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class LachShieldCommand implements BasicCommand {
+public class LachShieldCommand extends Command {
 
     private final LachShield plugin;
     private final ConfigManager configManager;
     private final FeatureManager featureManager;
 
     public LachShieldCommand(LachShield plugin) {
+        super("lachshield");
         this.plugin = plugin;
         this.configManager = LachShield.configManager;
         this.featureManager = LachShield.featureManager;
@@ -54,13 +54,13 @@ public class LachShieldCommand implements BasicCommand {
 
         if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
             if (args[1].equalsIgnoreCase("config")) {
-                plugin.getConfigManager().reloadConfig();
+                configManager.reloadConfig();
                 stack.getSender().sendMessage(configManager.getMessage("messages.reloadSuccess"));
                 return;
             }
 
             if (args[1].equalsIgnoreCase("all")) {
-                plugin.getConfigManager().reloadConfig();
+                configManager.reloadConfig();
                 featureManager.getEnabledFeatures().forEach(featureManager::reloadFeature);
                 stack.getSender().sendMessage(Component.text("All features reloaded", NamedTextColor.GREEN));
                 return;
@@ -118,7 +118,7 @@ public class LachShieldCommand implements BasicCommand {
                     stack.getSender().sendMessage(Component.text("The ip limit should be 1 or more", NamedTextColor.RED));
                     return;
                 }
-                plugin.getConfigManager().setMaxAccountsPerIP(newLimit);
+                configManager.setMaxAccountsPerIP(newLimit);
                 stack.getSender().sendMessage(Component.text("IP limit has been set to " + newLimit, NamedTextColor.GREEN));
             } catch (NumberFormatException e) {
                 stack.getSender().sendMessage(Component.text("Invalid number format. Usage: /lachshield iplimit <number>", NamedTextColor.RED));

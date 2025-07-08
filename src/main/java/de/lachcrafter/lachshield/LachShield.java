@@ -1,20 +1,16 @@
 package de.lachcrafter.lachshield;
 
-import de.lachcrafter.lachshield.commands.LachShieldCommand;
+import de.lachcrafter.lachshield.managers.CommandManager;
 import de.lachcrafter.lachshield.managers.FeatureManager;
 import de.lachcrafter.lachshield.managers.ConfigManager;
-import io.papermc.paper.command.brigadier.Commands;
-import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
-import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 
 public class LachShield extends JavaPlugin {
     public static ConfigManager configManager;
     public static FeatureManager featureManager;
+    public static CommandManager commandManager;
     public static final Logger LOGGER = LogManager.getLogger("LachShield");
 
     @Override
@@ -27,7 +23,7 @@ public class LachShield extends JavaPlugin {
         featureManager = new FeatureManager(this);
 
         LOGGER.info("Registering Commands...");
-        regCommands();
+        commandManager = new CommandManager(this);
 
         LOGGER.info("LachShield successfully initialized.");
     }
@@ -37,22 +33,8 @@ public class LachShield extends JavaPlugin {
         LOGGER.info("LachShield successfully unloaded");
     }
 
-    // Register commands
-    public void regCommands() {
-        LifecycleEventManager<@NotNull Plugin> manager = this.getLifecycleManager();
-        manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
-            final Commands commands = event.registrar();
-            commands.register("lachshield", new LachShieldCommand(this));
-        });
-    }
-
-    public ConfigManager getConfigManager() {
-        return configManager;
-    }
-
     /**
      * Check if the server runs Folia
-     *
      * @return true if Folia and false if else.
      */
     public static boolean isFolia() {
