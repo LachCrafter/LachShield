@@ -19,7 +19,7 @@ public class ChatFilter extends Feature {
     @EventHandler
     public void onAsyncChat(AsyncChatEvent event) {
         for (String s : blacklist) {
-            if (event.message().toString().contains(s)) {
+            if (event.message().toString().toLowerCase().contains(s.toLowerCase())) {
                 event.setCancelled(true);
                 if (LachShield.configManager.getConfig().getBoolean("ChatFilter.warning.enabled")) {
                     event.getPlayer().sendMessage(LachShield.configManager.getMessage("ChatFilter.warning.message"));
