@@ -1,6 +1,6 @@
 # LachShield
 A customizable and lightweight Minecraft security-focused plugin.
-> **Note**: You can find the full documentation of LachShield on the [wiki](https://github.com/LachCrafter/LachShield/wiki).
+> **Note**: You can find the full documentation of LachShield on the [wiki](https://github.com/LachCrafter/LachShield/wiki/1.-Home).
 
 ## Features
 - **IPLimiter**: Limit the number of player accounts that can join from the same IP address. **Warning**: not supported on Folia at the moment.
