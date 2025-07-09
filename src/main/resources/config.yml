@@ -31,6 +31,9 @@ HidePlayerData:
     health: true
     stackSize: true
     durability: true
+    enchantments:
+      enabled: true
+      randomness: true
 
 # Players can't throw ender pearls in blocks to "phase" into them.
 AntiPearlPhase:

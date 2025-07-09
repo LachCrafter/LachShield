@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 import static de.lachcrafter.lachshield.LachShield.configManager;
 
@@ -43,6 +42,7 @@ class PacketListener extends PacketListenerAbstract {
     public boolean stackSize;
     public boolean durability;
     public boolean health;
+    public boolean enchantments;
 
     @Override
     public void onPacketSend(PacketSendEvent event) {
@@ -56,11 +56,11 @@ class PacketListener extends PacketListenerAbstract {
                 if (durability) {
                     eq.getItem().setDamageValue(0);
                 }
-                if (eq.getItem().isEnchanted()) {
+                if (enchantments && eq.getItem().isEnchanted()) {
                     eq.getItem().setEnchantments(new ArrayList<>(Collections.singletonList(
                             new Enchantment.Builder()
                                     .type(EnchantmentTypes.ALL_DAMAGE_PROTECTION)
-                                    .level(new Random().nextInt(1, 60))
+                                    .level(1)
                                     .build()
                     )));
                 }
@@ -81,6 +81,7 @@ class PacketListener extends PacketListenerAbstract {
         this.stackSize = config.getBoolean("HidePlayerData.data.stackSize", true);
         this.durability = config.getBoolean("HidePlayerData.data.durability", true);
         this.health = config.getBoolean("HidePlayerData.data.health", true);
+        this.enchantments = config.getBoolean("HidePlayerData.enchantments", true);
     }
 
 }
