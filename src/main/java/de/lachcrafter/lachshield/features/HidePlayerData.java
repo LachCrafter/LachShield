@@ -3,7 +3,6 @@ package de.lachcrafter.lachshield.features;
 import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.event.PacketListenerAbstract;
 import com.github.retrooper.packetevents.event.PacketSendEvent;
-import com.github.retrooper.packetevents.protocol.entity.data.EntityData;
 import com.github.retrooper.packetevents.protocol.item.enchantment.Enchantment;
 import com.github.retrooper.packetevents.protocol.item.enchantment.type.EnchantmentTypes;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
@@ -12,7 +11,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 import static de.lachcrafter.lachshield.LachShield.configManager;
@@ -72,11 +70,9 @@ class PacketListener extends PacketListenerAbstract {
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_METADATA) {
             WrapperPlayServerEntityMetadata em = new WrapperPlayServerEntityMetadata(event);
 
-            List<EntityData<?>> datas = new ArrayList<>();
             if (health) {
                 em.getEntityMetadata().removeIf(data -> data.getIndex() == 9);
             }
-            em.setEntityMetadata(datas);
         }
     }
 
