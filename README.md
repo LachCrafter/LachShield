@@ -22,7 +22,7 @@ There are some modules that cannot be implemented for Folia servers at the momen
 - AntiAFK
 - AntiPearlPhase
 
-These modules won't be loadedon a Folia server.
+These modules won't be loaded a Folia server.
 
 ## Configuration
 
