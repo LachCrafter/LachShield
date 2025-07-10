@@ -23,6 +23,9 @@ public class AntiPearlPhase extends Feature {
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
         Location to = event.getTo();
+
+        if (hasFeaturePermission(player)) return;
+
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.ENDER_PEARL && isPlayerLookingDown(player) &&
                 isDestinationSafe(player.getLocation(), to)) {
             event.setCancelled(true);

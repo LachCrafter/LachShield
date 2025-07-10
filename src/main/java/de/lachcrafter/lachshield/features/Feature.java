@@ -1,5 +1,6 @@
 package de.lachcrafter.lachshield.features;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 public abstract class Feature implements Listener {
@@ -24,6 +25,22 @@ public abstract class Feature implements Listener {
      */
     public boolean isFoliaCompatible() {
         return foliaCompatible;
+    }
+
+    /**
+     * @return the permission for this feature.
+     */
+    public String getPermission() {
+        return "lachshield." + name.toLowerCase();
+    }
+
+    /**
+     * Checks if the player has the bypass/use permission.
+     * @param player player object to check
+     * @return if the player has the permission
+     */
+    public boolean hasFeaturePermission(Player player) {
+        return player.hasPermission(getPermission()) && player.hasPermission("lachshield.admin");
     }
 
     public abstract void onEnable();

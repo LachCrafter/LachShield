@@ -31,7 +31,7 @@ public class AntiNetherRoof extends Feature {
         Player player = event.getPlayer();
         World world = player.getWorld();
 
-        if (player.hasPermission("lachshield.admin") || player.hasPermission("lachshield.AntiNetherRoof")) return;
+        if (hasFeaturePermission(player)) return;
 
         if (world.getEnvironment() == World.Environment.NETHER && player.getLocation().getY() >= 128) {
             if (isInCooldown(player)) {

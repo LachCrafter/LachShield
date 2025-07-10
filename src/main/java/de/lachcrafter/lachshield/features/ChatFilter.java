@@ -18,6 +18,8 @@ public class ChatFilter extends Feature {
 
     @EventHandler
     public void onAsyncChat(AsyncChatEvent event) {
+        if (hasFeaturePermission(event.getPlayer())) return;
+
         for (String s : blacklist) {
             if (event.message().toString().toLowerCase().contains(s.toLowerCase())) {
                 event.setCancelled(true);

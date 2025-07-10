@@ -33,13 +33,13 @@ public class AntiAfk extends Feature {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        if (player.hasPermission("lachshield.antiAfk") || player.hasPermission("lachshield.admin")) return;
+        if (hasFeaturePermission(player)) return;
         playerActivity.put(player.getUniqueId(), System.currentTimeMillis());
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        if (event.getPlayer().hasPermission("lachshield.bypassAfk") || event.getPlayer().hasPermission("lachshield.admin")) return;
+        if (hasFeaturePermission(event.getPlayer())) return;
         playerActivity.remove(event.getPlayer().getUniqueId());
     }
 
