@@ -37,12 +37,6 @@ java {
     }
 }
 
-tasks.named('compileJava') {
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava11Compatible()) {
-        options.release.set(targetJavaVersion)
-    }
-}
-
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
