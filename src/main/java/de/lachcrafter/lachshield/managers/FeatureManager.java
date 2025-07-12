@@ -82,12 +82,11 @@ public class FeatureManager {
      */
     public void loadFeatures() {
         registeredFeatures.forEach(feature -> {
-            if (configManager.isFeatureEnabled(feature.getName())) {
+            if (configManager.isFeatureEnabled(feature)) {
                 enableFeature(feature);
             } else {
                 disabledFeatures.add(feature);
             }
-
         });
     }
 
@@ -123,7 +122,7 @@ public class FeatureManager {
     public boolean enableFeature(Feature feature) {
         if (!enabledFeatures.contains(feature)) {
             enabledFeatures.add(feature);
-            configManager.setFeatureEnabled(feature.getName(), true);
+            configManager.setFeatureEnabled(feature, true);
             feature.onEnable();
             feature.onReload();
             return true;
@@ -142,7 +141,7 @@ public class FeatureManager {
             feature.onDisable();
             enabledFeatures.remove(feature);
             disabledFeatures.add(feature);
-            configManager.setFeatureEnabled(feature.getName(), false);
+            configManager.setFeatureEnabled(feature, false);
             return true;
         } else {
             return false;

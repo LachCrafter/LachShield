@@ -65,8 +65,8 @@ public class ConfigManager {
         return config.getStringList(path);
     }
 
-    public boolean isFeatureEnabled(String feature) {
-        return config.getBoolean(feature + ".enabled", true);
+    public boolean isFeatureEnabled(Feature feature) {
+        return config.getBoolean(feature.getName() + ".enabled", true);
     }
 
     public void setFeatureEnabled(String feature, boolean enabled) {
