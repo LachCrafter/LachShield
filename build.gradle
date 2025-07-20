@@ -5,6 +5,7 @@ plugins {
 
 group = project.group
 version = project.version
+minecraft_version = project.minecraft_version
 
 repositories {
     mavenCentral()
@@ -23,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:${minecraft_version}-R0.1-SNAPSHOT")
     compileOnly 'com.github.retrooper:packetevents-spigot:2.9.3'
 }
 
@@ -58,6 +59,6 @@ jar {
 }
 
 runServer {
-    minecraftVersion("1.21.4")
+    minecraftVersion(minecraft_version)
     jvmArgs("-DPaper.IgnoreJavaVersion=true", "-Dcom.mojang.eula.agree=true")
 }
