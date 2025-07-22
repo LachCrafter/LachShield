@@ -69,6 +69,7 @@ public class AntiNetherRoof extends Feature {
         Location location = event.getLocation();
         Entity entity = event.getEntity();
         World world = location.getWorld();
+
         if (world.getEnvironment() == World.Environment.NETHER && location.getBlockY() >= 126 && entity instanceof EnderPearl) {
             event.setCancelled(true);
         }
@@ -79,7 +80,7 @@ public class AntiNetherRoof extends Feature {
         Location location = event.getBlock().getLocation();
         World world = location.getWorld();
 
-        if (world.getEnvironment() == World.Environment.NETHER && location.getBlockY() >= 128) {
+        if (world.getEnvironment() == World.Environment.NETHER && location.getBlockY() >= 128 && hasFeaturePermission(event.getPlayer())) {
             event.setCancelled(true);
         }
     }
