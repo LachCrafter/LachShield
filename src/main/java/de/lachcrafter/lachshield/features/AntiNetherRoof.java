@@ -4,12 +4,17 @@ import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.event.vehicle.VehicleCreateEvent;
+
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
@@ -55,6 +60,37 @@ public class AntiNetherRoof extends Feature {
             }
 
             player.teleportAsync(Objects.requireNonNullElseGet(safeLocation, () -> new Location(world, player.getLocation().getX(), 124, player.getLocation().getZ())));
+        }
+    }
+
+    @EventHandler
+    public void onEntitySpawn(EntitySpawnEvent event) {
+        Location location = event.getLocation();
+        Entity entity = event.getEntity();
+        World world = location.getWorld();
+
+        if (world.getEnvironment() == World.Environment.NETHER && location.getBlockY() >= 128 && !(entity instanceof Player)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+        Location location = event.getBlock().getLocation();
+        World world = location.getWorld();
+
+        if (world.getEnvironment() == World.Environment.NETHER && location.getBlockY() >= 128) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onVehicleCreate(VehicleCreateEvent event) {
+        Location location = event.getVehicle().getLocation();
+        World world = location.getWorld();
+
+        if (world.getEnvironment() == World.Environment.NETHER && location.getBlockY() >= 128) {
+            event.setCancelled(true);
         }
     }
 
