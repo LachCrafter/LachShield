@@ -4,6 +4,7 @@ import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
 import org.bukkit.World;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -68,8 +69,7 @@ public class AntiNetherRoof extends Feature {
         Location location = event.getLocation();
         Entity entity = event.getEntity();
         World world = location.getWorld();
-
-        if (world.getEnvironment() == World.Environment.NETHER && location.getBlockY() >= 128 && !(entity instanceof Player)) {
+        if (world.getEnvironment() == World.Environment.NETHER && location.getBlockY() >= 126 && entity instanceof EnderPearl) {
             event.setCancelled(true);
         }
     }
