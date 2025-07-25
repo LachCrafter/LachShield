@@ -131,7 +131,11 @@ public class LachShieldCommand extends Command {
 
             featureManager.getEnabledFeatures().forEach(feature -> statusBuilder.append(Component.text(feature.getName(), NamedTextColor.GREEN)).appendNewline());
 
-            statusBuilder.append(Component.text("Disabled modules (" + featureManager.getDisabledFeatures().size() + "):", NamedTextColor.GOLD)).appendNewline();
+            statusBuilder.append(Component.text("Disabled modules (" + featureManager.getDisabledFeatures().size() + "):", NamedTextColor.GOLD));
+
+            if (!featureManager.getDisabledFeatures().isEmpty()) {
+                statusBuilder.appendNewline();
+            }
 
             for (int i = 0; i < featureManager.getDisabledFeatures().size(); i++) {
                 Feature currentFeature = featureManager.getDisabledFeatures().get(i);
