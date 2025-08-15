@@ -40,7 +40,7 @@ public abstract class Feature implements Listener {
      * @return if the player has the permission
      */
     public boolean hasFeaturePermission(Player player) {
-        return player.hasPermission(getPermission()) && player.hasPermission("lachshield.admin");
+        return player.hasPermission(getPermission()) || player.hasPermission("lachshield.admin");
     }
 
     public abstract void onEnable();
