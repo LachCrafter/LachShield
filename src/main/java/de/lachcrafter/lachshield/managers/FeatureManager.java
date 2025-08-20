@@ -1,13 +1,7 @@
 package de.lachcrafter.lachshield.managers;
 
 import de.lachcrafter.lachshield.LachShield;
-import de.lachcrafter.lachshield.features.AntiAfk;
-import de.lachcrafter.lachshield.features.AntiNetherRoof;
-import de.lachcrafter.lachshield.features.AntiPearlPhase;
-import de.lachcrafter.lachshield.features.Feature;
-import de.lachcrafter.lachshield.features.HidePlayerData;
-import de.lachcrafter.lachshield.features.ChatFilter;
-import de.lachcrafter.lachshield.features.IPAccountManager;
+import de.lachcrafter.lachshield.features.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +28,8 @@ public class FeatureManager {
                 new AntiNetherRoof(plugin, configManager),
                 new AntiPearlPhase(plugin),
                 new ChatFilter(plugin),
-                new IPAccountManager(plugin, configManager)
+                new IPAccountManager(plugin, configManager),
+                new CommandLimiter(plugin)
 
         ));
 

@@ -47,3 +47,14 @@ ChatFilter:
   blacklist: # Insert blacklisted words here.
     - "test"
     - "test1"
+
+# Prevent spamming of specific commands or sub-commands.
+CommandLimiter:
+  enabled: true
+  cooldown: 100 # define the cooldown in ticks
+  warning: "<red>Hey, stop spamming please." # Make the string blank to disable warning messages.
+
+  # List top-level and sub commands here.
+  commands:
+    - "pl" # Top-level and sub commands.
+    - "help 2" # only the "2" sub-command of the help command.
