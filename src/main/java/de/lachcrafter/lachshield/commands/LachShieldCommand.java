@@ -44,6 +44,8 @@ public class LachShieldCommand extends Command {
                     .appendNewline()
                     .append(Component.text("- /lachshield disable <feature> - disables a specific feature"))
                     .appendNewline()
+                    .append(Component.text("- /lachshield status - lists all enabled and disabled features"))
+                    .appendNewline()
                     .append(Component.text("- /lachshield iplimit <number> - sets the player ip limit"))
                     .color(NamedTextColor.DARK_GREEN)
                     .build();
