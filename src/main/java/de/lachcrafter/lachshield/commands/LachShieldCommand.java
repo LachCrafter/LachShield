@@ -40,11 +40,11 @@ public class LachShieldCommand extends Command {
                     .appendNewline()
                     .append(Component.text("- /lachshield reload <config|all|feature> - reloads a specific component or everything"))
                     .appendNewline()
-                    .append(Component.text("- /lachshield enable <feature> - reloads a specific feature"))
+                    .append(Component.text("- /lachshield enable <feature> - enables a specific feature"))
                     .appendNewline()
                     .append(Component.text("- /lachshield disable <feature> - disables a specific feature"))
                     .appendNewline()
-                    .append(Component.text("- /lachshield iplimit <number> - set the player ip limit"))
+                    .append(Component.text("- /lachshield iplimit <number> - sets the player ip limit"))
                     .color(NamedTextColor.DARK_GREEN)
                     .build();
 
