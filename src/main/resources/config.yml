@@ -58,3 +58,11 @@ CommandLimiter:
   commands:
     - "pl" # Top-level and sub commands.
     - "help 2" # only the "2" sub-command of the help command.
+
+# Prevent the placement of certain blocks and or remove them.
+AntiIllegals:
+  list:
+    - COMMAND_BLOCK
+
+  list-as-whitelist: false
+  remove-from-inventory: true
