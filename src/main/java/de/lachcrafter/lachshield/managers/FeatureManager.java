@@ -26,10 +26,10 @@ public class FeatureManager {
 
                 new AntiAfk(plugin, configManager),
                 new AntiNetherRoof(plugin, configManager),
-                new AntiPearlPhase(plugin),
                 new ChatFilter(plugin),
                 new IPAccountManager(plugin, configManager),
-                new CommandLimiter(plugin)
+                new CommandLimiter(plugin),
+                new AntiPearlPhase(plugin)
 
         ));
 

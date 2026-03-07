@@ -1,58 +1,65 @@
 package de.lachcrafter.lachshield.features;
 
+import com.destroystokyo.paper.event.player.PlayerLaunchProjectileEvent;
 import de.lachcrafter.lachshield.LachShield;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 public class AntiPearlPhase extends Feature {
-
     private final LachShield plugin;
+    private final List<Material> whitelist = List.of(Material.WATER, Material.SHORT_DRY_GRASS, Material.AIR, Material.TALL_GRASS, Material.SHORT_GRASS, Material.TALL_DRY_GRASS, Material.SEAGRASS, Material.TALL_SEAGRASS);
 
     public AntiPearlPhase(LachShield plugin) {
-        super("AntiPearlPhase", false);
+        super("AntiPearlPhase", true);
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerTeleport(PlayerTeleportEvent event) {
-        Player player = event.getPlayer();
-        Location to = event.getTo();
+    public void onPlayerItemInteract(PlayerLaunchProjectileEvent event) {
+        var player = event.getPlayer();
+        var projectile = event.getProjectile();
+        var targetDistanceLimit = plugin.getConfig().getInt("AntiPearlPhaseRewrite.targetDistance", 3);
+        var downPitchLimit = plugin.getConfig().getDouble("AntiPearlPhaseRewrite.downPitch", 45.00);
 
-        if (hasFeaturePermission(player)) return;
+        if (projectile.getType() == EntityType.ENDER_PEARL
+                && player.getTargetBlockExact(targetDistanceLimit) != null
+                && player.getPitch() >= downPitchLimit
+                && isPlayerLocationSurrounded(player.getLocation())
+        ) {
 
-        if (event.getCause() == PlayerTeleportEvent.TeleportCause.ENDER_PEARL && isPlayerLookingDown(player) &&
-                isDestinationSafe(player.getLocation(), to)) {
             event.setCancelled(true);
-            ItemStack enderPearl = new ItemStack(Material.ENDER_PEARL, 1);
-            player.getInventory().addItem(enderPearl);
         }
     }
 
-    private boolean isPlayerLookingDown(Player player) {
-        Location location = player.getLocation();
-        double downPitch = LachShield.configManager.getConfig().getDouble("AntiPearlPhase.downPitch", 45.00D);
-        double pitch = location.getPitch();
-        return (pitch > downPitch || pitch < -downPitch);
-    }
+    private boolean isPlayerLocationSurrounded(Location playerLocation) {
 
-    private boolean isDestinationSafe(Location from, Location to) {
-        double distance = from.distance(to);
-        if (distance > 1.0D)
-            return false;
-        for (BlockFace face : BlockFace.values()) {
-            if (face != BlockFace.DOWN && face != BlockFace.UP) {
-                Location adjacent = to.clone().add(face.getModX(), 0.0D, face.getModZ());
-                if (adjacent.getBlock().getType() != Material.AIR)
-                    return true;
+        for (Location checkLocation : getCheckLocations(playerLocation)) {
+            if (!whitelist.contains(checkLocation.getBlock().getType())) {
+
+                return true;
             }
         }
+
         return false;
+    }
+
+    private List<Location> getCheckLocations(Location playerLocation) {
+        var playerWorld = playerLocation.getWorld();
+        var playerX = playerLocation.getX();
+        var playerY = playerLocation.getY();
+        var playerZ = playerLocation.getZ();
+
+        return List.of(
+                new Location(playerWorld, playerX + 1, playerY, playerZ),   // positive X
+                new Location(playerWorld, playerX - 1, playerY, playerZ),   // negative X
+                new Location(playerWorld, playerX, playerY, playerZ + 1),   // positive Z
+                new Location(playerWorld, playerX, playerY, playerZ - 1)    // negative Z
+        );
     }
 
     @Override
@@ -66,5 +73,7 @@ public class AntiPearlPhase extends Feature {
     }
 
     @Override
-    public void onReload() {}
+    public void onReload() {
+
+    }
 }

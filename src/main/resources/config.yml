@@ -33,11 +33,6 @@ HidePlayerData:
     durability: true
     enchantments: true
 
-# Players can't throw ender pearls in blocks to "phase" into them.
-AntiPearlPhase:
-  enabled: false
-  downPitch: 45.00
-
 # Filter certain words/elements out in chat.
 ChatFilter:
   enabled: false
@@ -58,3 +53,9 @@ CommandLimiter:
   commands:
     - "pl" # Top-level and sub commands.
     - "help 2" # only the "2" sub-command of the help command.
+
+# Prevent players bugging into blocks using ender-pearls
+AntiPearlPhaseRewrite:
+  enabled: true
+  downPitch: 45.00
+  targetDistance: 2
