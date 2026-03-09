@@ -53,7 +53,7 @@ public class ConfigManager {
         return config.getBoolean(feature.getName() + ".enabled", true);
     }
 
-    public void setFeatureEnabled(String feature, boolean enabled) {
+    public void setFeatureState(String feature, boolean enabled) {
         config.set(feature + ".enabled", enabled);
         plugin.saveConfig();
     }

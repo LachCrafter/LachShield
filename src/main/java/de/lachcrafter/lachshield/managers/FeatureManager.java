@@ -117,7 +117,7 @@ public class FeatureManager {
     public boolean enableFeature(Feature feature) {
         if (!enabledFeatures.contains(feature)) {
             enabledFeatures.add(feature);
-            configManager.setFeatureEnabled(feature.getName(), true);
+            configManager.setFeatureState(feature.getName(), true);
             feature.onEnable();
             feature.onReload();
             return true;
@@ -136,7 +136,7 @@ public class FeatureManager {
             feature.onDisable();
             enabledFeatures.remove(feature);
             disabledFeatures.add(feature);
-            configManager.setFeatureEnabled(feature.getName(), false);
+            configManager.setFeatureState(feature.getName(), false);
             return true;
         } else {
             return false;
