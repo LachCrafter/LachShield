@@ -120,7 +120,8 @@ public class LachShieldCommand extends Command {
                     stack.getSender().sendMessage(Component.text("The ip limit should be 1 or more", NamedTextColor.RED));
                     return;
                 }
-                configManager.setMaxAccountsPerIP(newLimit);
+                plugin.getConfig().set("IPLimiter.maxAccountsPerIp", newLimit);
+                plugin.saveConfig();
                 stack.getSender().sendMessage(Component.text("IP limit has been set to " + newLimit, NamedTextColor.GREEN));
             } catch (NumberFormatException e) {
                 stack.getSender().sendMessage(Component.text("Invalid number format. Usage: /lachshield iplimit <number>", NamedTextColor.RED));

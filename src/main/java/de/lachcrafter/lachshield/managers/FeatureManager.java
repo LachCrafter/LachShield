@@ -24,10 +24,10 @@ public class FeatureManager {
         // List all features here.
         List<Feature> features = new ArrayList<>(List.of(
 
-                new AntiAfk(plugin, configManager),
-                new AntiNetherRoof(plugin, configManager),
+                new AntiAfk(plugin),
+                new AntiNetherRoof(plugin),
                 new ChatFilter(plugin),
-                new IPAccountManager(plugin, configManager),
+                new IPAccountManager(plugin),
                 new CommandLimiter(plugin),
                 new AntiPearlPhase(plugin)
 
@@ -117,7 +117,7 @@ public class FeatureManager {
     public boolean enableFeature(Feature feature) {
         if (!enabledFeatures.contains(feature)) {
             enabledFeatures.add(feature);
-            configManager.setFeatureEnabled(feature, true);
+            configManager.setFeatureEnabled(feature.getName(), true);
             feature.onEnable();
             feature.onReload();
             return true;
@@ -136,7 +136,7 @@ public class FeatureManager {
             feature.onDisable();
             enabledFeatures.remove(feature);
             disabledFeatures.add(feature);
-            configManager.setFeatureEnabled(feature, false);
+            configManager.setFeatureEnabled(feature.getName(), false);
             return true;
         } else {
             return false;

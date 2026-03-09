@@ -1,6 +1,5 @@
 package de.lachcrafter.lachshield.features;
 
-import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -17,17 +16,15 @@ import java.util.UUID;
 
 public class AntiAfk extends Feature {
     private final LachShield plugin;
-    private final ConfigManager configManager;
     private final HashMap<UUID, Long> playerActivity = new HashMap<>();
     private long afkTimeoutMinutes;
     private Component kickMessage;
 
     private int taskId = -1;
 
-    public AntiAfk(LachShield plugin, ConfigManager configManager) {
+    public AntiAfk(LachShield plugin) {
         super("AntiAFK", false);
         this.plugin = plugin;
-        this.configManager = configManager;
     }
 
     @EventHandler
@@ -83,7 +80,7 @@ public class AntiAfk extends Feature {
 
     @Override
     public void onReload() {
-        afkTimeoutMinutes = configManager.getAfkTimeoutMinutes() * 60 * 1000;
-        kickMessage = configManager.getMessage("AntiAFK.kickMessage");
+        afkTimeoutMinutes = (long) plugin.getConfig().getInt("AntiAFK.timeoutMinutes", 15) * 60 * 1000;
+        kickMessage = LachShield.configManager.getMessage("AntiAFK.kickMessage");
     }
 }

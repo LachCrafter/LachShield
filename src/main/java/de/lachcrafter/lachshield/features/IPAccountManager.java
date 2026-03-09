@@ -1,6 +1,5 @@
 package de.lachcrafter.lachshield.features;
 
-import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
@@ -15,14 +14,12 @@ import java.util.Objects;
 
 public class IPAccountManager extends Feature {
     private final LachShield plugin;
-    private final ConfigManager configManager;
     private final Map<String, Integer> ipAccountCount = new HashMap<>();
     private int maxAccountsPerIP;
 
-    public IPAccountManager(LachShield plugin, ConfigManager configManager) {
+    public IPAccountManager(LachShield plugin) {
         super("IPLimiter", true);
         this.plugin = plugin;
-        this.configManager = configManager;
     }
 
     @EventHandler
@@ -31,7 +28,7 @@ public class IPAccountManager extends Feature {
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
 
         if (accountCount >= maxAccountsPerIP) {
-            Component kickComponent = configManager.getMessage("IPLimiter.kickMessage");
+            Component kickComponent = LachShield.configManager.getMessage("IPLimiter.kickMessage");
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, kickComponent);
             return;
         }
@@ -65,6 +62,6 @@ public class IPAccountManager extends Feature {
 
     @Override
     public void onReload() {
-        maxAccountsPerIP = configManager.getMaxAccountsPerIP();
+        maxAccountsPerIP = plugin.getConfig().getInt("IPLimiter.maxAccountsPerIp", 3);
     }
 }

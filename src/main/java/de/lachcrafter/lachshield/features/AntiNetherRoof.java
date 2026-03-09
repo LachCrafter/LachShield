@@ -1,6 +1,5 @@
 package de.lachcrafter.lachshield.features;
 
-import de.lachcrafter.lachshield.managers.ConfigManager;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
 import org.bukkit.World;
@@ -22,14 +21,12 @@ import java.util.UUID;
 
 public class AntiNetherRoof extends Feature {
     private final LachShield plugin;
-    private final ConfigManager configManager;
     private final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private Component antiNetherRoofWarningMessage;
 
-    public AntiNetherRoof(LachShield plugin, ConfigManager configManager) {
+    public AntiNetherRoof(LachShield plugin) {
         super("AntiNetherRoof", true);
         this.plugin = plugin;
-        this.configManager = configManager;
     }
 
     @EventHandler
@@ -148,6 +145,6 @@ public class AntiNetherRoof extends Feature {
 
     @Override
     public void onReload() {
-        antiNetherRoofWarningMessage = configManager.getMessage("AntiNetherRoof.warnMessage");
+        antiNetherRoofWarningMessage = LachShield.configManager.getMessage("AntiNetherRoof.warnMessage");
     }
 }

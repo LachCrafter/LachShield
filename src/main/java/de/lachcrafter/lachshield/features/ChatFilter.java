@@ -8,7 +8,7 @@ import org.bukkit.event.HandlerList;
 import java.util.List;
 
 public class ChatFilter extends Feature {
-    private final List<String> blacklist = LachShield.configManager.getStringList("ChatFilter.blacklist");
+    private final List<String> blacklist = LachShield.configManager.getConfig().getStringList("ChatFilter.blacklist");
     private final LachShield lachShield;
 
     public ChatFilter(LachShield lachShield) {
