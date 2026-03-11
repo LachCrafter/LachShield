@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'xyz.jpenilla.run-paper' version '2.3.1'
+    id 'xyz.jpenilla.run-paper' version "${run_paper}"
 }
 
 group = project.group
@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:${minecraft_version}-R0.1-SNAPSHOT")
-    compileOnly 'com.github.retrooper:packetevents-spigot:2.9.3'
+    compileOnly("com.github.retrooper:packetevents-spigot:${packetevents}")
 }
 
 def targetJavaVersion = 21
