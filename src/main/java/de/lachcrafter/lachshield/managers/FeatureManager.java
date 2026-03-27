@@ -7,13 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FeatureManager {
-    private final LachShield plugin;
     private final ConfigManager configManager;
 
     private final List<Feature> disabledFeatures, registeredFeatures, enabledFeatures, incompatibleFeatures;
 
     public FeatureManager(LachShield plugin) {
-        this.plugin = plugin;
         this.configManager = LachShield.configManager;
 
         this.disabledFeatures = new ArrayList<>();
