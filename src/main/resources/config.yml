@@ -24,14 +24,16 @@ AntiAFK:
   timeoutMinutes: 15
   kickMessage: "<red>You have been disconnected for AFK."
 
-# Hide player data that can bee seen through hacks or mods.
+# Prevent players from using hacks to see player data.
 HidePlayerData:
   enabled: false
   data:
     health: true
-    stackSize: true
-    durability: true
     enchantments: true
+    durability: true
+    stackSize: true
+    ping: true
+    gameMode: true
 
 # Filter certain words/elements out in chat.
 ChatFilter:
