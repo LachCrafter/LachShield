@@ -8,7 +8,9 @@ import com.github.retrooper.packetevents.protocol.item.enchantment.Enchantment;
 import com.github.retrooper.packetevents.protocol.item.enchantment.type.EnchantmentTypes;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.player.GameMode;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEntityEquipment;
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEntityMetadata;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerPlayerInfoUpdate;
 import de.lachcrafter.lachshield.LachShield;
 import org.jspecify.annotations.NonNull;
 
@@ -51,45 +53,42 @@ class PlayerDataListener extends PacketListenerAbstract {
     @Override
     public void onPacketSend(@NonNull PacketSendEvent event) {
 
-        if (event.getPacketType() == PacketType.Play.Server.ENTITY_METADATA) {
-            WrapperPlayServerEntityMetadata packet = new WrapperPlayServerEntityMetadata(event);
-
-            if (HidePlayerData.hideDurability) {
-                var playerItemStack = packet.readItemStack();
-
-                playerItemStack.setDamageValue(1);
-                packet.writeItemStack(playerItemStack);
-            }
-
-            if (HidePlayerData.hideEnchantments) {
-                var playerItemStack = packet.readItemStack();
-
-                if (playerItemStack.isEnchanted()) {
-                    playerItemStack.setEnchantments(List.of(Enchantment.builder()
-                            .type(EnchantmentTypes.ALL_DAMAGE_PROTECTION)
-                            .level(1)
-                            .build()));
-
-                    packet.writeItemStack(playerItemStack);
-                }
-            }
-
-            if (HidePlayerData.hideStackSize) {
-                var playerItemStack = packet.readItemStack();
-
-                playerItemStack.setAmount(1);
-                packet.writeItemStack(playerItemStack);
-            }
+        if (event.getPacketType() == PacketType.Play.Server.PLAYER_INFO_UPDATE) {
+            WrapperPlayServerPlayerInfoUpdate packet = new WrapperPlayServerPlayerInfoUpdate(event);
 
             if (HidePlayerData.hideGameMode) {
-                packet.writeGameMode(GameMode.ADVENTURE);
+                packet.getEntries().forEach(playerInfo -> playerInfo.setGameMode(GameMode.ADVENTURE));
             }
+        }
 
-            if (HidePlayerData.hideHealth) {
-                packet.getEntityMetadata().removeIf(entityData -> entityData.getIndex() == 9);
-            }
+        if (event.getPacketType() == PacketType.Play.Server.ENTITY_EQUIPMENT) {
+            WrapperPlayServerEntityEquipment packet = new WrapperPlayServerEntityEquipment(event);
 
-            event.markForReEncode(true);
+            packet.getEquipment().forEach(equipment -> {
+                var itemStack = equipment.getItem();
+
+                if (HidePlayerData.hideStackSize) {
+                    itemStack.setAmount(1);
+                }
+
+                if (HidePlayerData.hideEnchantments && itemStack.isEnchanted()) {
+                    itemStack.setEnchantments(List.of(
+                            Enchantment.builder()
+                                .type(EnchantmentTypes.ALL_DAMAGE_PROTECTION)
+                                .level(1)
+                                .build()));
+                }
+
+                if (HidePlayerData.hideDurability) {
+                    itemStack.setDamageValue(0);
+                }
+            });
+        }
+
+        if (HidePlayerData.hideHealth && event.getPacketType() == PacketType.Play.Server.ENTITY_METADATA) {
+            WrapperPlayServerEntityMetadata packet = new WrapperPlayServerEntityMetadata(event);
+
+            packet.getEntityMetadata().removeIf(entityData -> entityData.getIndex() == 9);
         }
     }
 
