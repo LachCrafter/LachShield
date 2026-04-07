@@ -91,8 +91,10 @@ class PlayerDataListener extends PacketListenerAbstract {
                 List<EntityData<?>> entityDataList = new ArrayList<>();
 
                 for (EntityData<?> data : packet.getEntityMetadata()) {
+                    if (data.getIndex() == 9) {
+                        break;
+                    }
 
-                    if (data.getIndex() == 9) break;
                     entityDataList.add(data);
                 }
                 packet.setEntityMetadata(entityDataList);
