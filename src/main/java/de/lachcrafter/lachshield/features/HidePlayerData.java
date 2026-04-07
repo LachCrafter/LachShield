@@ -19,7 +19,7 @@ import java.util.List;
 public class HidePlayerData extends Feature {
     private final EventManager eventManager = PacketEvents.getAPI().getEventManager();
     private final PlayerDataListener playerDataListener;
-    protected static boolean hideHealth, hideEnchantments, hideDurability, hideStackSize, hideGameMode;
+    protected static boolean hideHealth, hideEnchantments, hideDurability, hideStackSize, hideGameMode, hidePing;
 
     public HidePlayerData() {
         super("HidePlayerData", true);
@@ -56,9 +56,15 @@ class PlayerDataListener extends PacketListenerAbstract {
         if (event.getPacketType() == PacketType.Play.Server.PLAYER_INFO_UPDATE) {
             WrapperPlayServerPlayerInfoUpdate packet = new WrapperPlayServerPlayerInfoUpdate(event);
 
-            if (HidePlayerData.hideGameMode) {
-                packet.getEntries().forEach(playerInfo -> playerInfo.setGameMode(GameMode.ADVENTURE));
-            }
+            packet.getEntries().forEach(playerInfo -> {
+                if (HidePlayerData.hideGameMode) {
+                    playerInfo.setGameMode(GameMode.ADVENTURE);
+                }
+
+                if (HidePlayerData.hidePing) {
+                    playerInfo.setLatency(0);
+                }
+            });
         }
 
         if (event.getPacketType() == PacketType.Play.Server.ENTITY_EQUIPMENT) {
