@@ -4,7 +4,6 @@ import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.event.EventManager;
 import com.github.retrooper.packetevents.event.PacketListenerAbstract;
 import com.github.retrooper.packetevents.event.PacketSendEvent;
-import com.github.retrooper.packetevents.protocol.entity.data.EntityData;
 import com.github.retrooper.packetevents.protocol.item.enchantment.Enchantment;
 import com.github.retrooper.packetevents.protocol.item.enchantment.type.EnchantmentTypes;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
@@ -13,7 +12,6 @@ import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEn
 import de.lachcrafter.lachshield.LachShield;
 import org.jspecify.annotations.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HidePlayerData extends Feature {
@@ -88,16 +86,7 @@ class PlayerDataListener extends PacketListenerAbstract {
             }
 
             if (HidePlayerData.hideHealth) {
-                List<EntityData<?>> entityDataList = new ArrayList<>();
-
-                for (EntityData<?> data : packet.getEntityMetadata()) {
-                    if (data.getIndex() == 9) {
-                        break;
-                    }
-
-                    entityDataList.add(data);
-                }
-                packet.setEntityMetadata(entityDataList);
+                packet.getEntityMetadata().removeIf(entityData -> entityData.getIndex() == 9);
             }
 
             event.markForReEncode(true);
