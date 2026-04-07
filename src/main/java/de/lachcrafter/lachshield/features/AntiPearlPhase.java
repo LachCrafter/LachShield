@@ -23,8 +23,8 @@ public class AntiPearlPhase extends Feature {
     public void onPlayerItemInteract(PlayerLaunchProjectileEvent event) {
         var player = event.getPlayer();
         var projectile = event.getProjectile();
-        var targetDistanceLimit = plugin.getConfig().getInt("AntiPearlPhaseRewrite.targetDistance", 3);
-        var downPitchLimit = plugin.getConfig().getDouble("AntiPearlPhaseRewrite.downPitch", 45.00);
+        var targetDistanceLimit = plugin.getConfig().getInt("AntiPearlPhase.targetDistance", 3);
+        var downPitchLimit = plugin.getConfig().getDouble("AntiPearlPhase.downPitch", 45.00);
 
         if (projectile.getType() == EntityType.ENDER_PEARL
                 && player.getTargetBlockExact(targetDistanceLimit) != null

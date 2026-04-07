@@ -57,7 +57,7 @@ CommandLimiter:
     - "help 2" # only the "2" sub-command of the help command.
 
 # Prevent players bugging into blocks using ender-pearls
-AntiPearlPhaseRewrite:
+AntiPearlPhase:
   enabled: true
   downPitch: 45.00
   targetDistance: 2
