@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class IPAccountManager extends Feature {
+public class IPLimiter extends Feature {
     private final LachShield plugin;
     private final Map<String, Integer> ipAccountCount = new HashMap<>();
     private int maxAccountsPerIP;
 
-    public IPAccountManager(LachShield plugin) {
+    public IPLimiter(LachShield plugin) {
         super("IPLimiter", true);
         this.plugin = plugin;
     }

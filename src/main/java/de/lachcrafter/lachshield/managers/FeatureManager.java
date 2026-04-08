@@ -25,7 +25,7 @@ public class FeatureManager {
                 new AntiAfk(plugin),
                 new AntiNetherRoof(plugin),
                 new ChatFilter(plugin),
-                new IPAccountManager(plugin),
+                new IPLimiter(plugin),
                 new CommandLimiter(plugin),
                 new AntiPearlPhase(plugin)
 
