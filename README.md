@@ -2,7 +2,7 @@
 A customizable and lightweight Minecraft security-focused plugin.
 
 ## Features
-- **IPLimiter**: Limit the number of player accounts that can join from the same IP address. **Warning**: not supported on Folia at the moment.
+- **IPLimiter**: Limit the number of player accounts that can join from the same IP address.
 - **AntiAFK**: Kick players that are AFK in a specified time.
 - **AntiNetherRoof**: Prevent players from accessing the Nether Roof.
 - **HidePlayerData**: Prevents players from viewing information from other players through hacks (e.g. health, armor durability).
