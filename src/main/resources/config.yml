@@ -51,6 +51,9 @@ CommandLimiter:
   cooldown: 100 # define the cooldown in ticks
   warning: "<red>Hey, stop spamming please." # Make the string blank to disable warning messages.
 
+  # Prevent spamming of every command.
+  all-commands: false
+
   # List top-level and sub commands here.
   commands:
     - "pl" # Top-level and sub commands.

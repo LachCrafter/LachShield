@@ -28,7 +28,7 @@ public class CommandLimiter extends Feature {
             return;
         }
 
-        if (coolDownCommands.contains(command)) {
+        if (plugin.getConfig().getBoolean("CommandLimiter.all-commands", false) || coolDownCommands.contains(command)) {
             doPlayerCooldown(event.getPlayer().getUniqueId(), command);
         }
     }
