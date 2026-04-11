@@ -23,7 +23,7 @@ public class CommandLimiter extends Feature {
         String command = event.getMessage().substring(1);
 
         if (inDelay.containsKey(event.getPlayer().getUniqueId()) && inDelay.containsValue(command)) {
-            event.getPlayer().sendRichMessage(plugin.getConfig().getString("CommandLimiter.message", "<red>Hey, stop spamming please."));
+            event.getPlayer().sendMessage(LachShield.configManager.getStringAsComponent("CommandLimiter.message"));
             event.setCancelled(true);
             return;
         }
