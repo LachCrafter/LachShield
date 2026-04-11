@@ -81,6 +81,6 @@ public class AntiAfk extends Feature {
     @Override
     public void onReload() {
         afkTimeoutMinutes = (long) plugin.getConfig().getInt("AntiAFK.timeoutMinutes", 15) * 60 * 1000;
-        kickMessage = LachShield.configManager.getMessage("AntiAFK.kickMessage");
+        kickMessage = LachShield.configManager.getStringAsComponent("AntiAFK.kickMessage");
     }
 }

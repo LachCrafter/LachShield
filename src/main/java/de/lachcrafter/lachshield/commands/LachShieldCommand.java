@@ -30,7 +30,7 @@ public class LachShieldCommand extends Command {
     @Override
     public void execute(@NotNull CommandSourceStack stack, @NotNull String @NotNull [] args) {
         if (!stack.getSender().hasPermission("lachshield.admin") || !stack.getSender().hasPermission("lachshield.commands")) {
-            stack.getSender().sendMessage(configManager.getMessage("messages.noPermission"));
+            stack.getSender().sendMessage(configManager.getStringAsComponent("messages.noPermission"));
             return;
         }
 
@@ -57,7 +57,7 @@ public class LachShieldCommand extends Command {
         if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
             if (args[1].equalsIgnoreCase("config")) {
                 configManager.reloadConfig();
-                stack.getSender().sendMessage(configManager.getMessage("messages.reloadSuccess"));
+                stack.getSender().sendMessage(configManager.getStringAsComponent("messages.reloadSuccess"));
                 return;
             }
 

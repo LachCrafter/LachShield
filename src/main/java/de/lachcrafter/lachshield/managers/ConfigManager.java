@@ -45,7 +45,7 @@ public class ConfigManager {
         return config;
     }
 
-    public Component getMessage(String path) {
+    public Component getStringAsComponent(String path) {
         return miniMessage.deserialize(config.getString(path, "Message " + path + " not found."));
     }
 

@@ -145,6 +145,6 @@ public class AntiNetherRoof extends Feature {
 
     @Override
     public void onReload() {
-        antiNetherRoofWarningMessage = LachShield.configManager.getMessage("AntiNetherRoof.warnMessage");
+        antiNetherRoofWarningMessage = LachShield.configManager.getStringAsComponent("AntiNetherRoof.warnMessage");
     }
 }

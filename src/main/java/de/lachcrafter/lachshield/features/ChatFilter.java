@@ -24,7 +24,7 @@ public class ChatFilter extends Feature {
             if (event.message().toString().toLowerCase().contains(s.toLowerCase())) {
                 event.setCancelled(true);
                 if (LachShield.configManager.getConfig().getBoolean("ChatFilter.warning.enabled")) {
-                    event.getPlayer().sendMessage(LachShield.configManager.getMessage("ChatFilter.warning.message"));
+                    event.getPlayer().sendMessage(LachShield.configManager.getStringAsComponent("ChatFilter.warning.message"));
                 }
                 break;
             }

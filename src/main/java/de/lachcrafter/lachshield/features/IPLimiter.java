@@ -28,7 +28,7 @@ public class IPLimiter extends Feature {
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
 
         if (accountCount >= maxAccountsPerIP) {
-            Component kickComponent = LachShield.configManager.getMessage("IPLimiter.kickMessage");
+            Component kickComponent = LachShield.configManager.getStringAsComponent("IPLimiter.kickMessage");
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, kickComponent);
             return;
         }
