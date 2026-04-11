@@ -45,7 +45,7 @@ ChatFilter:
     - "test"
     - "test1"
 
-# Prevent spamming of specific commands or sub-commands.
+# Limit command executions from a player.
 CommandLimiter:
   enabled: true
   cooldown: 100 # define the cooldown in ticks
