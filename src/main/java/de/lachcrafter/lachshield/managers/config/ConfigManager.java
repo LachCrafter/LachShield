@@ -1,4 +1,4 @@
-package de.lachcrafter.lachshield.managers;
+package de.lachcrafter.lachshield.managers.config;
 
 import de.lachcrafter.lachshield.features.Feature;
 import net.kyori.adventure.text.Component;
@@ -12,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @since 1.6
  */
 public class ConfigManager {
-
     private final JavaPlugin plugin;
     private FileConfiguration config;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -20,6 +19,11 @@ public class ConfigManager {
     public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
         loadConfig();
+        ConfigUpdater configUpdater = new ConfigUpdater(plugin, config);
+
+        if (configUpdater.isUpdateNeeded()) {
+            configUpdater.update();
+        }
     }
 
     /**

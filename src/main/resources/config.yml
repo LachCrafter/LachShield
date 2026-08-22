@@ -2,6 +2,9 @@
 # We use MiniMessages and the color format.
 # Learn more about the syntax here: https://docs.advntr.dev/minimessage/format.html
 
+# Config version. Do not change unless you know what you're doing!
+configVersion: 1
+
 # General plugin messages.
 messages:
   noPermission: "<red>You don't have permission to execute this command!"

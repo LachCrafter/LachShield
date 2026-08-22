@@ -2,7 +2,7 @@ package de.lachcrafter.lachshield;
 
 import de.lachcrafter.lachshield.managers.CommandManager;
 import de.lachcrafter.lachshield.managers.FeatureManager;
-import de.lachcrafter.lachshield.managers.ConfigManager;
+import de.lachcrafter.lachshield.managers.config.ConfigManager;
 import de.lachcrafter.lachshield.scheduling.SchedulerFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

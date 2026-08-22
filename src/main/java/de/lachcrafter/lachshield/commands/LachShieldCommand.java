@@ -3,7 +3,7 @@ package de.lachcrafter.lachshield.commands;
 import de.lachcrafter.lachshield.LachShield;
 import de.lachcrafter.lachshield.features.Feature;
 import de.lachcrafter.lachshield.managers.FeatureManager;
-import de.lachcrafter.lachshield.managers.ConfigManager;
+import de.lachcrafter.lachshield.managers.config.ConfigManager;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;

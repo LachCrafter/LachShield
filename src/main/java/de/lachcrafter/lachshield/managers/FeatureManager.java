@@ -2,6 +2,7 @@ package de.lachcrafter.lachshield.managers;
 
 import de.lachcrafter.lachshield.LachShield;
 import de.lachcrafter.lachshield.features.*;
+import de.lachcrafter.lachshield.managers.config.ConfigManager;
 
 import java.util.ArrayList;
 import java.util.List;
