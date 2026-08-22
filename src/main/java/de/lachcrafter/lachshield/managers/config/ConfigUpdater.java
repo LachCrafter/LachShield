@@ -71,6 +71,10 @@ public class ConfigUpdater {
                 return;
             }
 
+            if (LachShield.configManager.getConfig().getBoolean("messages.verbose")) {
+                LachShield.LOGGER.debug(key + " -> " + value);
+            }
+
             if (isPre1_9) {
 
                 if (legacyAndEquivalentNames_Pre_1_9.containsKey(key)) {

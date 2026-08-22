@@ -7,6 +7,9 @@ configVersion: 1
 
 # General plugin messages.
 messages:
+  # Logs more information to the console (useful for debugging).
+  verbose: false
+
   noPermission: "<red>You don't have permission to execute this command!"
   reloadSuccess: "<green>The LachShield configuration has been successfully reloaded."
 

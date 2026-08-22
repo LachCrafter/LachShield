@@ -53,7 +53,10 @@ public class FeatureManager {
     public void registerFeature(Feature feature) {
         if (!registeredFeatures.contains(feature) && !incompatibleFeatures.contains(feature)) {
             registeredFeatures.add(feature);
-            LachShield.LOGGER.info("Feature registered: {}", feature.getName());
+
+            if (LachShield.configManager.getConfig().getBoolean("messages.verbose")) {
+                LachShield.LOGGER.info("Feature registered: {}", feature.getName());
+            }
         }
     }
 
