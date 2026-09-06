@@ -6,6 +6,7 @@ import de.lachcrafter.lachshield.managers.config.ConfigManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FeatureManager {
     private final ConfigManager configManager;
@@ -163,11 +164,10 @@ public class FeatureManager {
      * Get a feature by its name.
      * @param name name of the feature.
      */
-    public Feature getFeatureByName(String name) {
+    public Optional<Feature> getFeatureByName(String name) {
         return registeredFeatures.stream()
                 .filter(f -> f.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
 }

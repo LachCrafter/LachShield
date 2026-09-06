@@ -14,10 +14,12 @@ public class LachShield extends JavaPlugin {
     public static CommandManager commandManager;
     public static SchedulerFactory schedulerFactory;
     public static final Logger LOGGER = LogManager.getLogger("LachShield");
+    public static LachShield plugin;
 
     @Override
     public void onEnable() {
         LOGGER.info("Initialising LachShield...");
+        plugin = this;
         schedulerFactory = new SchedulerFactory(this);
         configManager = new ConfigManager(this);
 
