@@ -28,7 +28,10 @@ public class LachShieldCommand {
                 .then(Commands.literal("status").executes(LachShieldCommand::executeStatusMessage))
                 .then(Commands.literal("enable").then(Commands.argument("feature", StringArgumentType.word())
                         .suggests((_, builder) -> {
-                            LachShield.featureManager.getDisabledFeatures().forEach(feature -> builder.suggest(feature.getName()));
+                            LachShield.featureManager.getDisabledFeatures().stream()
+                                    .filter(feature -> feature.getName().toLowerCase().startsWith(builder.getRemainingLowerCase()))
+                                    .forEach(feature -> builder.suggest(feature.getName()));
+
                             return builder.buildFuture();
                         })
                         .executes(LachShieldCommand::executeEnableFeature))
@@ -36,7 +39,10 @@ public class LachShieldCommand {
 
                 .then(Commands.literal("disable").then(Commands.argument("feature", StringArgumentType.word())
                         .suggests((_, builder) -> {
-                            LachShield.featureManager.getEnabledFeatures().forEach(feature -> builder.suggest(feature.getName()));
+                            LachShield.featureManager.getEnabledFeatures().stream()
+                                    .filter(feature -> feature.getName().toLowerCase().startsWith(builder.getRemainingLowerCase()))
+                                    .forEach(feature -> builder.suggest(feature.getName()));
+
                             return builder.buildFuture();
                         })
                         .executes(LachShieldCommand::executeDisableFeature))
