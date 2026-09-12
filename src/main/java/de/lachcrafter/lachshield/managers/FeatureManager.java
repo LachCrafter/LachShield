@@ -120,6 +120,7 @@ public class FeatureManager {
     public boolean enableFeature(Feature feature) {
         if (!enabledFeatures.contains(feature)) {
             enabledFeatures.add(feature);
+            disabledFeatures.remove(feature);
             configManager.setFeatureState(feature.getName(), true);
             feature.onEnable();
             feature.onReload();
