@@ -1,6 +1,7 @@
 package de.lachcrafter.lachshield.commands.lachshield;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.tree.LiteralCommandNode;
@@ -47,6 +48,11 @@ public class LachShieldCommand {
                         })
                         .executes(LachShieldCommand::executeDisableFeature))
                 )
+
+                .then(Commands.literal("iplimit")
+                        .then(Commands.argument("value", IntegerArgumentType.integer(1))
+                        .executes(LachShieldCommand::executeSetIPLimit)
+                ))
 
 
                 .then(ReloadSubCommand.createCommand())
@@ -138,6 +144,20 @@ public class LachShieldCommand {
             ctx.getSource().getSender().sendRichMessage("<gray>[<gold>LachShield</gold>] <green>Feature <gray><feature></gray> has been disabled.",
                     Placeholder.unparsed("feature", featureString));
         }
+
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int executeSetIPLimit(CommandContext<CommandSourceStack> ctx) {
+        var value = ctx.getArgument("value", Integer.class);
+
+        LachShield.configManager.getConfig().set("IPLimiter.maxAccountsPerIp", value);
+        LachShield.plugin.saveConfig();
+
+        ctx.getSource().getSender().sendMessage(CommandManager.PREFIX
+                .append(Component.text("The IP limit has been set to ")).color(NamedTextColor.GRAY)
+                .append(Component.text(value).color(NamedTextColor.YELLOW))
+                .append(Component.text(".")));
 
         return Command.SINGLE_SUCCESS;
     }
