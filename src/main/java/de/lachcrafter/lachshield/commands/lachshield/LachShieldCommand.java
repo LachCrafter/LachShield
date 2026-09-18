@@ -123,7 +123,7 @@ public class LachShieldCommand {
             ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<red>Feature <gray>" + featureString + "</gray> is already enabled.");
         } else {
             LachShield.featureManager.enableFeature(feature.get());
-            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<green>Feature <gray>" + featureString + "</gray> has been enabled.");
+            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<gray>Feature <gold>" + featureString + "</gold> has been <green>enabled</green>.");
         }
 
         return Command.SINGLE_SUCCESS;
@@ -141,7 +141,7 @@ public class LachShieldCommand {
                     Placeholder.unparsed("feature", featureString));
         } else {
             LachShield.featureManager.disableFeature(feature.get());
-            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<green>Feature <gray><feature></gray> has been disabled.",
+            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<gray>Feature <gold><feature></gold> has been <red>disabled</red>.",
                     Placeholder.unparsed("feature", featureString));
         }
 
