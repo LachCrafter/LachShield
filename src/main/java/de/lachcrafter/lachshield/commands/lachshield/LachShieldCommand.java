@@ -118,12 +118,12 @@ public class LachShieldCommand {
         var feature = LachShield.featureManager.getFeatureByName(featureString);
 
         if (feature.isEmpty()) {
-            ctx.getSource().getSender().sendRichMessage("<gray>[<gold>LachShield</gold>] <red>Feature <gray>" + featureString + "</gray> does not exist.");
+            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<red>Feature <gray>" + featureString + "</gray> does not exist.");
         } else if (LachShield.featureManager.getEnabledFeatures().contains(feature.get())) {
-            ctx.getSource().getSender().sendRichMessage("<gray>[<gold>LachShield</gold>] <red>Feature <gray>" + featureString + "</gray> is already enabled.");
+            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<red>Feature <gray>" + featureString + "</gray> is already enabled.");
         } else {
             LachShield.featureManager.enableFeature(feature.get());
-            ctx.getSource().getSender().sendRichMessage("<gray>[<gold>LachShield</gold>] <green>Feature <gray>" + featureString + "</gray> has been enabled.");
+            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<green>Feature <gray>" + featureString + "</gray> has been enabled.");
         }
 
         return Command.SINGLE_SUCCESS;
@@ -134,14 +134,14 @@ public class LachShieldCommand {
         var feature = LachShield.featureManager.getFeatureByName(featureString);
 
         if (feature.isEmpty()) {
-            ctx.getSource().getSender().sendRichMessage("<gray>[<gold>LachShield</gold>] <red>Feature <gray><feature></gray> does not exist.",
+            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<red>Feature <gray><feature></gray> does not exist.",
                     Placeholder.unparsed("feature", featureString));
         } else if (LachShield.featureManager.getDisabledFeatures().contains(feature.get())) {
-            ctx.getSource().getSender().sendRichMessage("<gray>[<gold>LachShield</gold>] <red>Feature <gray><feature></gray> is already disabled.",
+            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<red>Feature <gray><feature></gray> is already disabled.",
                     Placeholder.unparsed("feature", featureString));
         } else {
             LachShield.featureManager.disableFeature(feature.get());
-            ctx.getSource().getSender().sendRichMessage("<gray>[<gold>LachShield</gold>] <green>Feature <gray><feature></gray> has been disabled.",
+            ctx.getSource().getSender().sendRichMessage(mm.serialize(CommandManager.PREFIX) + "<green>Feature <gray><feature></gray> has been disabled.",
                     Placeholder.unparsed("feature", featureString));
         }
 
