@@ -22,6 +22,7 @@ public class LachShield extends JavaPlugin {
         plugin = this;
         schedulerFactory = new SchedulerFactory(this);
         configManager = new ConfigManager(this);
+        configManager.configUpdate();
 
         LOGGER.info("Loading Features...");
         featureManager = new FeatureManager(this);

@@ -19,11 +19,7 @@ public class ConfigManager {
     public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
         loadConfig();
-        ConfigUpdater configUpdater = new ConfigUpdater(plugin, config);
 
-        if (configUpdater.isUpdateNeeded()) {
-            configUpdater.update();
-        }
     }
 
     /**
@@ -40,6 +36,15 @@ public class ConfigManager {
     public void reloadConfig() {
         plugin.reloadConfig();
         config = plugin.getConfig();
+    }
+
+    public void configUpdate() {
+        ConfigUpdater configUpdater = new ConfigUpdater(plugin, config);
+
+        if (configUpdater.isUpdateNeeded()) {
+
+            configUpdater.update();
+        }
     }
 
     /**
