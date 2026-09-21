@@ -37,7 +37,7 @@ public class CommandLimiter extends Feature {
         int cooldown = plugin.getConfig().getInt("CommandLimiter.cooldown", 100);
 
         inDelay.put(uuid, command);
-        LachShield.schedulerFactory.scheduleInTicks(cooldown, () -> inDelay.remove(uuid));
+        plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, (_) -> inDelay.remove(uuid), cooldown);
     }
 
     @Override

@@ -3,7 +3,6 @@ package de.lachcrafter.lachshield;
 import de.lachcrafter.lachshield.managers.CommandManager;
 import de.lachcrafter.lachshield.managers.FeatureManager;
 import de.lachcrafter.lachshield.managers.config.ConfigManager;
-import de.lachcrafter.lachshield.scheduling.SchedulerFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,7 +11,6 @@ public class LachShield extends JavaPlugin {
     public static ConfigManager configManager;
     public static FeatureManager featureManager;
     public static CommandManager commandManager;
-    public static SchedulerFactory schedulerFactory;
     public static final Logger LOGGER = LogManager.getLogger("LachShield");
     public static LachShield plugin;
 
@@ -20,7 +18,6 @@ public class LachShield extends JavaPlugin {
     public void onEnable() {
         LOGGER.info("Initialising LachShield...");
         plugin = this;
-        schedulerFactory = new SchedulerFactory(this);
         configManager = new ConfigManager(this);
         configManager.configUpdate();
 
