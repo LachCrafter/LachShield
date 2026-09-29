@@ -38,11 +38,7 @@ public class IPLimiter extends Feature {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        handlePlayerQuit(event.getPlayer());
-    }
-
-    public void handlePlayerQuit(Player player) {
-        String ip = Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress();
+        String ip = Objects.requireNonNull(event.getPlayer().getAddress()).getAddress().getHostAddress();
         int accountCount = ipAccountCount.getOrDefault(ip, 0);
 
         if (accountCount > 0) {
