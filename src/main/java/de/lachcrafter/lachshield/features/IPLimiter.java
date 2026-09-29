@@ -2,7 +2,6 @@ package de.lachcrafter.lachshield.features;
 
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
