@@ -66,7 +66,7 @@ public class ConfigUpdater {
 
     public void migrateConfiguration(Map<String, Object> oldConfigValues) {
         oldConfigValues.forEach((key, value) -> {
-            if (value instanceof MemorySection || removedOptions.contains(key)) {
+            if (value instanceof MemorySection || removedOptions.contains(key) || key.equals("configVersion")) {
 
                 return;
             }
