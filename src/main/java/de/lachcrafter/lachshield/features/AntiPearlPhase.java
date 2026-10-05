@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 
 import java.util.List;
 
@@ -64,12 +63,10 @@ public class AntiPearlPhase extends Feature {
 
     @Override
     public void onEnable() {
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @Override
     public void onDisable() {
-        HandlerList.unregisterAll(this);
     }
 
     @Override

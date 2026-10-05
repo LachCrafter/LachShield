@@ -4,7 +4,6 @@ import de.lachcrafter.lachshield.LachShield;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerInputEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -26,7 +25,6 @@ public class AntiAFK extends Feature {
 
     @Override
     public void onEnable() {
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
         playerTimestampMap = new HashMap<>();
 
         afkCheckTask = plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, (_) -> playerTimestampMap.entrySet().iterator().forEachRemaining((entry) -> {
@@ -85,7 +83,6 @@ public class AntiAFK extends Feature {
 
     @Override
     public void onDisable() {
-        HandlerList.unregisterAll(this);
         playerTimestampMap.clear();
         afkCheckTask.cancel();
     }

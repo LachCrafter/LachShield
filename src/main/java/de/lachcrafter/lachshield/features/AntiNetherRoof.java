@@ -6,7 +6,6 @@ import org.bukkit.World;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -134,12 +133,10 @@ public class AntiNetherRoof extends Feature {
 
     @Override
     public void onEnable() {
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @Override
     public void onDisable() {
-        HandlerList.unregisterAll(this);
         cooldowns.clear();
     }
 

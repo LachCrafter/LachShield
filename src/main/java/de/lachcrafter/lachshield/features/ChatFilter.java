@@ -3,7 +3,6 @@ package de.lachcrafter.lachshield.features;
 import de.lachcrafter.lachshield.LachShield;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 
 import java.util.List;
 
@@ -32,14 +31,10 @@ public class ChatFilter extends Feature {
     }
 
     @Override
-    public void onEnable() {
-        lachShield.getServer().getPluginManager().registerEvents(this, lachShield);
-    }
+    public void onEnable() {}
 
     @Override
-    public void onDisable() {
-        HandlerList.unregisterAll(this);
-    }
+    public void onDisable() {}
 
     @Override
     public void onReload() {}

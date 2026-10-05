@@ -3,7 +3,6 @@ package de.lachcrafter.lachshield.features;
 import de.lachcrafter.lachshield.LachShield;
 import net.kyori.adventure.text.Component;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -47,12 +46,10 @@ public class IPLimiter extends Feature {
 
     @Override
     public void onEnable() {
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @Override
     public void onDisable() {
-        HandlerList.unregisterAll(this);
     }
 
     @Override

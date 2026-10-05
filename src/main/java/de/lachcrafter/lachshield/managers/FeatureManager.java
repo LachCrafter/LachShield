@@ -3,6 +3,7 @@ package de.lachcrafter.lachshield.managers;
 import de.lachcrafter.lachshield.LachShield;
 import de.lachcrafter.lachshield.features.*;
 import de.lachcrafter.lachshield.managers.config.ConfigManager;
+import org.bukkit.event.HandlerList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +124,7 @@ public class FeatureManager {
             disabledFeatures.remove(feature);
             configManager.setFeatureState(feature.getName(), true);
             feature.onEnable();
+            LachShield.plugin.getServer().getPluginManager().registerEvents(feature, LachShield.plugin);
             feature.onReload();
             return true;
         } else {
@@ -138,6 +140,7 @@ public class FeatureManager {
     public boolean disableFeature(Feature feature) {
         if (enabledFeatures.contains(feature)) {
             feature.onDisable();
+            HandlerList.unregisterAll(feature);
             enabledFeatures.remove(feature);
             disabledFeatures.add(feature);
             configManager.setFeatureState(feature.getName(), false);
