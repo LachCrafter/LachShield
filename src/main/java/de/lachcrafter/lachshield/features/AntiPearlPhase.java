@@ -60,17 +60,4 @@ public class AntiPearlPhase extends Feature {
                 new Location(playerWorld, playerX, playerY, playerZ - 1)    // negative Z
         );
     }
-
-    @Override
-    public void onEnable() {
-    }
-
-    @Override
-    public void onDisable() {
-    }
-
-    @Override
-    public void onReload() {
-
-    }
 }

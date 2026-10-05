@@ -45,14 +45,6 @@ public class IPLimiter extends Feature {
     }
 
     @Override
-    public void onEnable() {
-    }
-
-    @Override
-    public void onDisable() {
-    }
-
-    @Override
     public void onReload() {
         maxAccountsPerIP = plugin.getConfig().getInt("IPLimiter.maxAccountsPerIp", 3);
     }

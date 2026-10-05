@@ -46,10 +46,6 @@ public class CommandLimiter extends Feature {
     }
 
     @Override
-    public void onDisable() {
-    }
-
-    @Override
     public void onReload() {
         inDelay.clear();
     }

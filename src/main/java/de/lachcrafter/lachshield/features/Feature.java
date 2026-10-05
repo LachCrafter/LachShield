@@ -3,7 +3,7 @@ package de.lachcrafter.lachshield.features;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-public abstract class Feature implements Listener {
+public class Feature implements Listener {
 
     private final String name;
     private final boolean foliaCompatible;
@@ -43,9 +43,9 @@ public abstract class Feature implements Listener {
         return player.hasPermission(getPermission()) || player.hasPermission("lachshield.admin");
     }
 
-    public abstract void onEnable();
+    public void onEnable() {}
 
-    public abstract void onDisable();
+    public void onDisable() {}
 
-    public abstract void onReload();
+    public void onReload() {}
 }

@@ -132,10 +132,6 @@ public class AntiNetherRoof extends Feature {
     }
 
     @Override
-    public void onEnable() {
-    }
-
-    @Override
     public void onDisable() {
         cooldowns.clear();
     }

@@ -29,13 +29,4 @@ public class ChatFilter extends Feature {
             }
         }
     }
-
-    @Override
-    public void onEnable() {}
-
-    @Override
-    public void onDisable() {}
-
-    @Override
-    public void onReload() {}
 }
