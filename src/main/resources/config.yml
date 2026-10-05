@@ -3,7 +3,7 @@
 # Learn more about the syntax here: https://docs.advntr.dev/minimessage/format.html
 
 # Config version. Do not change unless you know what you're doing!
-configVersion: 1
+configVersion: 2
 
 # General plugin messages.
 messages:
@@ -28,6 +28,10 @@ AntiNetherRoof:
 AntiAFK:
   enabled: false
   timeoutMinutes: 15
+
+  # Uses PlayerInputEvent instead of PlayerMoveEvent which avoids AntiAFK-ing with water,
+  # but kicks players when they press a movement button for a long period of time.
+  usePlayerInputEvent: false
   kickMessage: "<red>You have been disconnected for AFK."
 
 # Prevent players from using hacks to see player data.

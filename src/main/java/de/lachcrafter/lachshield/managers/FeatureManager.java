@@ -24,7 +24,7 @@ public class FeatureManager {
         // List all features here.
         List<Feature> features = new ArrayList<>(List.of(
 
-                new AntiAfk(plugin),
+                new AntiAFK(),
                 new AntiNetherRoof(plugin),
                 new ChatFilter(plugin),
                 new IPLimiter(plugin),

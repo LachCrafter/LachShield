@@ -14,7 +14,7 @@ public class ConfigUpdater {
     private final FileConfiguration fileConfiguration;
     private final Plugin plugin;
 
-    public static final int CONFIG_VERSION = 1;
+    public static final int CONFIG_VERSION = 2;
 
     // Config is older than 1.9.
     private final boolean isPre1_9;
